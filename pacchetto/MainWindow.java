@@ -23,7 +23,7 @@ public class MainWindow extends JFrame {
 	private javax.swing.JPanel jContentPane = null;
 
 	private JPanel pannelloComandi = null;
-	private JButton apriFile = null;
+	private JButton openFile = null;
 	private JButton salvaFile = null;
 	private JButton salvaFileConNome = null;
 	private JButton uscita = null;
@@ -43,6 +43,7 @@ public class MainWindow extends JFrame {
 
 	private TextBox nomeNodo = null;
 	private TextBox testoNodo = null;
+	private JButton about = null;
 	/**
 	 * @throws java.awt.HeadlessException
 	 */
@@ -92,10 +93,11 @@ public class MainWindow extends JFrame {
 			pannelloComandi = new JPanel();
 			pannelloComandi.setLayout(flowLayout1);
 			flowLayout1.setAlignment(java.awt.FlowLayout.LEFT);
-			pannelloComandi.add(getApriFile(), null);
+			pannelloComandi.add(getOpenFile(), null);
 			pannelloComandi.add(getSalvaFile(), null);
 			pannelloComandi.add(getSalvaFileConNome(), null);
 			pannelloComandi.add(getUscita(), null);
+			pannelloComandi.add(getAbout(), null);
 		}
 		return pannelloComandi;
 	}
@@ -104,14 +106,14 @@ public class MainWindow extends JFrame {
 	 * 	
 	 * @return javax.swing.JButton	
 	 */    
-	private JButton getApriFile() {
-		if (apriFile == null) {
-			apriFile = new JButton();
-			apriFile.setText("Apri...");
-			apriFile.setIcon(new ImageIcon(getClass().getResource("/pacchetto/iconaApriFile.gif")));
-			apriFile.setToolTipText("Apre un file");
-			apriFile.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12));
-			apriFile.addActionListener(new java.awt.event.ActionListener() { 
+	private JButton getOpenFile() {
+		if (openFile == null) {
+			openFile = new JButton();
+			openFile.setText("Open...");
+			openFile.setIcon(new ImageIcon(getClass().getResource("/pacchetto/iconOpenFile.gif")));
+			openFile.setToolTipText("Open a File");
+			openFile.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12));
+			openFile.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
 					JFileChooser dlgApri = new JFileChooser();
 					
@@ -128,7 +130,7 @@ public class MainWindow extends JFrame {
 				}
 			});
 		}
-		return apriFile;
+		return openFile;
 	}
 	/**
 	 * This method initializes jButton	
@@ -138,7 +140,7 @@ public class MainWindow extends JFrame {
 	private JButton getSalvaFile() {
 		if (salvaFile == null) {
 			salvaFile = new JButton();
-			salvaFile.setIcon(new ImageIcon(getClass().getResource("/pacchetto/iconaSalvaFile.gif")));
+			salvaFile.setIcon(new ImageIcon(getClass().getResource("/pacchetto/iconSaveFile.gif")));
 			salvaFile.setText("Salva");
 			salvaFile.setToolTipText("Salva il file corrente");
 			salvaFile.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12));
@@ -158,7 +160,7 @@ public class MainWindow extends JFrame {
 	private JButton getSalvaFileConNome() {
 		if (salvaFileConNome == null) {
 			salvaFileConNome = new JButton();
-			salvaFileConNome.setIcon(new ImageIcon(getClass().getResource("/pacchetto/iconaSalvaFileConNome.gif")));
+			salvaFileConNome.setIcon(new ImageIcon(getClass().getResource("/pacchetto/iconSaveFileAs.gif")));
 			salvaFileConNome.setText("Salva...");
 			salvaFileConNome.setToolTipText("Salva il file corrente con nome");
 			salvaFileConNome.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12));
@@ -204,7 +206,7 @@ public class MainWindow extends JFrame {
 	private JButton getUscita() {
 		if (uscita == null) {
 			uscita = new JButton();
-			uscita.setIcon(new ImageIcon(getClass().getResource("/pacchetto/iconaUscita.gif")));
+			uscita.setIcon(new ImageIcon(getClass().getResource("/pacchetto/iconExit.gif")));
 			uscita.setText("Uscita");
 			uscita.setToolTipText("Esce dall'applicazione");
 			uscita.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12));
@@ -277,7 +279,7 @@ public class MainWindow extends JFrame {
 		if (aggiungiNodo == null) {
 			aggiungiNodo = new JButton();
 			aggiungiNodo.setText("Aggiungi");
-			aggiungiNodo.setIcon(new ImageIcon(getClass().getResource("/pacchetto/iconaAggiungiNodo.gif")));
+			aggiungiNodo.setIcon(new ImageIcon(getClass().getResource("/pacchetto/iconAddNode.gif")));
 			aggiungiNodo.setToolTipText("Aggiunge un nodo figlio al nodo corrente");
 			aggiungiNodo.setName("aggiungiNodo");
 			aggiungiNodo.setBounds(139, 140, 119, 42);
@@ -317,7 +319,7 @@ public class MainWindow extends JFrame {
 	private JButton getModificaNodo() {
 		if (modificaNodo == null) {
 			modificaNodo = new JButton();
-			modificaNodo.setIcon(new ImageIcon(getClass().getResource("/pacchetto/iconaModificaNodo.gif")));
+			modificaNodo.setIcon(new ImageIcon(getClass().getResource("/pacchetto/iconModifyNode.gif")));
 			modificaNodo.setText("Modifica");
 			modificaNodo.setToolTipText("Modifica il nodo corrente");
 			modificaNodo.setBounds(266, 140, 119, 42);
@@ -360,7 +362,7 @@ public class MainWindow extends JFrame {
 		if (eliminaNodo == null) {
 			eliminaNodo = new JButton();
 			eliminaNodo.setText("Elimina");
-			eliminaNodo.setIcon(new ImageIcon(getClass().getResource("/pacchetto/iconaEliminaNodo.gif")));
+			eliminaNodo.setIcon(new ImageIcon(getClass().getResource("/pacchetto/iconDeleteNode.gif")));
 			eliminaNodo.setToolTipText("Elimina il nodo corrente");
 			eliminaNodo.setBounds(393, 140, 119, 42);
 			eliminaNodo.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12));
@@ -424,7 +426,7 @@ public class MainWindow extends JFrame {
 			aggiungiAttributo = new JButton();
 			aggiungiAttributo.setBounds(139, 447, 119, 42);
 			aggiungiAttributo.setText("Aggiungi");
-			aggiungiAttributo.setIcon(new ImageIcon(getClass().getResource("/pacchetto/iconaAggiungiAttributo.gif")));
+			aggiungiAttributo.setIcon(new ImageIcon(getClass().getResource("/pacchetto/iconAddAttribute.gif")));
 			aggiungiAttributo.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12));
 			aggiungiAttributo.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
@@ -467,7 +469,7 @@ public class MainWindow extends JFrame {
 			modificaAttributo = new JButton();
 			modificaAttributo.setBounds(266, 447, 119, 42);
 			modificaAttributo.setText("Modifica");
-			modificaAttributo.setIcon(new ImageIcon(getClass().getResource("/pacchetto/iconaModificaAttributo.gif")));
+			modificaAttributo.setIcon(new ImageIcon(getClass().getResource("/pacchetto/iconModifyAttribute.gif")));
 			modificaAttributo.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12));
 			modificaAttributo.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
@@ -516,7 +518,7 @@ public class MainWindow extends JFrame {
 			eliminaAttributo = new JButton();
 			eliminaAttributo.setBounds(393, 447, 119, 42);
 			eliminaAttributo.setText("Elimina");
-			eliminaAttributo.setIcon(new ImageIcon(getClass().getResource("/pacchetto/iconaEliminaAttributo.gif")));
+			eliminaAttributo.setIcon(new ImageIcon(getClass().getResource("/pacchetto/iconDeleteAttribute.gif")));
 			eliminaAttributo.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12));
 			eliminaAttributo.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
@@ -602,7 +604,20 @@ public class MainWindow extends JFrame {
 		}
 		return testoNodo;
 	}
-     	public static void main(String[] args) {
+	/**
+	 * This method initializes jButton	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */    
+	private JButton getAbout() {
+		if (about == null) {
+			about = new JButton();
+			about.setText("About...");
+			about.setIcon(new ImageIcon(getClass().getResource("/pacchetto/iconAbout.gif")));
+		}
+		return about;
+	}
+      	public static void main(String[] args) {
          		new MainWindow().setVisible(true);
          		
 	}

@@ -25,9 +25,9 @@ public class JTreeXML extends JTree {
 	 */
 	public JTreeXML() {
 		super();
-		ImageIcon iconaFile = new ImageIcon(getClass().getResource("/pacchetto/iconaFile.gif"));
-		ImageIcon iconaNodoConAttributi = new ImageIcon(getClass().getResource("/pacchetto/iconaNodoConAttributi.gif"));
-		ImageIcon iconaNodoSenzaAttributi = new ImageIcon(getClass().getResource("/pacchetto/iconaNodoSenzaAttributi.gif"));
+		ImageIcon iconaFile = new ImageIcon(getClass().getResource("/pacchetto/iconFile.gif"));
+		ImageIcon iconaNodoConAttributi = new ImageIcon(getClass().getResource("/pacchetto/iconNodeWithAttribute.gif"));
+		ImageIcon iconaNodoSenzaAttributi = new ImageIcon(getClass().getResource("/pacchetto/iconaNodeWithoutAttribute.gif"));
 		
 		IconRenderer render = new IconRenderer(iconaFile,iconaNodoConAttributi,iconaNodoSenzaAttributi);
 		
