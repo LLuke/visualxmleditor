@@ -13,6 +13,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 package pack;
 
 import java.awt.Rectangle;
+import java.io.File;
 
 /**
  * @author Ferreri Gabriele
@@ -42,4 +43,10 @@ public class Utility {
 	{
 		return nomeFile.substring(nomeFile.lastIndexOf(".")+1); //$NON-NLS-1$
 	}
+	
+	static public String currentPath()
+	{
+		return new File("").getAbsolutePath(); //$NON-NLS-1$
+	}
 }
+

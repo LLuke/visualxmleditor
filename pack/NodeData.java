@@ -15,6 +15,7 @@ package pack;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
+import javax.swing.ImageIcon;
 /**
  * Extends JDialog and creates a form for data entering on a node or an attribute
  * @author Ferreri Gabriele
@@ -67,14 +68,14 @@ public class NodeData extends JDialog {
 		if (modo==MODO_NODO)
 		{
 			this.setTitle(LocalizedMessages.getString("NodeData.TitleWindowNode")); //$NON-NLS-1$
-			nome.setEtichetta(LocalizedMessages.getString("NodeData.TextboxNodeName")); //$NON-NLS-1$
-			testo.setEtichetta(LocalizedMessages.getString("NodeData.TextBoxNodeText")); //$NON-NLS-1$
+			nome.setLabel(LocalizedMessages.getString("NodeData.TextboxNodeName")); //$NON-NLS-1$
+			testo.setLabel(LocalizedMessages.getString("NodeData.TextBoxNodeText")); //$NON-NLS-1$
 		}
 		else
 		{
 			this.setTitle(LocalizedMessages.getString("NodeData.TitleWindowAttribute")); //$NON-NLS-1$
-			nome.setEtichetta(LocalizedMessages.getString("NodeData.TextboxAttributeName")); //$NON-NLS-1$
-			testo.setEtichetta(LocalizedMessages.getString("NodeData.TextboxAttributeText")); //$NON-NLS-1$
+			nome.setLabel(LocalizedMessages.getString("NodeData.TextboxAttributeName")); //$NON-NLS-1$
+			testo.setLabel(LocalizedMessages.getString("NodeData.TextboxAttributeText")); //$NON-NLS-1$
 		}
 
 		this.setModal(true);
@@ -140,6 +141,7 @@ public class NodeData extends JDialog {
 			ok.setBounds(152, 92, 89, 40);
 			ok.setText(LocalizedMessages.getString("NodeData.ButtonOk")); //$NON-NLS-1$
 			ok.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 14)); //$NON-NLS-1$
+			ok.setIcon(new ImageIcon(getClass().getResource("/icons/iconOk.gif"))); //$NON-NLS-1$
 			ok.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
 					if (getNome().getText().length()>0)
@@ -167,6 +169,7 @@ public class NodeData extends JDialog {
 			annulla.setBounds(314, 92, 89, 38);
 			annulla.setText(LocalizedMessages.getString("NodeData.ButtonCancel")); //$NON-NLS-1$
 			annulla.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 14)); //$NON-NLS-1$
+			annulla.setIcon(new ImageIcon(getClass().getResource("/icons/iconCancel.gif"))); //$NON-NLS-1$
 			annulla.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
 					scelto=false;
@@ -185,8 +188,8 @@ public class NodeData extends JDialog {
 		if (nome == null) {
 			nome = new TextBox();
 			nome.setBounds(14, 25, 526, 22);
-			nome.setEtichetta(""); //$NON-NLS-1$
-			nome.setLarghezzaEtichetta(100);
+			nome.setLabel(""); //$NON-NLS-1$
+			nome.setWidthLabel(100);
 		}
 		return nome;
 	}
@@ -199,7 +202,7 @@ public class NodeData extends JDialog {
 		if (testo == null) {
 			testo = new TextBox();
 			testo.setBounds(14, 58, 526, 22);
-			testo.setLarghezzaEtichetta(100);
+			testo.setWidthLabel(100);
 		}
 		return testo;
 	}

@@ -12,28 +12,26 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 package pack;
 
+import java.awt.Color;
+
 import javax.swing.JPanel;
-
 import javax.swing.JLabel;
-import javax.swing.JTextField;
-
-import java.awt.*;
-
+import javax.swing.JComboBox;
 /**
- * Extends JPanel to create a textbox with personalized label
+ * Extends JPanel to create a combobox with personalized label
  * @author Ferreri Gabriele
  */
-public class TextBox extends JPanel {
+public class ComboBox extends JPanel {
 	private static final long serialVersionUID = 1L;
-
 	private JLabel label = null;
-	private JTextField field = null;
+	private JComboBox field = null;
 	private int width=80;
 	
 	/**
-	 * Constructor 
+	 * Extends JPanel to create a textbox with personalized label
+	 * @author Ferreri Gabriele
 	 */
-	public TextBox() {
+	public ComboBox() {
 		super();
 		initialize();
 	}
@@ -50,6 +48,42 @@ public class TextBox extends JPanel {
 	}
 	
 	/**
+	 * This method add a item to JComboBox  
+	 * @param value Item to add
+	 */
+	public void addItem(Object value)
+	{
+		field.addItem(value);
+	}
+
+	/**
+	 * This method remove a item from JComboBox  
+	 * @param value Item to remove
+	 */
+	public void removeItem(Object value)
+	{
+		field.removeItem(value);
+	}
+	
+	/**
+	 * This method return a selected item in JComboBox  
+	 * @param value Item selected
+	 */
+	public Object getSelectedItem()
+	{
+		return field.getSelectedItem();
+	}
+	
+	/**
+	 * This method set selected item
+	 * @param value Item to set
+	 */
+	public void setSelectedItem(Object value)
+	{
+		field.setSelectedItem(value);
+	}
+	
+	/**
 	 * This method initializes this
 	 * 
 	 * @return void
@@ -57,33 +91,31 @@ public class TextBox extends JPanel {
 	private  void initialize() {
 		label = new JLabel();
 		this.setLayout(null);
-		this.setSize(249, 32);
+		this.setSize(232, 35);
 		label.setText(""); //$NON-NLS-1$
+		label.setLocation(5, 4);
 		label.setSize(94, 20);
-		label.setLocation(4, 0);
-		label.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 14)); //$NON-NLS-1$
+		label.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12)); //$NON-NLS-1$
 		this.add(label, null);
 		this.add(getField(), null);
 		refreshDimension();
-		this.addComponentListener(new java.awt.event.ComponentAdapter() {   
-			public void componentResized(java.awt.event.ComponentEvent e) {
+		this.addComponentListener(new java.awt.event.ComponentAdapter() { 
+			public void componentResized(java.awt.event.ComponentEvent e) {    
 				refreshDimension();
 			}
 		});
 	}
-	
+
 	/**
-	 * This method initializes jTextField	
+	 * This method initializes field	
 	 * 	
-	 * @return javax.swing.JTextField	
+	 * @return javax.swing.JComboBox	
 	 */    
-	private JTextField getField() {
+	private JComboBox getField() {
 		if (field == null) {
-			field = new JTextField();
-			field.setSize(120, 20);
-			field.setLocation(97, 0);
+			field = new JComboBox();
+			field.setBounds(98, 4, 94, 20);
 			field.setFont(new java.awt.Font("Times New Roman", java.awt.Font.PLAIN, 14)); //$NON-NLS-1$
-			field.setForeground(java.awt.Color.black);
 			field.addFocusListener(new java.awt.event.FocusAdapter() {   
 				public void focusLost(java.awt.event.FocusEvent e) {    
 					if (field.isEditable())
@@ -101,6 +133,7 @@ public class TextBox extends JPanel {
 		}
 		return field;
 	}
+
 	/**
 	 * @return Returns the width label.
 	 */
@@ -132,13 +165,13 @@ public class TextBox extends JPanel {
 	 * @return Returns the text field.
 	 */
 	public String getText() {
-		return field.getText();
+		return field.getSelectedItem().toString();
 	}
 	/**
 	 * @param set text field
 	 */
 	public void setText(String value) {
-		field.setText(value);
+		field.setSelectedItem(value);
 	}
 
 	/**
@@ -155,4 +188,4 @@ public class TextBox extends JPanel {
 		field.setEditable(value);
 	}
 	
-}  //  @jve:decl-index=0:visual-constraint="10,10"
+ }  //  @jve:decl-index=0:visual-constraint="10,10"

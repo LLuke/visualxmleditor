@@ -16,6 +16,8 @@ import javax.swing.JDialog;
 
 import javax.swing.JLabel;
 import javax.swing.JButton;
+
+import javax.swing.ImageIcon;
 /**
  * About graphical interface
  * @author Ferreri Gabriele 
@@ -93,6 +95,7 @@ public class About extends JDialog {
 			ok = new JButton();
 			ok.setBounds(148, 187, 138, 47);
 			ok.setText("Ok"); //$NON-NLS-1$
+			ok.setIcon(new ImageIcon(getClass().getResource("/icons/iconOk.gif"))); //$NON-NLS-1$
 			ok.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
 					setVisible(false);

@@ -25,6 +25,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JList;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.JToolBar;
+import java.awt.Toolkit;
 /**
  * Main graphical interface
  * @author Ferreri Gabriele 
@@ -56,6 +58,8 @@ public class MainWindow extends JFrame {
 	private TextBox nodeName = null;
 	private TextBox nodeText = null;
 	private JButton about = null;
+	private JButton configure = null;
+	private JToolBar comandi = null;
 	/**
 	 * @throws java.awt.HeadlessException
 	 */
@@ -105,16 +109,12 @@ public class MainWindow extends JFrame {
 			pannelloComandi = new JPanel();
 			pannelloComandi.setLayout(flowLayout1);
 			flowLayout1.setAlignment(java.awt.FlowLayout.LEFT);
-			pannelloComandi.add(getOpenFile(), null);
-			pannelloComandi.add(getSaveFile(), null);
-			pannelloComandi.add(getSaveFileAs(), null);
-			pannelloComandi.add(getAbout(), null);
-			pannelloComandi.add(getExit(), null);
+			pannelloComandi.add(getComandi(), null);
 		}
 		return pannelloComandi;
 	}
 	/**
-	 * This method initializes jButton	
+	 * This method initializes configure	
 	 * 	
 	 * @return javax.swing.JButton	
 	 */    
@@ -125,7 +125,9 @@ public class MainWindow extends JFrame {
 			openFile.setIcon(new ImageIcon(getClass().getResource("/icons/iconOpenFile.gif"))); //$NON-NLS-1$
 			openFile.setToolTipText(LocalizedMessages.getString("MainWindow.TipButtonOpenFile")); //$NON-NLS-1$
 			openFile.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12)); //$NON-NLS-1$
-			openFile.setPreferredSize(new java.awt.Dimension(130,44));
+			openFile.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
+			openFile.setVerticalTextPosition(javax.swing.SwingConstants.CENTER);
+			openFile.setPreferredSize(new java.awt.Dimension(125,44));
 			openFile.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
 					JFileChooser dlgApri = new JFileChooser();
@@ -146,7 +148,7 @@ public class MainWindow extends JFrame {
 		return openFile;
 	}
 	/**
-	 * This method initializes jButton	
+	 * This method initializes configure	
 	 * 	
 	 * @return javax.swing.JButton	
 	 */    
@@ -157,7 +159,7 @@ public class MainWindow extends JFrame {
 			saveFile.setText(LocalizedMessages.getString("MainWindow.ButtonSaveFile")); //$NON-NLS-1$
 			saveFile.setToolTipText(LocalizedMessages.getString("MainWindow.TipButtonSaveFile")); //$NON-NLS-1$
 			saveFile.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12)); //$NON-NLS-1$
-			saveFile.setPreferredSize(new java.awt.Dimension(130,44));
+			saveFile.setPreferredSize(new java.awt.Dimension(125,44));
 			saveFile.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
 					//albero.salvaXML(albero.getNomeFile());
@@ -178,7 +180,7 @@ public class MainWindow extends JFrame {
 			saveFileAs.setText(LocalizedMessages.getString("MainWindow.ButtonSaveFileAs")); //$NON-NLS-1$
 			saveFileAs.setToolTipText(LocalizedMessages.getString("MainWindow.TipButtonSaveFileAs")); //$NON-NLS-1$
 			saveFileAs.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12)); //$NON-NLS-1$
-			saveFileAs.setPreferredSize(new java.awt.Dimension(130,44));
+			saveFileAs.setPreferredSize(new java.awt.Dimension(125,44));
 			saveFileAs.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
 					JFileChooser dlgSalva = new JFileChooser();
@@ -225,7 +227,7 @@ public class MainWindow extends JFrame {
 			exit.setText(LocalizedMessages.getString("MainWindow.ButtonExit")); //$NON-NLS-1$
 			exit.setToolTipText(LocalizedMessages.getString("MainWindow.TipButtonExit")); //$NON-NLS-1$
 			exit.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12)); //$NON-NLS-1$
-			exit.setPreferredSize(new java.awt.Dimension(130,44));
+			exit.setPreferredSize(new java.awt.Dimension(125,44));
 			exit.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
 					if (JOptionPane.showConfirmDialog(null,LocalizedMessages.getString("MainWindow.MessageConfirmationExit"),LocalizedMessages.getString("MainWindow.TitleConfirmationExit"),JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.YES_OPTION) //$NON-NLS-1$ //$NON-NLS-2$
@@ -287,7 +289,7 @@ public class MainWindow extends JFrame {
 		return albero;
 	}
 	/**
-	 * This method initializes jButton	
+	 * This method initializes configure	
 	 * 	
 	 * @return javax.swing.JButton	
 	 */    
@@ -299,7 +301,7 @@ public class MainWindow extends JFrame {
 			addNode.setToolTipText(LocalizedMessages.getString("MainWindow.TipButtonAddNode")); //$NON-NLS-1$
 			addNode.setName("addNode"); //$NON-NLS-1$
 			addNode.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12)); //$NON-NLS-1$
-			addNode.setSize(130, 44);
+			addNode.setSize(125, 44);
 			addNode.setLocation(14, 140);
 			addNode.setPreferredSize(new java.awt.Dimension(130,44));
 			addNode.addActionListener(new java.awt.event.ActionListener() { 
@@ -330,7 +332,7 @@ public class MainWindow extends JFrame {
 		return addNode;
 	}
 	/**
-	 * This method initializes jButton	
+	 * This method initializes configure	
 	 * 	
 	 * @return javax.swing.JButton	
 	 */    
@@ -342,7 +344,7 @@ public class MainWindow extends JFrame {
 			modifyNode.setToolTipText(LocalizedMessages.getString("MainWindow.TipButtonModifyNode")); //$NON-NLS-1$
 			modifyNode.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12)); //$NON-NLS-1$
 			modifyNode.setLocation(250, 140);
-			modifyNode.setSize(130, 44);
+			modifyNode.setSize(125, 44);
 			modifyNode.setPreferredSize(new java.awt.Dimension(130,44));
 			modifyNode.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
@@ -374,7 +376,7 @@ public class MainWindow extends JFrame {
 		return modifyNode;
 	}
 	/**
-	 * This method initializes jButton	
+	 * This method initializes configure	
 	 * 	
 	 * @return javax.swing.JButton	
 	 */    
@@ -386,7 +388,7 @@ public class MainWindow extends JFrame {
 			deleteNode.setToolTipText(LocalizedMessages.getString("MainWindow.TipButtonDeleteNode")); //$NON-NLS-1$
 			deleteNode.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12)); //$NON-NLS-1$
 			deleteNode.setLocation(486, 140);
-			deleteNode.setSize(130, 44);
+			deleteNode.setSize(125, 44);
 			deleteNode.setPreferredSize(new java.awt.Dimension(130,44));
 			deleteNode.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
@@ -439,7 +441,7 @@ public class MainWindow extends JFrame {
 		return pannelloVisualizza;
 	}
 	/**
-	 * This method initializes jButton	
+	 * This method initializes configure	
 	 * 	
 	 * @return javax.swing.JButton	
 	 */    
@@ -450,7 +452,7 @@ public class MainWindow extends JFrame {
 			addAttribute.setIcon(new ImageIcon(getClass().getResource("/icons/iconAddAttribute.gif"))); //$NON-NLS-1$
 			addAttribute.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12)); //$NON-NLS-1$
 			addAttribute.setLocation(15, 447);
-			addAttribute.setSize(130, 44);
+			addAttribute.setSize(125, 44);
 			addAttribute.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
 					boolean ok=false;
@@ -483,7 +485,7 @@ public class MainWindow extends JFrame {
 		return addAttribute;
 	}
 	/**
-	 * This method initializes jButton	
+	 * This method initializes configure	
 	 * 	
 	 * @return javax.swing.JButton	
 	 */    
@@ -494,7 +496,7 @@ public class MainWindow extends JFrame {
 			modifyAttribute.setIcon(new ImageIcon(getClass().getResource("/icons/iconModifyAttribute.gif"))); //$NON-NLS-1$
 			modifyAttribute.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12)); //$NON-NLS-1$
 			modifyAttribute.setLocation(250, 447);
-			modifyAttribute.setSize(130, 44);
+			modifyAttribute.setSize(125, 44);
 			modifyAttribute.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
 					boolean ok=false;
@@ -533,7 +535,7 @@ public class MainWindow extends JFrame {
 		return modifyAttribute;
 	}
 	/**
-	 * This method initializes jButton	
+	 * This method initializes configure	
 	 * 	
 	 * @return javax.swing.JButton	
 	 */    
@@ -544,7 +546,7 @@ public class MainWindow extends JFrame {
 			deleteAttribute.setIcon(new ImageIcon(getClass().getResource("/icons/iconDeleteAttribute.gif"))); //$NON-NLS-1$
 			deleteAttribute.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12)); //$NON-NLS-1$
 			deleteAttribute.setLocation(485, 447);
-			deleteAttribute.setSize(130, 44);
+			deleteAttribute.setSize(125, 44);
 			deleteAttribute.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
 					if (albero.getSelectionPath()!=null)
@@ -608,8 +610,8 @@ public class MainWindow extends JFrame {
 		if (nodeName == null) {
 			nodeName = new TextBox();
 			nodeName.setBounds(10, 42, 582, 22);
-			nodeName.setLarghezzaEtichetta(100);
-			nodeName.setEtichetta(LocalizedMessages.getString("MainWindow.TextboxNodeName")); //$NON-NLS-1$
+			nodeName.setWidthLabel(100);
+			nodeName.setLabel(LocalizedMessages.getString("MainWindow.TextboxNodeName")); //$NON-NLS-1$
 			nodeName.setEditable(false);
 		}
 		return nodeName;
@@ -623,14 +625,14 @@ public class MainWindow extends JFrame {
 		if (nodeText == null) {
 			nodeText = new TextBox();
 			nodeText.setBounds(10, 73, 582, 22);
-			nodeText.setLarghezzaEtichetta(100);
-			nodeText.setEtichetta(LocalizedMessages.getString("MainWindow.TextboxNodeText")); //$NON-NLS-1$
+			nodeText.setWidthLabel(100);
+			nodeText.setLabel(LocalizedMessages.getString("MainWindow.TextboxNodeText")); //$NON-NLS-1$
 			nodeText.setEditable(false);
 		}
 		return nodeText;
 	}
 	/**
-	 * This method initializes jButton	
+	 * This method initializes configure	
 	 * 	
 	 * @return javax.swing.JButton	
 	 */    
@@ -639,7 +641,7 @@ public class MainWindow extends JFrame {
 			about = new JButton();
 			about.setText(LocalizedMessages.getString("MainWindow.ButtonAbout")); //$NON-NLS-1$
 			about.setIcon(new ImageIcon(getClass().getResource("/icons/iconAbout.gif"))); //$NON-NLS-1$
-			about.setPreferredSize(new java.awt.Dimension(130,44));
+			about.setPreferredSize(new java.awt.Dimension(125,44));
 			about.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
 					new About().setVisible(true);
@@ -648,7 +650,48 @@ public class MainWindow extends JFrame {
 		}
 		return about;
 	}
-      	public static void main(String[] args) {
+	/**
+	 * This method initializes configure	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */    
+	private JButton getConfigure() {
+		if (configure == null) {
+			configure = new JButton();
+			configure.setText(LocalizedMessages.getString("MainWindow.ButtonConfigure")); //$NON-NLS-1$
+			configure.setToolTipText(LocalizedMessages.getString("MainWindow.TipButtonConfigure")); //$NON-NLS-1$
+			configure.setIcon(new ImageIcon(getClass().getResource("/icons/iconConfig.gif"))); //$NON-NLS-1$
+			configure.setHorizontalTextPosition(javax.swing.SwingConstants.TRAILING);
+			configure.setPreferredSize(new java.awt.Dimension(125,44));
+			configure.addActionListener(new java.awt.event.ActionListener() { 
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					new Configuration().setVisible(true);
+					setVisible(false);
+					setVisible(true);
+				}
+			});
+		}
+		return configure;
+	}
+	/**
+	 * This method initializes comandi	
+	 * 	
+	 * @return javax.swing.JToolBar	
+	 */    
+	private JToolBar getComandi() {
+		if (comandi == null) {
+			comandi = new JToolBar();
+			comandi.setFloatable(false);
+			comandi.add(getOpenFile());
+			comandi.add(getSaveFile());
+			comandi.add(getSaveFileAs());
+			comandi.add(getConfigure());
+			comandi.add(getAbout());
+			comandi.add(getExit());
+		}
+		return comandi;
+	}
+        	public static void main(String[] args) {
          		new MainWindow().setVisible(true);
          		
 	}
@@ -658,7 +701,8 @@ public class MainWindow extends JFrame {
 	 * @return void
 	 */
 	private void initialize() {
-		LocalizedMessages.reInit("Italiano"); //$NON-NLS-1$
+		LocalizedMessages.reInit(Configuration.getCurrentLanguage()); //$NON-NLS-1$
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icons/iconProgram.gif"))); //$NON-NLS-1$
 		this.setSize(800,600);
 		this.setContentPane(getJContentPane());
 		this.setTitle("Editor XML 0.1"); //$NON-NLS-1$
