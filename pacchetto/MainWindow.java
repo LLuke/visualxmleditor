@@ -14,12 +14,10 @@ import javax.swing.JList;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 /**
- * @author Ferreri Gabriele
- *
- * Classe che estende il JFrame per creare l'interfaccia grafica dell'applicativo
- * 
+ * Main graphical interface
+ * @author Ferreri Gabriele 
  */
-public class Principale extends JFrame {
+public class MainWindow extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private javax.swing.JPanel jContentPane = null;
@@ -43,12 +41,12 @@ public class Principale extends JFrame {
 	private JPanel pannelloNodo = null;
 	private JPanel pannelloAttributi = null;
 
-	private CasellaTesto nomeNodo = null;
-	private CasellaTesto testoNodo = null;
+	private TextBox nomeNodo = null;
+	private TextBox testoNodo = null;
 	/**
 	 * @throws java.awt.HeadlessException
 	 */
-	public Principale() {
+	public MainWindow() {
 		super();
 		initialize();
 		this.setBounds(Utility.centraSuSchermo(this.getBounds()));
@@ -117,7 +115,7 @@ public class Principale extends JFrame {
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
 					JFileChooser dlgApri = new JFileChooser();
 					
-					dlgApri.setFileFilter(new FiltroFileXML());
+					dlgApri.setFileFilter(new XMLFilter());
 					dlgApri.setCurrentDirectory(new File(System.getProperty("user.dir")));
 					
 					int res=dlgApri.showOpenDialog(null);
@@ -169,7 +167,7 @@ public class Principale extends JFrame {
 					JFileChooser dlgSalva = new JFileChooser();
 					boolean ok=false;
 					
-					dlgSalva.setFileFilter(new FiltroFileXML());
+					dlgSalva.setFileFilter(new XMLFilter());
 					dlgSalva.setCurrentDirectory(new File(System.getProperty("user.dir")));
 					
 					int res=dlgSalva.showOpenDialog(null);
@@ -287,14 +285,14 @@ public class Principale extends JFrame {
 			aggiungiNodo.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
 					boolean ok=false;
-					DatiNodoAttributo dati = new DatiNodoAttributo();
+					NodeData dati = new NodeData();
 					
 					if (albero.getSelectionPath()!=null)
 					{
 						DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode)albero.getLastSelectedPathComponent();
 						while (!ok)
 						{
-							ok=dati.visualizza(DatiNodoAttributo.MODO_ATTRIBUTO,"","");
+							ok=dati.visualizza(NodeData.MODO_ATTRIBUTO,"","");
 							if (ok)
 							{
 								albero.aggiungiNodo(dmtn,dati.getParametroNome(),dati.getParametroTesto());
@@ -327,7 +325,7 @@ public class Principale extends JFrame {
 			modificaNodo.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
 					boolean ok=false;
-					DatiNodoAttributo dati = new DatiNodoAttributo();
+					NodeData dati = new NodeData();
 					
 					if (albero.getSelectionPath()!=null)
 					{
@@ -336,7 +334,7 @@ public class Principale extends JFrame {
 						
 						while (!ok)
 						{
-							ok=dati.visualizza(DatiNodoAttributo.MODO_ATTRIBUTO ,nodo.getNome(),nodo.getTesto());
+							ok=dati.visualizza(NodeData.MODO_ATTRIBUTO ,nodo.getNome(),nodo.getTesto());
 							if (ok)
 							{
 								albero.modificaNodo(dmtn,dati.getParametroNome(),dati.getParametroTesto());
@@ -431,14 +429,14 @@ public class Principale extends JFrame {
 			aggiungiAttributo.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
 					boolean ok=false;
-					DatiNodoAttributo dati = new DatiNodoAttributo();
+					NodeData dati = new NodeData();
 					
 					if (albero.getSelectionPath()!=null)
 					{
 						DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode)albero.getLastSelectedPathComponent();
 						while (!ok)
 						{
-							ok=dati.visualizza(DatiNodoAttributo.MODO_ATTRIBUTO,"","");
+							ok=dati.visualizza(NodeData.MODO_ATTRIBUTO,"","");
 							if (ok)
 							{
 								ok=albero.aggiungiAttributo(dmtn,dati.getParametroNome(),dati.getParametroTesto());
@@ -474,7 +472,7 @@ public class Principale extends JFrame {
 			modificaAttributo.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
 					boolean ok=false;
-					DatiNodoAttributo dati = new DatiNodoAttributo();
+					NodeData dati = new NodeData();
 					
 					if (albero.getSelectionPath()!=null)
 					{
@@ -486,7 +484,7 @@ public class Principale extends JFrame {
 							
 							while (!ok)
 							{
-								ok=dati.visualizza(DatiNodoAttributo.MODO_ATTRIBUTO ,valori[0],valori[1]);
+								ok=dati.visualizza(NodeData.MODO_ATTRIBUTO ,valori[0],valori[1]);
 								if (ok)
 								{
 									ok=albero.modificaAttributo(dmtn,dati.getParametroNome(),dati.getParametroTesto(),dati.getValoreNomeVecchio());
@@ -579,9 +577,9 @@ public class Principale extends JFrame {
 	 * 	
 	 * @return pacchetto.CasellaTesto	
 	 */    
-	private CasellaTesto getNomeNodo() {
+	private TextBox getNomeNodo() {
 		if (nomeNodo == null) {
-			nomeNodo = new CasellaTesto();
+			nomeNodo = new TextBox();
 			nomeNodo.setBounds(10, 42, 582, 22);
 			nomeNodo.setLarghezzaEtichetta(100);
 			nomeNodo.setEtichetta("Nome Nodo");
@@ -594,9 +592,9 @@ public class Principale extends JFrame {
 	 * 	
 	 * @return pacchetto.CasellaTesto	
 	 */    
-	private CasellaTesto getTestoNodo() {
+	private TextBox getTestoNodo() {
 		if (testoNodo == null) {
-			testoNodo = new CasellaTesto();
+			testoNodo = new TextBox();
 			testoNodo.setBounds(10, 73, 582, 22);
 			testoNodo.setLarghezzaEtichetta(100);
 			testoNodo.setEtichetta("Testo Nodo");
@@ -605,7 +603,7 @@ public class Principale extends JFrame {
 		return testoNodo;
 	}
      	public static void main(String[] args) {
-         		new Principale().setVisible(true);
+         		new MainWindow().setVisible(true);
          		
 	}
 	/**

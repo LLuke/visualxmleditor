@@ -8,12 +8,10 @@ import javax.swing.JTextField;
 import java.awt.*;
 
 /**
+ * Extends JPanel to create a textbox with personalized label
  * @author Ferreri Gabriele
- *
- * Classe che estende la classe JPanel per creare una casella di testo con
- * label personalizzata
  */
-public class CasellaTesto extends JPanel {
+public class TextBox extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	private JLabel etichetta = null;
@@ -23,7 +21,7 @@ public class CasellaTesto extends JPanel {
 	/**
 	 * Costruttore di classe 
 	 */
-	public CasellaTesto() {
+	public TextBox() {
 		super();
 		initialize();
 	}

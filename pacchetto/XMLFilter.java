@@ -5,18 +5,17 @@ import java.io.File;
 import javax.swing.filechooser.FileFilter;
 
 /**
+ * Filters XML files
  * @author Ferreri Gabriele
- *
- * Classe che estende la classe FileFilter per il filtro dei file XML
  *  
  */
-public class FiltroFileXML extends FileFilter {
+public class XMLFilter extends FileFilter {
 
 	/**
 	 * Costruttore di classe
 	 * 
 	 */
-	public FiltroFileXML() {
+	public XMLFilter() {
 		super();
 	}
 
@@ -29,7 +28,7 @@ public class FiltroFileXML extends FileFilter {
 		{
 			return true;
 		}
-		else if (Utility.estraiEstensioneFile(f.getName()).toLowerCase().equals("xml"))
+		else if (Utility.estraiEstensioneFile(f.getName()).equalsIgnoreCase("xml"))
 		{
 			return true;
 		}

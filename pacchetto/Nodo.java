@@ -104,7 +104,7 @@ public class Nodo {
 	}
 
 	/**
-	 * Funzione che effettua l'overrides del metodo toString per
+	 * Funzione che effettua l'override del metodo toString per
 	 * personalizzare la modalità di visualizzazione del nodo
 	 * @return Stringa rappresentante l'oggetto
 	 */

@@ -4,13 +4,11 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
 /**
+ * Extends JDialog and creates a form for data entering on a node or an attribute
  * @author Ferreri Gabriele
- *
- * Classe che estende la classe JDialog e crea una form per l'immissione
- * dei dati di un nodo o di un attributo
  */
 
-public class DatiNodoAttributo extends JDialog {
+public class NodeData extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private javax.swing.JPanel jContentPane = null;
@@ -25,14 +23,14 @@ public class DatiNodoAttributo extends JDialog {
 	final static int MODO_NODO=0;
 	final static int MODO_ATTRIBUTO=1;
 	
-	private CasellaTesto nome = null;
-	private CasellaTesto testo = null;
+	private TextBox nome = null;
+	private TextBox testo = null;
 	/**
 	 * Costruttore di classe
 	 * 
 	 * 
 	 */
-	public DatiNodoAttributo() {
+	public NodeData() {
 		super();
 		initialize();
 		this.setBounds(Utility.centraSuSchermo(this.getBounds()));
@@ -171,9 +169,9 @@ public class DatiNodoAttributo extends JDialog {
 	 * 	
 	 * @return pacchetto.CasellaTesto	
 	 */    
-	private CasellaTesto getNome() {
+	private TextBox getNome() {
 		if (nome == null) {
-			nome = new CasellaTesto();
+			nome = new TextBox();
 			nome.setBounds(14, 25, 526, 22);
 			nome.setEtichetta("");
 			nome.setLarghezzaEtichetta(100);
@@ -185,9 +183,9 @@ public class DatiNodoAttributo extends JDialog {
 	 * 	
 	 * @return pacchetto.CasellaTesto	
 	 */    
-	private CasellaTesto getTesto() {
+	private TextBox getTesto() {
 		if (testo == null) {
-			testo = new CasellaTesto();
+			testo = new TextBox();
 			testo.setBounds(14, 58, 526, 22);
 			testo.setLarghezzaEtichetta(100);
 		}

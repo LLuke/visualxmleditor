@@ -3,7 +3,10 @@ package pacchetto;
 import javax.swing.*;
 import javax.swing.tree.*;
 import java.io.*;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
+
+import org.jdom.adapters.JAXPDOMAdapter;
 import org.jdom.output.XMLOutputter;
 import org.w3c.dom.Document;
 import org.w3c.dom.*; 
@@ -11,10 +14,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 
 /**
+ * Extends JTree to work with an XML file
  * @author Ferreri Gabriele
- * 
- * Classe che estende il JTree aggiungendo la possibilità di lavorare con un file XML
- * 
  */
 public class JTreeXML extends JTree {
 
@@ -31,7 +32,7 @@ public class JTreeXML extends JTree {
 		ImageIcon iconaNodoConAttributi = new ImageIcon(getClass().getResource("/pacchetto/iconaNodoConAttributi.gif"));
 		ImageIcon iconaNodoSenzaAttributi = new ImageIcon(getClass().getResource("/pacchetto/iconaNodoSenzaAttributi.gif"));
 		
-		CustomRender render = new CustomRender(iconaFile,iconaNodoConAttributi,iconaNodoSenzaAttributi);
+		IconRenderer render = new IconRenderer(iconaFile,iconaNodoConAttributi,iconaNodoSenzaAttributi);
 		
 		this.setCellRenderer(render);
 		
@@ -49,7 +50,8 @@ public class JTreeXML extends JTree {
 			DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
 			Document doc = docBuilder.parse (new File(nomeFile));
-			doc.getDocumentElement().normalize();
+			// inutile, dato che il metodo dà un risultato equivalente al salvare e riaprire il documento (e qui l'abbiamo appena aperto)
+			//doc.getDocumentElement().normalize();
 			
 			radiceXML=doc.getDocumentElement();
 

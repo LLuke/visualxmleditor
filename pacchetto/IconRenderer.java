@@ -8,12 +8,10 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 
 
 /**
+ * Permits icon personalization based on type
  * @author Ferreri Gabriele
- *
- * Classe che estende la classe DefaultTreeCellRenderer per permettere di
- * personalizzare le icone in base al tipo
  */
-public class CustomRender extends DefaultTreeCellRenderer {
+public class IconRenderer extends DefaultTreeCellRenderer {
 
 	private static final long serialVersionUID = 1L;
 	private ImageIcon iconaF;
@@ -26,7 +24,7 @@ public class CustomRender extends DefaultTreeCellRenderer {
 	 * @param iconaNodoConAttributi	Icona che rappresenta il nodo Nodo con attributi
 	 * @param iconaNodoSenzaAttributi Icona che rappresenta il nodo Nodo senza attributi
 	 */
-	public CustomRender(ImageIcon iconaFile,ImageIcon iconaNodoConAttributi,ImageIcon iconaNodoSenzaAttributi) {
+	public IconRenderer(ImageIcon iconaFile,ImageIcon iconaNodoConAttributi,ImageIcon iconaNodoSenzaAttributi) {
 		super();
 		iconaF=iconaFile;
 		iconaNCA=iconaNodoConAttributi;
