@@ -46,6 +46,7 @@ public class Configuration extends JDialog {
 		super();
 		initialize();
 		LocalizedMessages.refreshLanguage("Configuration",this);
+		this.setBounds(Utility.centerToScreen(this.getBounds()));
 	}
 
 	/**
@@ -54,11 +55,12 @@ public class Configuration extends JDialog {
 	 * @return void
 	 */
 	private void initialize() {
+		this.setBackground(new java.awt.Color(166,202,240));
 		this.setModal(true);
 		this.setSize(400,230);
 		this.setContentPane(getJContentPane());
 		this.setTitle("Configuration"); //$NON-NLS-1$
-		this.setBounds(Utility.centerToScreen(this.getBounds()));
+		this.setBounds(new java.awt.Rectangle(640,400,419,180));
 
 		List files = LocalizedMessages.getLanguageList();
 		
@@ -124,6 +126,7 @@ public class Configuration extends JDialog {
 		if(jContentPane == null) {
 			jContentPane = new javax.swing.JPanel();
 			jContentPane.setLayout(null);
+			jContentPane.setBackground(new java.awt.Color(166,202,240));
 			jContentPane.add(getLanguage(), null);
 			jContentPane.add(getOk(), null);
 			jContentPane.add(getCancel(), null);
@@ -154,9 +157,9 @@ public class Configuration extends JDialog {
 	private JButton getOk() {
 		if (ok == null) {
 			ok = new JButton();
-			ok.setIcon(new ImageIcon(getClass().getResource("/icons/iconOk.gif"))); //$NON-NLS-1$
+			ok.setIcon(new ImageIcon(getClass().getResource("/icons/iconOk.png"))); //$NON-NLS-1$
 			ok.setText("Ok"); //$NON-NLS-1$
-			ok.setLocation(64, 138);
+			ok.setLocation(60, 91);
 			ok.setSize(121, 51);
 			ok.setName("Ok");
 			ok.addActionListener(new java.awt.event.ActionListener() { 
@@ -177,8 +180,8 @@ public class Configuration extends JDialog {
 	private JButton getCancel() {
 		if (cancel == null) {
 			cancel = new JButton();
-			cancel.setBounds(210, 138, 121, 51);
-			cancel.setIcon(new ImageIcon(getClass().getResource("/icons/iconCancel.gif"))); //$NON-NLS-1$
+			cancel.setBounds(230, 91, 121, 51);
+			cancel.setIcon(new ImageIcon(getClass().getResource("/icons/iconCancel.png"))); //$NON-NLS-1$
 			cancel.setText("Cancel"); //$NON-NLS-1$
 			cancel.setName("Cancel");
 			cancel.addActionListener(new java.awt.event.ActionListener() { 
@@ -189,4 +192,4 @@ public class Configuration extends JDialog {
 		}
 		return cancel;
 	}
-   }
+   }  //  @jve:decl-index=0:visual-constraint="10,10"

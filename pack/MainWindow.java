@@ -115,6 +115,7 @@ public class MainWindow extends JFrame {
 			panelCommands = new JPanel();
 			panelCommands.setLayout(flowLayout1);
 			flowLayout1.setAlignment(java.awt.FlowLayout.LEFT);
+			panelCommands.setBackground(new java.awt.Color(166,202,240));
 			panelCommands.add(getCommands(), null);
 		}
 		return panelCommands;
@@ -128,7 +129,7 @@ public class MainWindow extends JFrame {
 		if (openFile == null) {
 			openFile = new JButton();
 			openFile.setText("Open..."); //$NON-NLS-1$
-			openFile.setIcon(new ImageIcon(getClass().getResource("/icons/iconOpenFile.gif"))); //$NON-NLS-1$
+			openFile.setIcon(new ImageIcon(getClass().getResource("/icons/iconOpenFile.png"))); //$NON-NLS-1$
 			openFile.setToolTipText("Open a File"); //$NON-NLS-1$
 			openFile.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12)); //$NON-NLS-1$
 			openFile.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
@@ -164,7 +165,7 @@ public class MainWindow extends JFrame {
 	private JButton getSaveFile() {
 		if (saveFile == null) {
 			saveFile = new JButton();
-			saveFile.setIcon(new ImageIcon(getClass().getResource("/icons/iconSaveFile.gif"))); //$NON-NLS-1$
+			saveFile.setIcon(new ImageIcon(getClass().getResource("/icons/iconSaveFile.png"))); //$NON-NLS-1$
 			saveFile.setText("Save"); //$NON-NLS-1$
 			saveFile.setToolTipText("Save current file"); //$NON-NLS-1$
 			saveFile.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12)); //$NON-NLS-1$
@@ -187,7 +188,7 @@ public class MainWindow extends JFrame {
 	private JButton getSaveFileAs() {
 		if (saveFileAs == null) {
 			saveFileAs = new JButton();
-			saveFileAs.setIcon(new ImageIcon(getClass().getResource("/icons/iconSaveFileAs.gif"))); //$NON-NLS-1$
+			saveFileAs.setIcon(new ImageIcon(getClass().getResource("/icons/iconSaveFileAs.png"))); //$NON-NLS-1$
 			saveFileAs.setText("Save..."); //$NON-NLS-1$
 			saveFileAs.setToolTipText("Save current file as..."); //$NON-NLS-1$
 			saveFileAs.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12)); //$NON-NLS-1$
@@ -243,7 +244,7 @@ public class MainWindow extends JFrame {
 	private JButton getExit() {
 		if (exit == null) {
 			exit = new JButton();
-			exit.setIcon(new ImageIcon(getClass().getResource("/icons/iconExit.gif"))); //$NON-NLS-1$
+			exit.setIcon(new ImageIcon(getClass().getResource("/icons/iconExit.png"))); //$NON-NLS-1$
 			exit.setText("Exit"); //$NON-NLS-1$
 			exit.setToolTipText("Exit application"); //$NON-NLS-1$
 			exit.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12)); //$NON-NLS-1$
@@ -318,12 +319,12 @@ public class MainWindow extends JFrame {
 		if (addNode == null) {
 			addNode = new JButton();
 			addNode.setText("Add"); //$NON-NLS-1$
-			addNode.setIcon(new ImageIcon(getClass().getResource("/icons/iconAddNode.gif"))); //$NON-NLS-1$
+			addNode.setIcon(new ImageIcon(getClass().getResource("/icons/iconAddNode.png"))); //$NON-NLS-1$
 			addNode.setToolTipText("Add child node to current node"); //$NON-NLS-1$
 			addNode.setName("AddNode"); //$NON-NLS-1$
 			addNode.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12)); //$NON-NLS-1$
 			addNode.setSize(130, 44);
-			addNode.setLocation(14, 140);
+			addNode.setLocation(15, 140);
 			addNode.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
 					boolean ok=true;
@@ -380,7 +381,7 @@ public class MainWindow extends JFrame {
 	private JButton getModifyNode() {
 		if (modifyNode == null) {
 			modifyNode = new JButton();
-			modifyNode.setIcon(new ImageIcon(getClass().getResource("/icons/iconModifyNode.gif"))); //$NON-NLS-1$
+			modifyNode.setIcon(new ImageIcon(getClass().getResource("/icons/iconModifyNode.png"))); //$NON-NLS-1$
 			modifyNode.setText("Modify"); //$NON-NLS-1$
 			modifyNode.setToolTipText("Modify current node"); //$NON-NLS-1$
 			modifyNode.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12)); //$NON-NLS-1$
@@ -426,10 +427,10 @@ public class MainWindow extends JFrame {
 		if (deleteNode == null) {
 			deleteNode = new JButton();
 			deleteNode.setText("Delete"); //$NON-NLS-1$
-			deleteNode.setIcon(new ImageIcon(getClass().getResource("/icons/iconDeleteNode.gif"))); //$NON-NLS-1$
+			deleteNode.setIcon(new ImageIcon(getClass().getResource("/icons/iconDeleteNode.png"))); //$NON-NLS-1$
 			deleteNode.setToolTipText("Delete current node"); //$NON-NLS-1$
 			deleteNode.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12)); //$NON-NLS-1$
-			deleteNode.setLocation(492, 140);
+			deleteNode.setLocation(485, 140);
 			deleteNode.setSize(130, 44);
 			deleteNode.setName("DeleteNode");
 			deleteNode.addActionListener(new java.awt.event.ActionListener() { 
@@ -476,6 +477,7 @@ public class MainWindow extends JFrame {
 		if (panelView == null) {
 			panelView = new JPanel();
 			panelView.setLayout(null);
+			panelView.setBackground(new java.awt.Color(166,202,240));
 			panelView.add(getAddNode(), null);
 			panelView.add(getDeleteNode(), null);
 			panelView.add(getModifyNode(), null);
@@ -496,7 +498,7 @@ public class MainWindow extends JFrame {
 		if (addAttribute == null) {
 			addAttribute = new JButton();
 			addAttribute.setText("Add"); //$NON-NLS-1$
-			addAttribute.setIcon(new ImageIcon(getClass().getResource("/icons/iconAddAttribute.gif"))); //$NON-NLS-1$
+			addAttribute.setIcon(new ImageIcon(getClass().getResource("/icons/iconAddAttribute.png"))); //$NON-NLS-1$
 			addAttribute.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12)); //$NON-NLS-1$
 			addAttribute.setLocation(15, 447);
 			addAttribute.setSize(130, 44);
@@ -546,9 +548,9 @@ public class MainWindow extends JFrame {
 		if (modifyAttribute == null) {
 			modifyAttribute = new JButton();
 			modifyAttribute.setText("Modify"); //$NON-NLS-1$
-			modifyAttribute.setIcon(new ImageIcon(getClass().getResource("/icons/iconModifyAttribute.gif"))); //$NON-NLS-1$
+			modifyAttribute.setIcon(new ImageIcon(getClass().getResource("/icons/iconModifyAttribute.png"))); //$NON-NLS-1$
 			modifyAttribute.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12)); //$NON-NLS-1$
-			modifyAttribute.setLocation(250, 447);
+			modifyAttribute.setLocation(253, 447);
 			modifyAttribute.setSize(130, 44);
 			modifyAttribute.setName("ModifyAttribute");
 			modifyAttribute.setToolTipText("Modify selected attribute");
@@ -602,7 +604,7 @@ public class MainWindow extends JFrame {
 		if (deleteAttribute == null) {
 			deleteAttribute = new JButton();
 			deleteAttribute.setText("Delete"); //$NON-NLS-1$
-			deleteAttribute.setIcon(new ImageIcon(getClass().getResource("/icons/iconDeleteAttribute.gif"))); //$NON-NLS-1$
+			deleteAttribute.setIcon(new ImageIcon(getClass().getResource("/icons/iconDeleteAttribute.png"))); //$NON-NLS-1$
 			deleteAttribute.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12)); //$NON-NLS-1$
 			deleteAttribute.setLocation(485, 447);
 			deleteAttribute.setSize(130, 44);
@@ -644,6 +646,7 @@ public class MainWindow extends JFrame {
 			panelNode.setBounds(15, 27, 602, 104);
 			panelNode.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Node", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 36), java.awt.Color.black)); //$NON-NLS-1$ //$NON-NLS-2$
 			panelNode.setName("PanelNode");
+			panelNode.setBackground(new java.awt.Color(166,202,240));
 			panelNode.add(getNodeName(), null);
 			panelNode.add(getNodeText(), null);
 		}
@@ -661,6 +664,7 @@ public class MainWindow extends JFrame {
 			panelAttribute.setBounds(14, 205, 602, 227);
 			panelAttribute.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Attribute", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 36), java.awt.Color.black)); //$NON-NLS-1$ //$NON-NLS-2$
 			panelAttribute.setName("PanelAttribute");
+			panelAttribute.setBackground(new java.awt.Color(166,202,240));
 			panelAttribute.add(getAttributes(), null);
 		}
 		return panelAttribute;
@@ -707,7 +711,7 @@ public class MainWindow extends JFrame {
 		if (about == null) {
 			about = new JButton();
 			about.setText("About..."); //$NON-NLS-1$
-			about.setIcon(new ImageIcon(getClass().getResource("/icons/iconAbout.gif"))); //$NON-NLS-1$
+			about.setIcon(new ImageIcon(getClass().getResource("/icons/iconAbout.png"))); //$NON-NLS-1$
 			about.setPreferredSize(new java.awt.Dimension(125,44));
 			about.setName("About");
 			about.setToolTipText("Open windows about");
@@ -729,7 +733,7 @@ public class MainWindow extends JFrame {
 			configure = new JButton();
 			configure.setText("Configure..."); //$NON-NLS-1$
 			configure.setToolTipText("Open window configuration"); //$NON-NLS-1$
-			configure.setIcon(new ImageIcon(getClass().getResource("/icons/iconConfig.gif"))); //$NON-NLS-1$
+			configure.setIcon(new ImageIcon(getClass().getResource("/icons/iconConfig.png"))); //$NON-NLS-1$
 			configure.setHorizontalTextPosition(javax.swing.SwingConstants.TRAILING);
 			configure.setPreferredSize(new java.awt.Dimension(125,44));
 			configure.setName("Configure");
@@ -752,6 +756,7 @@ public class MainWindow extends JFrame {
 		if (commands == null) {
 			commands = new JToolBar();
 			commands.setFloatable(false);
+			commands.setBackground(new java.awt.Color(166,202,240));
 			commands.add(getNewFile());
 			commands.add(getOpenFile());
 			commands.add(getSaveFile());
@@ -773,7 +778,7 @@ public class MainWindow extends JFrame {
 			newFile = new JButton();
 			newFile.setName("NewFile");
 			newFile.setText("New");
-			newFile.setIcon(new ImageIcon(getClass().getResource("/icons/iconNewFile.gif")));
+			newFile.setIcon(new ImageIcon(getClass().getResource("/icons/iconNewFile.png")));
 			newFile.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12));
 			newFile.setActionCommand("New");
 			newFile.addActionListener(new java.awt.event.ActionListener() { 
@@ -812,7 +817,7 @@ public class MainWindow extends JFrame {
 	 * @return void
 	 */
 	private void initialize() {
-		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icons/iconProgram.gif")));
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icons/iconProgram.png")));
 		this.setSize(800,600);
 		this.setContentPane(getJContentPane());
 		this.setTitle("Editor XML 0.1"); //$NON-NLS-1$

@@ -40,10 +40,10 @@ public class JTreeXML extends JTree {
 	 */
 	public JTreeXML() {
 		super();
-		ImageIcon iconFolder = new ImageIcon(getClass().getResource("/icons/iconFolder.gif"));
-		ImageIcon iconFile = new ImageIcon(getClass().getResource("/icons/iconFileXML.gif"));
-		ImageIcon iconNodeWithAttribute = new ImageIcon(getClass().getResource("/icons/iconNodeWithAttribute.gif"));
-		ImageIcon iconNodeWithoutAttribute = new ImageIcon(getClass().getResource("/icons/iconNodeWithoutAttribute.gif"));
+		ImageIcon iconFolder = new ImageIcon(getClass().getResource("/icons/iconFolder.png"));
+		ImageIcon iconFile = new ImageIcon(getClass().getResource("/icons/iconFileXML.png"));
+		ImageIcon iconNodeWithAttribute = new ImageIcon(getClass().getResource("/icons/iconNodeWithAttribute.png"));
+		ImageIcon iconNodeWithoutAttribute = new ImageIcon(getClass().getResource("/icons/iconNodeWithoutAttribute.png"));
 		
 		render = new IconRenderer(iconFolder,iconFile,iconNodeWithAttribute,iconNodeWithoutAttribute);
 		
@@ -322,7 +322,7 @@ public class JTreeXML extends JTree {
 				
 				try
 				{
-					f.write(temp[0] + "=\"" + temp[1] + "\""); //$NON-NLS-1$ //$NON-NLS-2$
+					f.write(temp[0] + "=\"" + temp[1] + "\" "); //$NON-NLS-1$ //$NON-NLS-2$
 				}
 				catch (IOException e)
 				{

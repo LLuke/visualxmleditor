@@ -120,6 +120,7 @@ public class NodeData extends JDialog {
 		if(jContentPane == null) {
 			jContentPane = new javax.swing.JPanel();
 			jContentPane.setLayout(null);
+			jContentPane.setBackground(new java.awt.Color(166,202,240));
 			jContentPane.add(getOk(), null);
 			jContentPane.add(getCancel(), null);
 			jContentPane.add(getNameNode(), null);
@@ -137,7 +138,7 @@ public class NodeData extends JDialog {
 			ok = new JButton();
 			ok.setText("Ok"); //$NON-NLS-1$
 			ok.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 14)); //$NON-NLS-1$
-			ok.setIcon(new ImageIcon(getClass().getResource("/icons/iconOk.gif"))); //$NON-NLS-1$
+			ok.setIcon(new ImageIcon(getClass().getResource("/icons/iconOk.png"))); //$NON-NLS-1$
 			ok.setLocation(147, 102);
 			ok.setSize(130, 44);
 			ok.setName("Ok");
@@ -167,7 +168,7 @@ public class NodeData extends JDialog {
 			cancel = new JButton();
 			cancel.setText("Cancel"); //$NON-NLS-1$
 			cancel.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 14)); //$NON-NLS-1$
-			cancel.setIcon(new ImageIcon(getClass().getResource("/icons/iconCancel.gif"))); //$NON-NLS-1$
+			cancel.setIcon(new ImageIcon(getClass().getResource("/icons/iconCancel.png"))); //$NON-NLS-1$
 			cancel.setLocation(309, 102);
 			cancel.setSize(130, 44);
 			cancel.setName("Cancel");

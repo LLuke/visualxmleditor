@@ -58,6 +58,7 @@ public class TextBox extends JPanel {
 		label = new JLabel();
 		this.setLayout(null);
 		this.setSize(249, 32);
+		this.setBackground(new java.awt.Color(166,202,240));
 		label.setText(""); //$NON-NLS-1$
 		label.setSize(94, 20);
 		label.setLocation(4, 0);
@@ -83,7 +84,6 @@ public class TextBox extends JPanel {
 			field.setSize(120, 20);
 			field.setLocation(97, 0);
 			field.setFont(new java.awt.Font("Times New Roman", java.awt.Font.PLAIN, 14)); //$NON-NLS-1$
-			field.setForeground(java.awt.Color.black);
 			field.addFocusListener(new java.awt.event.FocusAdapter() {   
 				public void focusLost(java.awt.event.FocusEvent e) {    
 					if (field.isEditable())

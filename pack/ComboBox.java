@@ -92,6 +92,7 @@ public class ComboBox extends JPanel {
 		label = new JLabel();
 		this.setLayout(null);
 		this.setSize(232, 35);
+		this.setBackground(new java.awt.Color(166,202,240));
 		label.setText(""); //$NON-NLS-1$
 		label.setLocation(5, 4);
 		label.setSize(94, 20);

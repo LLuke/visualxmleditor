@@ -30,7 +30,7 @@ public class About extends JDialog {
 	private JButton ok = null;
 	private JLabel title = null;
 	private JLabel createdBy = null;
-	private JLabel Authors = null;
+	private JLabel Authors = null;  //  @jve:decl-index=0:
 	/**
 	 * 
 	 */
@@ -73,7 +73,7 @@ public class About extends JDialog {
 			title.setBackground(java.awt.Color.yellow);
 			title.setName("Title");
 			Authors.setName("Authors");
-			jContentPane.setBackground(java.awt.Color.yellow);
+			jContentPane.setBackground(new java.awt.Color(166,202,240));
 			createdBy.setBounds(5, 98, 436, 36);
 			createdBy.setText("Created by"); //$NON-NLS-1$
 			createdBy.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 24)); //$NON-NLS-1$
@@ -100,7 +100,7 @@ public class About extends JDialog {
 			ok = new JButton();
 			ok.setBounds(148, 187, 138, 47);
 			ok.setText("Ok"); //$NON-NLS-1$
-			ok.setIcon(new ImageIcon(getClass().getResource("/icons/iconOk.gif"))); //$NON-NLS-1$
+			ok.setIcon(new ImageIcon(getClass().getResource("/icons/iconOk.png"))); //$NON-NLS-1$
 			ok.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
 					setVisible(false);
