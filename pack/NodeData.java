@@ -111,8 +111,6 @@ public class NodeData extends JDialog {
 	private void initialize() {
 		this.setSize(565, 182);
 		this.setContentPane(getJContentPane());
-		this.addWindowListener(new java.awt.event.WindowAdapter() {
-		});
 	}
 	/**
 	 * This method initializes jContentPane

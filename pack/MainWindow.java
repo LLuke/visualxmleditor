@@ -60,6 +60,7 @@ public class MainWindow extends JFrame {
 	private JButton about = null;
 	private JButton configure = null;
 	private JToolBar comandi = null;
+	private JButton nuovoFile = null;
 	/**
 	 * @throws java.awt.HeadlessException
 	 */
@@ -67,6 +68,7 @@ public class MainWindow extends JFrame {
 		super();
 		initialize();
 		this.setBounds(Utility.centraSuSchermo(this.getBounds()));
+		//LocalizedMessages.refreshLanguage("MainWindow",getContentPane());
 	}
 
 	/**
@@ -121,7 +123,7 @@ public class MainWindow extends JFrame {
 	private JButton getOpenFile() {
 		if (openFile == null) {
 			openFile = new JButton();
-			openFile.setText("Open..."); //$NON-NLS-1$
+			openFile.setText(""); //$NON-NLS-1$
 			openFile.setIcon(new ImageIcon(getClass().getResource("/icons/iconOpenFile.gif"))); //$NON-NLS-1$
 			openFile.setToolTipText("Open a File"); //$NON-NLS-1$
 			openFile.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12)); //$NON-NLS-1$
@@ -157,7 +159,7 @@ public class MainWindow extends JFrame {
 		if (saveFile == null) {
 			saveFile = new JButton();
 			saveFile.setIcon(new ImageIcon(getClass().getResource("/icons/iconSaveFile.gif"))); //$NON-NLS-1$
-			saveFile.setText("Save"); //$NON-NLS-1$
+			saveFile.setText(""); //$NON-NLS-1$
 			saveFile.setToolTipText("Save current file"); //$NON-NLS-1$
 			saveFile.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12)); //$NON-NLS-1$
 			saveFile.setPreferredSize(new java.awt.Dimension(125,44));
@@ -179,7 +181,7 @@ public class MainWindow extends JFrame {
 		if (saveFileAs == null) {
 			saveFileAs = new JButton();
 			saveFileAs.setIcon(new ImageIcon(getClass().getResource("/icons/iconSaveFileAs.gif"))); //$NON-NLS-1$
-			saveFileAs.setText("Save..."); //$NON-NLS-1$
+			saveFileAs.setText(""); //$NON-NLS-1$
 			saveFileAs.setToolTipText("Save current file as..."); //$NON-NLS-1$
 			saveFileAs.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12)); //$NON-NLS-1$
 			saveFileAs.setPreferredSize(new java.awt.Dimension(125,44));
@@ -192,7 +194,7 @@ public class MainWindow extends JFrame {
 					dlgSalva.setFileFilter(new XMLFilter());
 					dlgSalva.setCurrentDirectory(new File(System.getProperty("user.dir"))); //$NON-NLS-1$
 					
-					int res=dlgSalva.showOpenDialog(null);
+					int res=dlgSalva.showSaveDialog(null);
 					
 					if (res==JFileChooser.APPROVE_OPTION)
 					{
@@ -227,7 +229,7 @@ public class MainWindow extends JFrame {
 		if (exit == null) {
 			exit = new JButton();
 			exit.setIcon(new ImageIcon(getClass().getResource("/icons/iconExit.gif"))); //$NON-NLS-1$
-			exit.setText("Exit"); //$NON-NLS-1$
+			exit.setText(""); //$NON-NLS-1$
 			exit.setToolTipText("Exit application"); //$NON-NLS-1$
 			exit.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12)); //$NON-NLS-1$
 			exit.setPreferredSize(new java.awt.Dimension(125,44));
@@ -653,7 +655,7 @@ public class MainWindow extends JFrame {
 	private JButton getAbout() {
 		if (about == null) {
 			about = new JButton();
-			about.setText("About..."); //$NON-NLS-1$
+			about.setText(""); //$NON-NLS-1$
 			about.setIcon(new ImageIcon(getClass().getResource("/icons/iconAbout.gif"))); //$NON-NLS-1$
 			about.setPreferredSize(new java.awt.Dimension(125,44));
 			about.setName("About");
@@ -674,7 +676,7 @@ public class MainWindow extends JFrame {
 	private JButton getConfigure() {
 		if (configure == null) {
 			configure = new JButton();
-			configure.setText("Configure..."); //$NON-NLS-1$
+			configure.setText(""); //$NON-NLS-1$
 			configure.setToolTipText("Open window configuration"); //$NON-NLS-1$
 			configure.setIcon(new ImageIcon(getClass().getResource("/icons/iconConfig.gif"))); //$NON-NLS-1$
 			configure.setHorizontalTextPosition(javax.swing.SwingConstants.TRAILING);
@@ -684,6 +686,7 @@ public class MainWindow extends JFrame {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					new Configuration().setVisible(true);
 					LocalizedMessages.refreshLanguage("MainWindow",getContentPane());
+					repaint();
 				}
 			});
 		}
@@ -698,6 +701,7 @@ public class MainWindow extends JFrame {
 		if (comandi == null) {
 			comandi = new JToolBar();
 			comandi.setFloatable(false);
+			comandi.add(getNuovoFile());
 			comandi.add(getOpenFile());
 			comandi.add(getSaveFile());
 			comandi.add(getSaveFileAs());
@@ -708,7 +712,21 @@ public class MainWindow extends JFrame {
 		return comandi;
 	}
 
-	public static void main(String[] args)
+	/**
+	 * This method initializes jButton	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */    
+	private JButton getNuovoFile() {
+		if (nuovoFile == null) {
+			nuovoFile = new JButton();
+			nuovoFile.setName("NuovoFile");
+			nuovoFile.setText("");
+			nuovoFile.setIcon(new ImageIcon(getClass().getResource("/icons/iconNodeWithoutAttribute.gif")));
+		}
+		return nuovoFile;
+	}
+ 	public static void main(String[] args)
 	{
 		new MainWindow().setVisible(true);
 	}
@@ -724,7 +742,6 @@ public class MainWindow extends JFrame {
 		this.setSize(800,600);
 		this.setContentPane(getJContentPane());
 		this.setTitle("Editor XML 0.1"); //$NON-NLS-1$
-		LocalizedMessages.refreshLanguage("MainWindow",this.getContentPane());
 	}
 	
 	/**

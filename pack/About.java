@@ -29,7 +29,7 @@ public class About extends JDialog {
 
 	private JButton ok = null;
 	private JLabel jLabel = null;
-	private JLabel jLabel1 = null;
+	private JLabel createdBy = null;
 	private JLabel jLabel2 = null;
 	/**
 	 * 
@@ -37,6 +37,8 @@ public class About extends JDialog {
 	public About() {
 		super();
 		initialize();
+		this.setBounds(Utility.centraSuSchermo(this.getBounds()));
+		LocalizedMessages.refreshLanguage("About",this);
 	}
 
 	/**
@@ -47,10 +49,9 @@ public class About extends JDialog {
 	private void initialize() {
 		this.setModal(true);
 		this.setResizable(false);
-		this.setTitle(LocalizedMessages.getString("About.TitleWindowAbout")); //$NON-NLS-1$
+		this.setTitle("About"); //$NON-NLS-1$
 		this.setSize(451, 261);
 		this.setContentPane(getJContentPane());
-		this.setBounds(Utility.centraSuSchermo(this.getBounds()));		
 	}
 	/**
 	 * This method initializes jContentPane
@@ -60,7 +61,7 @@ public class About extends JDialog {
 	private javax.swing.JPanel getJContentPane() {
 		if(jContentPane == null) {
 			jLabel2 = new JLabel();
-			jLabel1 = new JLabel();
+			createdBy = new JLabel();
 			jLabel = new JLabel();
 			jContentPane = new javax.swing.JPanel();
 			jContentPane.setLayout(null);
@@ -71,17 +72,18 @@ public class About extends JDialog {
 			jLabel.setForeground(java.awt.Color.red);
 			jLabel.setBackground(java.awt.Color.yellow);
 			jContentPane.setBackground(java.awt.Color.yellow);
-			jLabel1.setBounds(5, 98, 436, 36);
-			jLabel1.setText(LocalizedMessages.getString("About.LabelCreatedBy")); //$NON-NLS-1$
-			jLabel1.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 24)); //$NON-NLS-1$
-			jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+			createdBy.setBounds(5, 98, 436, 36);
+			createdBy.setText("Created by"); //$NON-NLS-1$
+			createdBy.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 24)); //$NON-NLS-1$
+			createdBy.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+			createdBy.setName("CreatedBy");
 			jLabel2.setBounds(5, 137, 436, 42);
 			jLabel2.setText("Gabriele Ferreri & Ignazio Palmisano"); //$NON-NLS-1$
 			jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 			jLabel2.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD | java.awt.Font.ITALIC, 26)); //$NON-NLS-1$
 			jContentPane.add(getOk(), null);
 			jContentPane.add(jLabel, null);
-			jContentPane.add(jLabel1, null);
+			jContentPane.add(createdBy, null);
 			jContentPane.add(jLabel2, null);
 		}
 		return jContentPane;
