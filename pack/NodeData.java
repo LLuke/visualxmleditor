@@ -136,7 +136,7 @@ public class NodeData extends JDialog {
 	private JButton getOk() {
 		if (ok == null) {
 			ok = new JButton();
-			ok.setText(LocalizedMessages.getString("NodeData.ButtonOk")); //$NON-NLS-1$
+			ok.setText("Ok"); //$NON-NLS-1$
 			ok.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 14)); //$NON-NLS-1$
 			ok.setIcon(new ImageIcon(getClass().getResource("/icons/iconOk.gif"))); //$NON-NLS-1$
 			ok.setLocation(147, 102);
@@ -165,7 +165,7 @@ public class NodeData extends JDialog {
 	private JButton getAnnulla() {
 		if (annulla == null) {
 			annulla = new JButton();
-			annulla.setText(LocalizedMessages.getString("NodeData.ButtonCancel")); //$NON-NLS-1$
+			annulla.setText("Cancel"); //$NON-NLS-1$
 			annulla.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 14)); //$NON-NLS-1$
 			annulla.setIcon(new ImageIcon(getClass().getResource("/icons/iconCancel.gif"))); //$NON-NLS-1$
 			annulla.setLocation(309, 102);

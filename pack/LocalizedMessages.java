@@ -21,6 +21,9 @@ import java.util.Properties;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.JToolBar;
@@ -64,10 +67,8 @@ public class LocalizedMessages {
 		if (files == null) {
 			getLanguageList();
 		}
-		//JOptionPane.showMessageDialog(null,entryName);
-		//JOptionPane.showMessageDialog(null,files.toString());
 		
-		Object o = files.get("pack\\languages\\" + entryName + ".properties");
+		Object o = files.get(entryName);
 		
 		if (o instanceof File) {
 			try {
@@ -115,7 +116,8 @@ public class LocalizedMessages {
 					for (int i = 0; i < propertyFiles.length; i++) {
 						// semilocalname must start with "languages/" (or
 						// "languages\\")
-						semiLocalName = propertyFiles[i].getAbsolutePath().substring(propertyFiles[i].getAbsolutePath().lastIndexOf("languages"));
+						semiLocalName = propertyFiles[i].getAbsolutePath();
+						semiLocalName = semiLocalName.substring(semiLocalName.lastIndexOf('\\')+1,semiLocalName.lastIndexOf('.'));
 						// qui inserisce oggetti di tipo File
 						files.put(semiLocalName, propertyFiles[i]);
 						toReturn.add(semiLocalName);
@@ -138,10 +140,11 @@ public class LocalizedMessages {
 				files = new HashMap();
 				while (e.hasMoreElements()) {
 					Object o = e.nextElement();
-					if (o.toString().startsWith(LocalizedMessages.class.getPackage().getName() + "/languages/")) {
-						toReturn.add(o.toString());
+					if (o.toString().startsWith("languages/")) {
+						String temp=o.toString().substring(o.toString().lastIndexOf('/')+1,o.toString().lastIndexOf('.'));
+						toReturn.add(temp);
 						// qui inserisce oggetti di tipo JarEntry
-						files.put(o.toString(), o);
+						files.put(temp, o);
 					}
 				}
 				// ora l contiene l'elenco delle entry col nome che inizia nel
@@ -199,85 +202,167 @@ public class LocalizedMessages {
 	/**
 	 * Refresh form language
 	 */
-	public static void refreshLanguage(String formName, Object comp) {
-		if (comp instanceof TextBox) {
-			TextBox txt = (TextBox) comp;
-
+	/**
+	 * Refresh form language
+	 *
+	 */
+	public static void refreshLanguage(String formName,Object comp)
+	{
+		if (comp instanceof TextBox)
+		{
+			TextBox txt = (TextBox)comp;
+			
 			String name = txt.getName();
-
-			if (name != null) {
+			
+			if (name!=null)
+			{
 				String text = getString(formName + ".TextBox" + name);
-				if (text != null) //$NON-NLS-1$
+				if (text!=null) //$NON-NLS-1$
 				{
 					txt.setLabel(text);
 				}
-
+				
 				String textTip = getString(formName + ".TipTextBox" + name); //$NON-NLS-1$
-				if (textTip != null) //$NON-NLS-1$
+				if (textTip!=null) //$NON-NLS-1$
 				{
 					txt.setToolTipText(textTip);
 				}
 			}
-		} else if (comp instanceof ComboBox) {
-			ComboBox cbo = (ComboBox) comp;
-
+		}
+		else if (comp instanceof ComboBox)
+		{
+			ComboBox cbo = (ComboBox)comp;
+			
 			String name = cbo.getName();
-
-			if (name != null) {
+			
+			if (name!=null)
+			{
 				String text = getString(formName + ".ComboBox" + name);
-				if (text != null) //$NON-NLS-1$
+				if (text!=null) //$NON-NLS-1$
 				{
 					cbo.setLabel(text);
 				}
-
+				
 				String textTip = getString(formName + ".TipComboBox" + name); //$NON-NLS-1$
-				if (textTip != null) //$NON-NLS-1$
+				if (textTip!=null) //$NON-NLS-1$
 				{
 					cbo.setToolTipText(textTip);
 				}
 			}
-		} else if (comp instanceof JPanel) {
-			JPanel pan = (JPanel) comp;
+		}
+		else if (comp instanceof JLabel)
+		{
+			JLabel lab = (JLabel)comp;
 
-			String name = pan.getName();
+			String name = lab.getName();
+			
+			if (name!=null)
+			{
+				String text = getString(formName + ".Label" + name);
+				if (text!=null)
+				{
+					lab.setText(text);
+				}
+			}
+			
+		}
+		else if (comp instanceof JFrame)
+		{
+			JFrame frm = (JFrame)comp;
 
-			if (name != null) {
-				String text = getString(formName + ".Title" + name);
-				if ((text != null) && (pan.getBorder() != null)) {
-					((TitledBorder) pan.getBorder()).setTitle(text);
+			String name = frm.getName();
+			
+			if (name!=null)
+			{
+				String text = getString(formName + ".TitleWindow" + formName);
+				if (text!=null) 
+				{
+					frm.setTitle(text);
 				}
 			}
 
-			for (int t = 0; t < pan.getComponentCount(); t++) {
-				refreshLanguage(formName, pan.getComponent(t));
+			for (int t=0;t<frm.getComponentCount();t++)
+			{
+				refreshLanguage(formName,frm.getComponent(t));
+			}
+			
+		}
+		else if (comp instanceof JDialog)
+		{
+			JDialog dlg = (JDialog)comp;
+
+			String name = dlg.getName();
+			
+			if (name!=null)
+			{
+				String text = getString(formName + ".TitleWindow" + formName);
+				if (text!=null) 
+				{
+					dlg.setTitle(text);
+				}
 			}
 
-		} else if (comp instanceof JToolBar) {
-			JToolBar tlb = (JToolBar) comp;
-
-			for (int t = 0; t < tlb.getComponentCount(); t++) {
-				refreshLanguage(formName, tlb.getComponent(t));
+			for (int t=0;t<dlg.getComponentCount();t++)
+			{
+				refreshLanguage(formName,dlg.getComponent(t));
 			}
-		} else if (comp instanceof JSplitPane) {
-			JSplitPane split = (JSplitPane) comp;
+			
+		}
+		else if (comp instanceof JPanel)
+		{
+			JPanel pan = (JPanel)comp;
 
-			for (int t = 0; t < split.getComponentCount(); t++) {
-				refreshLanguage(formName, split.getComponent(t));
+			String name = pan.getName();
+			
+			if (name!=null)
+			{
+				String text = getString(formName + ".Title" + name);
+				if ((text!=null) && (pan.getBorder()!=null)) 
+				{
+					((TitledBorder)pan.getBorder()).setTitle(text);
+				}
 			}
-		} else if (comp instanceof JButton) {
-			JButton btn = (JButton) comp;
 
+			for (int t=0;t<pan.getComponentCount();t++)
+			{
+				refreshLanguage(formName,pan.getComponent(t));
+			}
+			
+		}
+		else if (comp instanceof JToolBar)
+		{
+			JToolBar tlb = (JToolBar)comp;
+			
+			for (int t=0;t<tlb.getComponentCount();t++)
+			{
+				refreshLanguage(formName,tlb.getComponent(t));
+			}
+		}
+		else if (comp instanceof JSplitPane)
+		{
+			JSplitPane split = (JSplitPane)comp;
+			
+			for (int t=0;t<split.getComponentCount();t++)
+			{
+				refreshLanguage(formName,split.getComponent(t));
+			}
+		}
+		else if (comp instanceof JButton)
+		{
+			JButton btn = (JButton)comp;
+			
 			String name = btn.getName();
-
-			if (name != null) {
+			
+			if (name!=null)
+			{
 				String text = getString(formName + ".Button" + name);
-				if (text != null) //$NON-NLS-1$
+				if (text!=null) //$NON-NLS-1$
 				{
 					btn.setText(text);
 				}
-
+				
 				String textTip = getString(formName + ".TipButton" + name); //$NON-NLS-1$
-				if (textTip != null) //$NON-NLS-1$
+				if (textTip!=null) //$NON-NLS-1$
 				{
 					btn.setToolTipText(textTip);
 				}

@@ -45,6 +45,7 @@ public class Configuration extends JDialog {
 	public Configuration() {
 		super();
 		initialize();
+		LocalizedMessages.refreshLanguage("Configuration",this);
 	}
 
 	/**
@@ -56,16 +57,14 @@ public class Configuration extends JDialog {
 		this.setModal(true);
 		this.setSize(400,230);
 		this.setContentPane(getJContentPane());
-		this.setTitle(LocalizedMessages.getString("Configuration.TitleConfiguration")); //$NON-NLS-1$
+		this.setTitle("Configuration"); //$NON-NLS-1$
 		this.setBounds(Utility.centraSuSchermo(this.getBounds()));
 
 		List files = LocalizedMessages.getLanguageList();
 		
 		for (int t=0;t<files.size();t++)
 		{
-			String temp = files.get(t).toString();
-			temp=temp.substring(temp.lastIndexOf('\\')+1,temp.lastIndexOf('.'));
-			language.addItem(temp);			
+			language.addItem(files.get(t).toString());			
 		}
 		
 		language.setSelectedItem(getCurrentLanguage());
@@ -140,8 +139,9 @@ public class Configuration extends JDialog {
 		if (language == null) {
 			language = new ComboBox();
 			language.setBounds(10, 24, 376, 28);
-			language.setLabel(LocalizedMessages.getString("LabelSettingLanguage")); //$NON-NLS-1$
+			language.setLabel("Language"); //$NON-NLS-1$
 			language.setWidthLabel(120);
+			language.setText("");
 		}
 		return language;
 	}
@@ -154,7 +154,7 @@ public class Configuration extends JDialog {
 		if (ok == null) {
 			ok = new JButton();
 			ok.setIcon(new ImageIcon(getClass().getResource("/icons/iconOk.gif"))); //$NON-NLS-1$
-			ok.setText(LocalizedMessages.getString("Configuration.ButtonOk")); //$NON-NLS-1$
+			ok.setText("Ok"); //$NON-NLS-1$
 			ok.setLocation(64, 138);
 			ok.setSize(121, 51);
 			ok.addActionListener(new java.awt.event.ActionListener() { 
@@ -177,7 +177,7 @@ public class Configuration extends JDialog {
 			cancel = new JButton();
 			cancel.setBounds(210, 138, 121, 51);
 			cancel.setIcon(new ImageIcon(getClass().getResource("/icons/iconCancel.gif"))); //$NON-NLS-1$
-			cancel.setText(LocalizedMessages.getString("Configuration.ButtonCancel")); //$NON-NLS-1$
+			cancel.setText("Cancel"); //$NON-NLS-1$
 			cancel.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
 					setVisible(false);
