@@ -15,7 +15,7 @@ import java.util.Properties;
 public class LocalizedMessages {
 	/** the Properties object used to access property files */
 	private static Properties properties = new Properties();
-
+	
 	/**
 	 * reinits the singleton object to use a particular language
 	 * 
@@ -23,9 +23,9 @@ public class LocalizedMessages {
 	 *            the nameof the file containing the properties (without the
 	 *            predefined extension ".properties")
 	 */
-	public static void reinit(String languagename) {
+	public static void reInit(String languageName) {
 		try {
-			properties.load(LocalizedMessages.class.getResourceAsStream(languagename + ".properties")); //$NON-NLS-1$
+			properties.load(LocalizedMessages.class.getResourceAsStream(languageName + ".properties")); //$NON-NLS-1$
 		} catch (IOException e) {
 			e.printStackTrace();
 			throw new Error("Undefined language!!!", e); //$NON-NLS-1$

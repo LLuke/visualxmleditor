@@ -66,15 +66,15 @@ public class NodeData extends JDialog {
 		
 		if (modo==MODO_NODO)
 		{
-			this.setTitle(Messages.getString("NodeData.TitleWindowNode")); //$NON-NLS-1$
-			nome.setEtichetta(Messages.getString("NodeData.TextboxNodeName")); //$NON-NLS-1$
-			testo.setEtichetta(Messages.getString("NodeData.TextBoxNodeText")); //$NON-NLS-1$
+			this.setTitle(LocalizedMessages.getString("NodeData.TitleWindowNode")); //$NON-NLS-1$
+			nome.setEtichetta(LocalizedMessages.getString("NodeData.TextboxNodeName")); //$NON-NLS-1$
+			testo.setEtichetta(LocalizedMessages.getString("NodeData.TextBoxNodeText")); //$NON-NLS-1$
 		}
 		else
 		{
-			this.setTitle(Messages.getString("NodeData.TitleWindowAttribute")); //$NON-NLS-1$
-			nome.setEtichetta(Messages.getString("NodeData.TextboxAttributeName")); //$NON-NLS-1$
-			testo.setEtichetta(Messages.getString("NodeData.TextboxAttributeText")); //$NON-NLS-1$
+			this.setTitle(LocalizedMessages.getString("NodeData.TitleWindowAttribute")); //$NON-NLS-1$
+			nome.setEtichetta(LocalizedMessages.getString("NodeData.TextboxAttributeName")); //$NON-NLS-1$
+			testo.setEtichetta(LocalizedMessages.getString("NodeData.TextboxAttributeText")); //$NON-NLS-1$
 		}
 
 		this.setModal(true);
@@ -138,7 +138,7 @@ public class NodeData extends JDialog {
 		if (ok == null) {
 			ok = new JButton();
 			ok.setBounds(152, 92, 89, 40);
-			ok.setText(Messages.getString("NodeData.ButtonOk")); //$NON-NLS-1$
+			ok.setText(LocalizedMessages.getString("NodeData.ButtonOk")); //$NON-NLS-1$
 			ok.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 14)); //$NON-NLS-1$
 			ok.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
@@ -149,7 +149,7 @@ public class NodeData extends JDialog {
 					}
 					else
 					{
-						JOptionPane.showMessageDialog(null,Messages.getString("NodeData.MessageObbligatoryName"),Messages.getString("NodeData.TitleObbligatoryName"),JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
+						JOptionPane.showMessageDialog(null,LocalizedMessages.getString("NodeData.MessageObbligatoryName"),LocalizedMessages.getString("NodeData.TitleObbligatoryName"),JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
 					}
 				}
 			});
@@ -165,7 +165,7 @@ public class NodeData extends JDialog {
 		if (annulla == null) {
 			annulla = new JButton();
 			annulla.setBounds(314, 92, 89, 38);
-			annulla.setText(Messages.getString("NodeData.ButtonCancel")); //$NON-NLS-1$
+			annulla.setText(LocalizedMessages.getString("NodeData.ButtonCancel")); //$NON-NLS-1$
 			annulla.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 14)); //$NON-NLS-1$
 			annulla.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
