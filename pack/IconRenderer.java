@@ -26,18 +26,21 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 public class IconRenderer extends DefaultTreeCellRenderer {
 
 	private static final long serialVersionUID = 1L;
+	private ImageIcon iconFO;
 	private ImageIcon iconF;
 	private ImageIcon iconNWA;
 	private ImageIcon iconNNA;
 	
 	/**
 	 * Constructor
+	 * @param iconFolder Icon of Folder node
 	 * @param iconFile	Icon of File node
 	 * @param iconNodeWithAttribute	Icon of Node with attributes  
 	 * @param iconNodeWithoutAttribute Icon of Node without attributes
 	 */
-	public IconRenderer(ImageIcon iconFile,ImageIcon iconNodeWithAttribute,ImageIcon iconNodeWithoutAttribute) {
+	public IconRenderer(ImageIcon iconFolder,ImageIcon iconFile,ImageIcon iconNodeWithAttribute,ImageIcon iconNodeWithoutAttribute) {
 		super();
+		iconFO=iconFolder;
 		iconF=iconFile;
 		iconNWA=iconNodeWithAttribute;
 		iconNNA=iconNodeWithoutAttribute;
@@ -65,7 +68,11 @@ public class IconRenderer extends DefaultTreeCellRenderer {
 			{
 				NodeElement ele = (NodeElement)((DefaultMutableTreeNode)value).getUserObject();
 	
-				if (ele.getType()==NodeElement.TYPENODE_FILE)
+				if (ele.getType()==NodeElement.TYPENODE_FOLDER)
+				{
+					this.setIcon(iconFO);
+				}
+				else if (ele.getType()==NodeElement.TYPENODE_FILE)
 				{
 					this.setIcon(iconF);
 				}

@@ -62,7 +62,7 @@ public class MainWindow extends JFrame {
 	private JToolBar commands = null;
 	private JButton newFile = null;
 	
-	private boolean openedFile=false;
+	private boolean modifiedFile=false;
 	
 	/**
 	 * @throws java.awt.HeadlessException
@@ -73,6 +73,8 @@ public class MainWindow extends JFrame {
 		this.setBounds(Utility.centerToScreen(this.getBounds()));
 		LocalizedMessages.reInit(Configuration.getCurrentLanguage());
 		LocalizedMessages.refreshLanguage("MainWindow",this);
+		tree.newXML();
+		tree.refresh();
 	}
 
 	/**
@@ -146,6 +148,8 @@ public class MainWindow extends JFrame {
 					{
 						resetData();
 						tree.loadXML(dlgApri.getSelectedFile().toString());
+						tree.refresh();
+						modifiedFile=false;
 					}
 				}
 			});
@@ -168,7 +172,8 @@ public class MainWindow extends JFrame {
 			saveFile.setName("SaveFile");
 			saveFile.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
-					tree.saveXML(tree.getFileName());
+					tree.saveXML(tree.getFileNameXML());
+					modifiedFile=false;
 				}
 			});
 		}
@@ -221,6 +226,8 @@ public class MainWindow extends JFrame {
 						if (ok)
 						{
 							tree.saveXML(filename);
+							tree.refresh();
+							modifiedFile=false;
 						}
 					}
 				}
@@ -319,18 +326,39 @@ public class MainWindow extends JFrame {
 			addNode.setLocation(14, 140);
 			addNode.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
-					boolean ok=false;
+					boolean ok=true;
 					NodeData dati = new NodeData();
 					
-					if (tree.getSelectionPath()!=null)
+					if (tree.getLastSelectedPathComponent()!=null)
 					{
 						DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode)tree.getLastSelectedPathComponent();
+						
+						NodeElement node = (NodeElement)dmtn.getUserObject();
+						
+						if (node.getType()==NodeElement.TYPENODE_FILE)
+						{
+							if (dmtn.getChildCount()<1)
+							{
+								ok=false;
+							}
+							else
+							{
+								JOptionPane.showMessageDialog(null,LocalizedMessages.getString("MessageMainNodeAllreadyExist"),LocalizedMessages.getString("TitleMainNodeAllreadyExist"),JOptionPane.OK_OPTION);
+							}
+						}
+						
+						if ((node.getType()==NodeElement.TYPENODE_NODEWITHATTRIBUTES) || (node.getType()==NodeElement.TYPENODE_WITHOUTATTRIBUTES))
+						{
+							ok=false;
+						}
+
 						while (!ok)
 						{
-							ok=dati.visualizza(NodeData.MODE_ATTRIBUTE,"",""); //$NON-NLS-1$ //$NON-NLS-2$
+							ok=dati.visualizza(NodeData.MODE_NODE,"",""); //$NON-NLS-1$ //$NON-NLS-2$
 							if (ok)
 							{
 								tree.addNode(dmtn,dati.getParametroNome(),dati.getParametroTesto());
+								modifiedFile=true;
 							}
 							else
 							{
@@ -371,10 +399,11 @@ public class MainWindow extends JFrame {
 						
 						while (!ok)
 						{
-							ok=dati.visualizza(NodeData.MODE_ATTRIBUTE ,nodo.getName(),nodo.getText());
+							ok=dati.visualizza(NodeData.MODE_NODE ,nodo.getName(),nodo.getText());
 							if (ok)
 							{
 								tree.modifyNode(dmtn,dati.getParametroNome(),dati.getParametroTesto());
+								modifiedFile=true;
 							}
 							else
 							{
@@ -405,11 +434,16 @@ public class MainWindow extends JFrame {
 			deleteNode.setName("DeleteNode");
 			deleteNode.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
-					if (tree.getSelectionPath()!=null)
+					if (tree.getLastSelectedPathComponent()!=null)
 					{
-						if (JOptionPane.showConfirmDialog(null,LocalizedMessages.getString("MainWindow.MessageConfirmationDeleteNode"),LocalizedMessages.getString("MainWindow.TitleConfirmationDeleteNode"),JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.YES_OPTION) //$NON-NLS-1$ //$NON-NLS-2$
+						NodeElement node = (NodeElement)((DefaultMutableTreeNode)tree.getLastSelectedPathComponent()).getUserObject();
+						if ((node.getType()==NodeElement.TYPENODE_NODEWITHATTRIBUTES) || (node.getType()==NodeElement.TYPENODE_WITHOUTATTRIBUTES))
 						{
-							tree.deleteNode((DefaultMutableTreeNode)tree.getLastSelectedPathComponent());
+							if (JOptionPane.showConfirmDialog(null,LocalizedMessages.getString("MainWindow.MessageConfirmationDeleteNode"),LocalizedMessages.getString("MainWindow.TitleConfirmationDeleteNode"),JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.YES_OPTION) //$NON-NLS-1$ //$NON-NLS-2$
+							{
+								tree.deleteNode((DefaultMutableTreeNode)tree.getLastSelectedPathComponent());
+								modifiedFile=true;
+							}
 						}
 					}
 				}
@@ -486,6 +520,10 @@ public class MainWindow extends JFrame {
 								{
 									JOptionPane.showMessageDialog(null,LocalizedMessages.getString("MainWindow.MessageAttributeExist"),LocalizedMessages.getString("MainWindow.TitleAttributeExist"),JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
 								}
+								else
+								{
+									modifiedFile=true;
+								}
 							}
 							else
 							{
@@ -537,6 +575,10 @@ public class MainWindow extends JFrame {
 									{
 										JOptionPane.showMessageDialog(null,LocalizedMessages.getString("MainWindow.MessageAttributeExist"),LocalizedMessages.getString("MainWindow.TitleAttributeExist"),JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
 									}
+									else
+									{
+										modifiedFile=true;
+									}
 								}
 								else
 								{
@@ -579,6 +621,7 @@ public class MainWindow extends JFrame {
 								nomeAttributo=nomeAttributo.substring(0,nomeAttributo.indexOf('='));
 								DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode)tree.getLastSelectedPathComponent();
 								tree.deleteAttribute(dmtn,nomeAttributo);
+								modifiedFile=true;
 								refreshData(dmtn);
 							}
 						}
@@ -730,14 +773,14 @@ public class MainWindow extends JFrame {
 			newFile = new JButton();
 			newFile.setName("NewFile");
 			newFile.setText("New");
-			newFile.setIcon(new ImageIcon(getClass().getResource("/icons/iconNodeWithoutAttribute.gif")));
+			newFile.setIcon(new ImageIcon(getClass().getResource("/icons/iconNewFile.gif")));
 			newFile.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12));
 			newFile.setActionCommand("New");
 			newFile.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
 					boolean ok=false;
 					
-					if (openedFile)
+					if (modifiedFile)
 					{
 						if (JOptionPane.showConfirmDialog(null,LocalizedMessages.getString("MainWindow.MessageFileNotSaved"),LocalizedMessages.getString("MainWindow.TitleFileNotSaved"),JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION)
 						{
@@ -751,7 +794,7 @@ public class MainWindow extends JFrame {
 					
 					if (ok)
 					{
-						//albero.newFile();
+						tree.newXML();
 					}
 				}
 			});

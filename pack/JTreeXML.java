@@ -30,23 +30,42 @@ import javax.xml.parsers.DocumentBuilder;
 public class JTreeXML extends JTree {
 
 	private static final long serialVersionUID = 1L;
-	private DefaultMutableTreeNode rootJTree = new DefaultMutableTreeNode(new NodeElement("","",null,NodeElement.TYPENODE_FILE)); //$NON-NLS-1$ //$NON-NLS-2$
+	private DefaultMutableTreeNode folderJTree = new DefaultMutableTreeNode(new NodeElement("Files","",null,NodeElement.TYPENODE_FOLDER));
+	private DefaultMutableTreeNode fileXMLJTree = new DefaultMutableTreeNode(new NodeElement("","",null,NodeElement.TYPENODE_FILE));
 	private Element rootXML;
+	private IconRenderer render;
 	
 	/**
 	 * Constructor
 	 */
 	public JTreeXML() {
 		super();
-		ImageIcon iconFile = new ImageIcon(getClass().getResource("/icons/iconFile.gif")); //$NON-NLS-1$
-		ImageIcon iconNodeWithAttribute = new ImageIcon(getClass().getResource("/icons/iconNodeWithAttribute.gif")); //$NON-NLS-1$
-		ImageIcon iconNodeWithoutAttribute = new ImageIcon(getClass().getResource("/icons/iconNodeWithoutAttribute.gif")); //$NON-NLS-1$
+		ImageIcon iconFolder = new ImageIcon(getClass().getResource("/icons/iconFolder.gif"));
+		ImageIcon iconFile = new ImageIcon(getClass().getResource("/icons/iconFileXML.gif"));
+		ImageIcon iconNodeWithAttribute = new ImageIcon(getClass().getResource("/icons/iconNodeWithAttribute.gif"));
+		ImageIcon iconNodeWithoutAttribute = new ImageIcon(getClass().getResource("/icons/iconNodeWithoutAttribute.gif"));
 		
-		IconRenderer render = new IconRenderer(iconFile,iconNodeWithAttribute,iconNodeWithoutAttribute);
+		render = new IconRenderer(iconFolder,iconFile,iconNodeWithAttribute,iconNodeWithoutAttribute);
 		
 		this.setCellRenderer(render);
 		
-		this.setModel(new DefaultTreeModel(rootJTree));
+		folderJTree.add(fileXMLJTree);
+		
+		this.setModel(new DefaultTreeModel(folderJTree));
+	}
+	
+	public void newXML()
+	{
+		if (!fileXMLJTree.isLeaf())
+		{
+			DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode)fileXMLJTree; 
+			if (dmtn!=null)
+			{
+				deleteNode(dmtn);
+			}
+		}
+		setFileNameXML("noname.xml");
+		setFileXMLVersion("<?xml version=\"1.0\"?>");
 	}
 	
 	/**
@@ -63,14 +82,14 @@ public class JTreeXML extends JTree {
 			
 			rootXML=doc.getDocumentElement();
 
-			rootJTree.removeAllChildren();
-			this.setModel(new DefaultTreeModel(rootJTree));
+			newXML();
 			
-			rootJTree.setUserObject(new NodeElement(filename,"",null,NodeElement.TYPENODE_FILE)); //$NON-NLS-1$
+			setFileNameXML(filename);
+			setFileXMLVersion("<?xml version=\"1.0\"?>");
 			
-			scanXML2JTree(rootXML,rootJTree);
+			scanXML2JTree(rootXML,fileXMLJTree);
 			
-			this.expandPath(new TreePath(rootJTree));
+			this.expandPath(new TreePath(fileXMLJTree));
 		}
 		catch (Exception e)
 		{
@@ -91,9 +110,11 @@ public class JTreeXML extends JTree {
 		{
 			f = new BufferedWriter(new FileWriter(filename));
 			
-			//"<?xml version="1.0"?>"
+			f.write(getFileXMLVersion() + "\r\n");
 			
-			scanJTree2XML((DefaultMutableTreeNode)rootJTree.getFirstChild(),f,0);
+			setFileNameXML(filename);
+			
+			scanJTree2XML((DefaultMutableTreeNode)fileXMLJTree.getFirstChild(),f,0);
 		}
 		catch (IOException e)
 		{
@@ -118,9 +139,45 @@ public class JTreeXML extends JTree {
 	 * This method return current filename ("" if not open)
 	 * @return Current filename
 	 */
-	public String getFileName()
+	public String getFileNameXML()
 	{
-		return rootJTree.getUserObject().toString();
+		return ((NodeElement)fileXMLJTree.getUserObject()).getName();
+	}
+	
+	/**
+	 * This method set current filename
+	 * @param val Current filename
+	 */
+	public void setFileNameXML(String val)
+	{
+		((NodeElement)fileXMLJTree.getUserObject()).setName(val);
+	}
+	
+	/**
+	 * Refresh view
+	 *
+	 */
+	public void refresh()
+	{
+		this.setModel(new DefaultTreeModel(folderJTree));
+	}
+	
+	/**
+	 * This method return version current file ("" if not open)
+	 * @return Version file
+	 */
+	public String getFileXMLVersion()
+	{
+		return ((NodeElement)fileXMLJTree.getUserObject()).getText();
+	}
+	
+	/**
+	 * This method set version current file
+	 * @param val Version file
+	 */
+	public void setFileXMLVersion(String val)
+	{
+		((NodeElement)fileXMLJTree.getUserObject()).setText(val);
 	}
 	
 	/**
@@ -170,7 +227,7 @@ public class JTreeXML extends JTree {
 		
 		NodeElement ele=(NodeElement)node.getUserObject();
 		
-		//Controlla prima che non sia già presente
+		//Control if exist
 		ok=(ele.getAttributes().get(name)==null);
 		
 		if (ok)

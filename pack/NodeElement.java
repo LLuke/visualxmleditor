@@ -21,9 +21,10 @@ import java.util.*;
  * 
  */
 public class NodeElement {
-	public static int TYPENODE_FILE=0;
-	public static int TYPENODE_NODEWITHATTRIBUTES=1;
-	public static int TYPENODE_WITHOUTATTRIBUTES=2;
+	public static int TYPENODE_FOLDER=0;
+	public static int TYPENODE_FILE=1;
+	public static int TYPENODE_NODEWITHATTRIBUTES=2;
+	public static int TYPENODE_WITHOUTATTRIBUTES=3;
 
 	private int typeNode;
 	private String nodeName;
