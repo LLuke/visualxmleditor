@@ -3,10 +3,7 @@ package pacchetto;
 import javax.swing.*;
 import javax.swing.tree.*;
 import java.io.*;
-import java.lang.reflect.InvocationTargetException;
 import java.util.*;
-
-import org.jdom.adapters.JAXPDOMAdapter;
 import org.jdom.output.XMLOutputter;
 import org.w3c.dom.Document;
 import org.w3c.dom.*; 
