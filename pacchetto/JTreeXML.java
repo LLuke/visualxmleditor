@@ -47,8 +47,6 @@ public class JTreeXML extends JTree {
 			DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
 			Document doc = docBuilder.parse (new File(nomeFile));
-			// inutile, dato che il metodo dà un risultato equivalente al salvare e riaprire il documento (e qui l'abbiamo appena aperto)
-			//doc.getDocumentElement().normalize();
 			
 			radiceXML=doc.getDocumentElement();
 
