@@ -19,6 +19,7 @@ import java.util.*;
 //import org.jdom.output.XMLOutputter;
 import org.w3c.dom.Document;
 import org.w3c.dom.*; 
+
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 
@@ -26,7 +27,7 @@ import javax.xml.parsers.DocumentBuilder;
  * Extends JTree to work with an XML file
  * @author Ferreri Gabriele
  */
-public class JTreeXML extends JTree {
+public class JTreeXML extends JTree implements org.w3c.dom.Document {
 
 	private static final long serialVersionUID = 1L;
 	private DefaultMutableTreeNode radiceJTree = new DefaultMutableTreeNode(new Nodo("","",null,Nodo.TIPONODO_FILE)); //$NON-NLS-1$ //$NON-NLS-2$
@@ -327,5 +328,341 @@ public class JTreeXML extends JTree {
 				}
 			}
 		}
+	}
+
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Document#getImplementation()
+	 */
+	public DOMImplementation getImplementation() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Document#createDocumentFragment()
+	 */
+	public DocumentFragment createDocumentFragment() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Document#getDoctype()
+	 */
+	public DocumentType getDoctype() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Document#getDocumentElement()
+	 */
+	public Element getDocumentElement() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Document#createAttribute(java.lang.String)
+	 */
+	public Attr createAttribute(String name) throws DOMException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Document#createCDATASection(java.lang.String)
+	 */
+	public CDATASection createCDATASection(String data) throws DOMException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Document#createComment(java.lang.String)
+	 */
+	public Comment createComment(String data) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Document#createElement(java.lang.String)
+	 */
+	public Element createElement(String tagName) throws DOMException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Document#getElementById(java.lang.String)
+	 */
+	public Element getElementById(String elementId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Document#createEntityReference(java.lang.String)
+	 */
+	public EntityReference createEntityReference(String name) throws DOMException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Document#importNode(org.w3c.dom.Node, boolean)
+	 */
+	public Node importNode(Node importedNode, boolean deep) throws DOMException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Document#getElementsByTagName(java.lang.String)
+	 */
+	public NodeList getElementsByTagName(String tagname) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Document#createTextNode(java.lang.String)
+	 */
+	public Text createTextNode(String data) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Document#createAttributeNS(java.lang.String, java.lang.String)
+	 */
+	public Attr createAttributeNS(String namespaceURI, String qualifiedName) throws DOMException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Document#createElementNS(java.lang.String, java.lang.String)
+	 */
+	public Element createElementNS(String namespaceURI, String qualifiedName) throws DOMException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Document#getElementsByTagNameNS(java.lang.String, java.lang.String)
+	 */
+	public NodeList getElementsByTagNameNS(String namespaceURI, String localName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Document#createProcessingInstruction(java.lang.String, java.lang.String)
+	 */
+	public ProcessingInstruction createProcessingInstruction(String target, String data) throws DOMException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#getNodeType()
+	 */
+	public short getNodeType() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#normalize()
+	 */
+	public void normalize() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#hasAttributes()
+	 */
+	public boolean hasAttributes() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#hasChildNodes()
+	 */
+	public boolean hasChildNodes() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#getLocalName()
+	 */
+	public String getLocalName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#getNamespaceURI()
+	 */
+	public String getNamespaceURI() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#getNodeName()
+	 */
+	public String getNodeName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#getNodeValue()
+	 */
+	public String getNodeValue() throws DOMException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#getPrefix()
+	 */
+	public String getPrefix() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#setNodeValue(java.lang.String)
+	 */
+	public void setNodeValue(String nodeValue) throws DOMException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#setPrefix(java.lang.String)
+	 */
+	public void setPrefix(String prefix) throws DOMException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#getOwnerDocument()
+	 */
+	public Document getOwnerDocument() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#getAttributes()
+	 */
+	public NamedNodeMap getAttributes() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#getFirstChild()
+	 */
+	public Node getFirstChild() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#getLastChild()
+	 */
+	public Node getLastChild() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#getNextSibling()
+	 */
+	public Node getNextSibling() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#getParentNode()
+	 */
+	public Node getParentNode() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#getPreviousSibling()
+	 */
+	public Node getPreviousSibling() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#cloneNode(boolean)
+	 */
+	public Node cloneNode(boolean deep) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#getChildNodes()
+	 */
+	public NodeList getChildNodes() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#isSupported(java.lang.String, java.lang.String)
+	 */
+	public boolean isSupported(String feature, String version) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#appendChild(org.w3c.dom.Node)
+	 */
+	public Node appendChild(Node newChild) throws DOMException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#removeChild(org.w3c.dom.Node)
+	 */
+	public Node removeChild(Node oldChild) throws DOMException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#insertBefore(org.w3c.dom.Node, org.w3c.dom.Node)
+	 */
+	public Node insertBefore(Node newChild, Node refChild) throws DOMException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.w3c.dom.Node#replaceChild(org.w3c.dom.Node, org.w3c.dom.Node)
+	 */
+	public Node replaceChild(Node newChild, Node oldChild) throws DOMException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
