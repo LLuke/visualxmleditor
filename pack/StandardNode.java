@@ -13,7 +13,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 package pack;
 
 import java.io.ByteArrayOutputStream;
-import java.io.OutputStream;
+//import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -30,8 +30,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.w3c.dom.ls.DOMImplementationLS;
-import org.w3c.dom.ls.LSOutput;
 
 /**
  * This class is the base for an object-model for XML. It buids up in memory the
@@ -305,13 +303,14 @@ public class StandardNode {
 	 * @throws Exception */
 	public String toXMLString() throws Exception {
 		ByteArrayOutputStream output=new ByteArrayOutputStream();
-		toXMLStream(output);
+		//toXMLStream(output);
 		return output.toString();
 	}
 	/**Serializes this object to a text stream
 	 * @param o the OutputStream to write to
 	 * @throws Exception if anything goes wrong
 	 * TODO the exception type is too generic, needs specialization*/
+	/*
 	public void toXMLStream(OutputStream o) throws Exception {
 		Document doc=this.getDocument();
 		
@@ -326,4 +325,5 @@ public class StandardNode {
 		}
 
 	}
+	*/
 }

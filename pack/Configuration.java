@@ -16,6 +16,7 @@ import java.io.*;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 import java.util.Properties;
 
 import javax.swing.JDialog;
@@ -58,11 +59,11 @@ public class Configuration extends JDialog {
 		this.setTitle(LocalizedMessages.getString("Configuration.TitleConfiguration")); //$NON-NLS-1$
 		this.setBounds(Utility.centraSuSchermo(this.getBounds()));
 
-		String[] files = LocalizedMessages.languagesAvailable();
+		List files = LocalizedMessages.getLanguageList();
 		
-		for (int t=0;t<files.length;t++)
+		for (int t=0;t<files.size();t++)
 		{
-			language.addItem(files[t]);			
+			language.addItem(files.get(t));			
 		}
 		
 		language.setSelectedItem(getCurrentLanguage());

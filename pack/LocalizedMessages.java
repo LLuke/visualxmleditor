@@ -6,11 +6,9 @@ package pack;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.util.ArrayList;
@@ -21,7 +19,6 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
-
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
@@ -101,7 +98,7 @@ public class LocalizedMessages {
 		if (u != null) {
 
 			try {
-				File f = new File(LocalizedMessages.class.getResource(".").toURI());
+				File f = new File(LocalizedMessages.class.getResource("/languages/").toURI());
 				// qui si può usare f per navigare l'albero, ex:
 				// supponendo che ci sia la directory languages/*.properties
 				File[] languageDirectoryFiles = f.listFiles(new LanguagesFilter());
@@ -119,7 +116,7 @@ public class LocalizedMessages {
 						toReturn.add(semiLocalName);
 					}
 				}
-			} catch (URISyntaxException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		} else {
@@ -207,21 +204,6 @@ public class LocalizedMessages {
 		}
 		return ok;
 	}
-
-	/**
-	 * This method return a list of languages available
-	 * 
-	 * @return
-	 */
-//	public static String[] languagesAvailable() {
-//		String[] temp = new File(Utility.currentPath()).list(new LocalizedMessages()); //$NON-NLS-1$
-//
-//		for (int t = 0; t < temp.length; t++) {
-//			temp[t] = temp[t].substring(0, temp[t].lastIndexOf('.'));
-//		}
-//
-//		return temp;
-//	}
 
 	/**
 	 * Refresh form language
