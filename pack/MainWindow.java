@@ -640,6 +640,11 @@ public class MainWindow extends JFrame {
 			about.setText(LocalizedMessages.getString("MainWindow.ButtonAbout")); //$NON-NLS-1$
 			about.setIcon(new ImageIcon(getClass().getResource("/icons/iconAbout.gif"))); //$NON-NLS-1$
 			about.setPreferredSize(new java.awt.Dimension(130,44));
+			about.addActionListener(new java.awt.event.ActionListener() { 
+				public void actionPerformed(java.awt.event.ActionEvent e) {    
+					new About().setVisible(true);
+				}
+			});
 		}
 		return about;
 	}
