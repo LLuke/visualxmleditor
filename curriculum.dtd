@@ -1,0 +1,24 @@
+<!ELEMENT radice (curriculum+)>
+<!ELEMENT curriculum (dati, studi, esperienze, lingua,  hobbies*)>
+<!ELEMENT dati (nome+, cognome, sesso, indirizzo, telefono*, posta*)>
+<!ELEMENT nome (#PCDATA)>
+<!ELEMENT cognome (#PCDATA)>
+<!ELEMENT sesso (#PCDATA)>
+<!ELEMENT indirizzo (via, cap, city, provincia, nazione)>
+<!ELEMENT via (#PCDATA)>
+<!ELEMENT cap (#PCDATA)>
+<!ELEMENT city (#PCDATA)>
+<!ELEMENT provincia (#PCDATA)>
+<!ELEMENT nazione (#PCDATA)>
+<!ELEMENT telefono (#PCDATA)>
+<!ELEMENT posta (#PCDATA)>
+<!ELEMENT studi (maturita*, laurea*)>
+<!ELEMENT maturita (titolo, voto)>
+<!ELEMENT laurea (universita, facolta, votol)>
+<!ELEMENT titolo (#PCDATA)>
+<!ELEMENT voto (#PCDATA)>
+<!ELEMENT universita (#PCDATA)>
+<!ELEMENT facolta (#PCDATA)>
+<!ELEMENT votol (#PCDATA)>
+<!ELEMENT esperienze (#PCDATA)>
+<!ELEMENT lingua (#PCDATA)>

@@ -1,0 +1,187 @@
+<?xml version="1.0" standalone="no"?>
+<radice>
+ <curriculum>
+  <dati>
+   <nome>Luca</nome>
+   <cognome>Rossi</cognome>
+   <sesso>Maschile</sesso>
+   <indirizzo>
+    <via>Via Degli Angeli 35</via>
+    <cap>21057</cap>
+    <city>Olgiate Olona</city>
+    <provincia>VA</provincia>
+    <nazione>Italia</nazione>
+   </indirizzo>
+   <telefono>03313434322</telefono>
+   <posta>rossi@mail.com</posta>
+  </dati>
+  <studi>
+   <maturita>
+    <titolo>Maturita' Scientifica</titolo>
+    <voto>48/60</voto>
+   </maturita>
+   <laurea>
+    <universita>Statale di Milano</universita>
+    <facolta>Informatica</facolta>
+    <votol>110</votol>
+   </laurea>
+  </studi>
+  <esperienze>Da 3 anni responsabile tecnico 
+"Inforscuola"</esperienze>
+  <lingua>Inglese</lingua>
+ </curriculum>
+
+ <curriculum>
+  <dati>
+   <nome>Marco</nome>
+   <cognome>Colombo</cognome>
+   <sesso>Maschile</sesso>
+   <indirizzo>
+    <via>Via De Amicis 3</via>
+    <cap>21057</cap>
+    <city>MILANO</city>
+    <provincia>VA</provincia>
+    <nazione>Italia</nazione>
+   </indirizzo>
+   <telefono>0231534322</telefono>
+   <posta>colombo@hotmail.com</posta>
+  </dati>
+  <studi>
+   <maturita>
+    <titolo>Maturita' Classica</titolo>
+    <voto>54/60</voto>
+   </maturita>
+   <laurea>
+    <universita>Statale di Milano</universita>
+    <facolta>Filosofia</facolta>
+    <votol>90</votol>
+   </laurea>
+  </studi>
+  <esperienze>Da 2 anni collabora con l'ufficio 
+   Arte e cultura del Corriere</esperienze>
+  <lingua>Spagnolo</lingua>
+ </curriculum>
+
+ <curriculum>
+  <dati>
+   <nome>Francesca</nome>
+   <cognome>Marillo</cognome>
+   <sesso>femminile</sesso>
+   <indirizzo>
+    <via>Via Piave 7</via>
+    <cap>21057</cap>
+    <city>Como</city>
+    <provincia>CO</provincia>
+    <nazione>Italia</nazione>
+   </indirizzo>
+   <telefono>031634340</telefono>
+   <posta>marillo@tin.it</posta>
+  </dati>
+  <studi>
+   <maturita>
+    <titolo>Maturita' Scientifica</titolo>
+    <voto>38/60</voto>
+   </maturita>
+   <laurea>
+    <universita>Cattolica</universita>
+    <facolta>Scienze Politiche</facolta>
+    <votol>106</votol>
+   </laurea>
+  </studi>
+  <esperienze>Nessuna</esperienze>
+  <lingua>Tedesco</lingua>
+ </curriculum>
+
+ <curriculum>
+  <dati>
+   <nome>Stefano</nome>
+   <cognome>Bassi</cognome>
+   <sesso>maschile</sesso>
+   <indirizzo>
+    <via>Via Piave 7</via>
+    <cap>21057</cap>
+    <city>Como</city>
+    <provincia>CO</provincia>
+    <nazione>Italia</nazione>
+   </indirizzo>
+   <telefono>031908765</telefono>
+   <posta>stefano@cio.it</posta>
+  </dati>
+  <studi>
+   <maturita>
+    <titolo>Maturita' Tecnica Industriale in 
+meccanica</titolo>
+    <voto>42/60</voto>
+   </maturita>
+   <laurea>
+    <universita>Politecnico</universita>
+    <facolta>Ingegneria Civile</facolta>
+    <votol>106</votol>
+   </laurea>
+  </studi>
+  <esperienze>Impiegato al comune di 
+Como</esperienze>
+  <lingua>Tedesco</lingua>
+ </curriculum>
+
+ <curriculum>
+  <dati>
+   <nome>Paolo</nome>
+   <cognome>Bellucci</cognome>
+   <sesso>maschile</sesso>
+   <indirizzo>
+    <via>Via Piave 7</via>
+    <cap>21057</cap>
+    <city>Seregno</city>
+    <provincia>MI</provincia>
+    <nazione>Italia</nazione>
+   </indirizzo>
+   <telefono>0234546787</telefono>
+   <posta>bellucci@dido.it</posta>
+  </dati>
+  <studi>
+   <maturita>
+    <titolo>Maturita' Artistica</titolo>
+    <voto>60/60</voto>
+   </maturita>
+   <laurea>
+    <universita>Politecnico</universita>
+    <facolta>Architettura</facolta>
+    <votol>101</votol>
+   </laurea>
+  </studi>
+  <esperienze>Nessuna</esperienze>
+  <lingua>Tedesco</lingua>
+ </curriculum>
+
+ <curriculum>
+  <dati>
+   <nome>Camilla</nome>
+   <cognome>Silvestri</cognome>
+   <sesso>femminile</sesso>
+   <indirizzo>
+    <via>Via Piave 7</via>
+    <cap>21057</cap>
+    <city>Torino</city>
+    <provincia>TO</provincia>
+    <nazione>Italia</nazione>
+   </indirizzo>
+   <telefono>03434322098</telefono>
+   <posta>camilla@tin.it</posta>
+  </dati>
+  <studi>
+   <maturita>
+    <titolo>Maturita' Scientifica</titolo>
+    <voto>46/60</voto>
+   </maturita>
+   <laurea>
+    <universita>Cattolica</universita>
+    <facolta>Scienze Ambientali</facolta>
+    <votol>106</votol>
+   </laurea>
+  </studi>
+  <esperienze>Lavora part-time presso uno studio 
+veterinario</esperienze>
+  <lingua>Inglese</lingua>
+ </curriculum>
+</radice>
