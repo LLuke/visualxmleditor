@@ -812,7 +812,7 @@ public class MainWindow extends JFrame {
 	 * @return void
 	 */
 	private void initialize() {
-		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icons/iconProgram.gif"))); //$NON-NLS-1$
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icons/iconProgram.gif")));
 		this.setSize(800,600);
 		this.setContentPane(getJContentPane());
 		this.setTitle("Editor XML 0.1"); //$NON-NLS-1$
