@@ -34,8 +34,9 @@ import java.awt.Toolkit;
 public class MainWindow extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	private final String titleProgram="Editor XML 0.1";
+	
 	private javax.swing.JPanel jContentPane = null;
-
 	private JPanel panelCommands = null;
 	private JButton openFile = null;
 	private JButton saveFile = null;
@@ -150,6 +151,7 @@ public class MainWindow extends JFrame {
 						resetData();
 						tree.loadXML(dlgApri.getSelectedFile().toString());
 						tree.refresh();
+						setTitle(titleProgram + " - " + tree.getFileNameXML());
 						modifiedFile=false;
 					}
 				}
@@ -820,7 +822,7 @@ public class MainWindow extends JFrame {
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icons/iconProgram.png")));
 		this.setSize(800,600);
 		this.setContentPane(getJContentPane());
-		this.setTitle("Editor XML 0.1"); //$NON-NLS-1$
+		this.setTitle(titleProgram); //$NON-NLS-1$
 	}
 	
 	/**

@@ -16,10 +16,8 @@ import javax.swing.*;
 import javax.swing.tree.*;
 import java.io.*;
 import java.util.*;
-//import org.jdom.output.XMLOutputter;
 import org.w3c.dom.Document;
 import org.w3c.dom.*; 
-
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 
@@ -84,7 +82,7 @@ public class JTreeXML extends JTree {
 
 			newXML();
 			
-			setFileNameXML(filename);
+			setFileNameXML(new File(filename).getName());
 			setFileXMLVersion("<?xml version=\"1.0\"?>");
 			
 			scanXML2JTree(rootXML,fileXMLJTree);
