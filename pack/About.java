@@ -45,6 +45,7 @@ public class About extends JDialog {
 	 * @return void
 	 */
 	private void initialize() {
+		this.setModal(true);
 		this.setResizable(false);
 		this.setTitle(LocalizedMessages.getString("About.TitleWindowAbout")); //$NON-NLS-1$
 		this.setSize(451, 261);

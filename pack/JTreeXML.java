@@ -83,46 +83,36 @@ public class JTreeXML extends JTree implements org.w3c.dom.Document {
 	 * Salva il contenuto della JTree in un file XML
 	 * @param nomeFile Nome del file XML su cui scrivere
 	 */
-	/*
-	public void salvaXML(String nomeFile)
+	public void salvaXML(String filename)
 	{
-		File f = new File(nomeFile);
+		BufferedWriter f=null;
 
-		org.jdom.Element radice = new org.jdom.Element("Radice"); //$NON-NLS-1$
-		
-		scandisciJTree2XML(radice,(DefaultMutableTreeNode)radiceJTree.getFirstChild(),true);
-		
-		org.jdom.Document doc = new org.jdom.Document(radice);
-		
-		BufferedWriter out = null;
-		
 		try
 		{
-			out=new BufferedWriter(new FileWriter(nomeFile));
+			f = new BufferedWriter(new FileWriter(filename));
 			
-			XMLOutputter XMLout=new XMLOutputter();
-			XMLout.setIndent(true);
-			XMLout.setNewlines(true);
+			//"<?xml version="1.0"?>"
 			
-			XMLout.output(doc,out);
+			scandisciJTree2XML((DefaultMutableTreeNode)radiceJTree.getFirstChild(),f,0);
 		}
-		catch (Exception e)
+		catch (IOException e)
 		{
 			e.printStackTrace();
 		}
-		finally
+
+		if (f!=null)
 		{
 			try
 			{
-				out.close();
+				f.close();
 			}
-			catch (Exception e)
+			catch (IOException e)
 			{
 				e.printStackTrace();
 			}
 		}
 	}
-	*/
+
 	
 	/**
 	 * Metodo che ritorna il nome del file XML aperto ("" se nessun file è aperto)
@@ -238,43 +228,86 @@ public class JTreeXML extends JTree implements org.w3c.dom.Document {
 	 * @param nodoXML Nodo origine del file XML
 	 * @param nodoJTree Nodo origine della JTree
 	 */
-	/*
-	private void scandisciJTree2XML(org.jdom.Element nodoXML,DefaultMutableTreeNode nodoJTree,boolean primo)
+	private void scandisciJTree2XML(DefaultMutableTreeNode nodoJTree,BufferedWriter f,int ntab)
 	{
+		
 		if (nodoJTree!=null)
 		{
-			org.jdom.Element ele = null;
-
 			Nodo nodo=(Nodo)nodoJTree.getUserObject();
+			
+			try
+			{
+				f.write(Utility.repeatString("\t",ntab) + "<" + nodo.getNome()); //$NON-NLS-1$ //$NON-NLS-2$
+			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
+			}
 
-			if (primo)
-			{
-				nodoXML.setName(nodo.getNome());
-				nodoXML.addContent(nodo.getTesto());
-				ele=nodoXML;
-			}
-			else
-			{
-				ele = new org.jdom.Element(nodo.getNome());
-				ele.addContent(nodo.getTesto());
-				nodoXML.addContent(ele);
-			}
-			
-			for (int t=0;t<nodoJTree.getChildCount();t++)
-			{
-				scandisciJTree2XML(ele,(DefaultMutableTreeNode)nodoJTree.getChildAt(t),false);
-			}
-			
 			Object[] attr=nodo.getAttributi().values().toArray();
+			
+			if (attr.length>0)
+			{
+				try
+				{
+					f.write(" "); //$NON-NLS-1$
+				}
+				catch (IOException e)
+				{
+					e.printStackTrace();
+				}
+			}
 			
 			for (int t=0;t<attr.length;t++)
 			{
 				String[] temp = attr[t].toString().split("="); //$NON-NLS-1$
-				ele.setAttribute(temp[0],temp[1]);
+				
+				try
+				{
+					f.write(temp[0] + "=\"" + temp[1] + "\""); //$NON-NLS-1$ //$NON-NLS-2$
+				}
+				catch (IOException e)
+				{
+					e.printStackTrace();
+				}
 			}
+
+			try
+			{
+				f.write(">" + nodo.getTesto()); //$NON-NLS-1$
+				
+				if (!nodoJTree.isLeaf())
+				{
+					 f.write("\r\n"); //$NON-NLS-1$
+				}
+			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+
+			for (int t=0;t<nodoJTree.getChildCount();t++)
+			{
+				scandisciJTree2XML((DefaultMutableTreeNode)nodoJTree.getChildAt(t),f,ntab+1);
+			}
+			
+			try
+			{
+				if (!nodoJTree.isLeaf())
+				{
+					f.write(Utility.repeatString("\t",ntab)); //$NON-NLS-1$
+				}
+				
+				f.write("</" + nodo.getNome() + ">\r\n"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+			
 		}
 	}
-	*/
+
 	
 	/**
 	 * Funzione che scandisce ricorsivamente il file XML e lo carica nella JTree

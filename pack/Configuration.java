@@ -12,6 +12,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 package pack;
 
+import java.io.*;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -19,6 +21,7 @@ import java.util.Properties;
 import javax.swing.JDialog;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  * Configuration graphical interface
@@ -55,7 +58,7 @@ public class Configuration extends JDialog {
 		this.setTitle(LocalizedMessages.getString("Configuration.TitleConfiguration")); //$NON-NLS-1$
 		this.setBounds(Utility.centraSuSchermo(this.getBounds()));
 
-		String[] files = Configuration.languagesAvailable();
+		String[] files = LocalizedMessages.languagesAvailable();
 		
 		for (int t=0;t<files.length;t++)
 		{
@@ -73,9 +76,10 @@ public class Configuration extends JDialog {
 	private static void loadConfig()
 	{
 		try {
-			properties.load(Configuration.class.getResourceAsStream("Config.properties")); //$NON-NLS-1$
+			properties.load(new FileInputStream(Utility.currentPath() + File.separator + "Config.properties")); //$NON-NLS-1$
 		} catch (IOException e) {
 			e.printStackTrace();
+			JOptionPane.showMessageDialog(null,e.getMessage());
 		}
 	}
 	
@@ -86,12 +90,12 @@ public class Configuration extends JDialog {
 	private static void saveConfig()
 	{
 		try {
-			properties.store(new FileOutputStream(Utility.currentPath()+"/pack/Config.properties"),""); //$NON-NLS-1$ //$NON-NLS-2$
+			properties.store(new FileOutputStream(Utility.currentPath() + File.separator + "Config.properties"),""); //$NON-NLS-1$ //$NON-NLS-2$
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * This method return current language
 	 * @return current language
@@ -104,16 +108,9 @@ public class Configuration extends JDialog {
 	
 	public static void setCurrentLanguage(String value)
 	{
+		loadConfig();
 		properties.setProperty("Language",value); //$NON-NLS-1$
-	}
-	
-	/**
-	 * This method return a list of languages available
-	 * @return
-	 */
-	public static String[] languagesAvailable()
-	{
-		return properties.getProperty("Languages").split(","); //$NON-NLS-1$ //$NON-NLS-2$
+		saveConfig();
 	}
 	
 	/**
@@ -160,7 +157,6 @@ public class Configuration extends JDialog {
 			ok.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
 					setCurrentLanguage(language.getSelectedItem().toString());
-					saveConfig();
 					LocalizedMessages.reInit(language.getSelectedItem().toString());
 					setVisible(false);
 				}

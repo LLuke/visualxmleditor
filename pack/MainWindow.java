@@ -52,8 +52,8 @@ public class MainWindow extends JFrame {
 	private JButton addAttribute = null;
 	private JButton modifyAttribute = null;
 	private JButton deleteAttribute = null;
-	private JPanel pannelloNodo = null;
-	private JPanel pannelloAttributi = null;
+	private JPanel panelNode = null;
+	private JPanel panelAttribute = null;
 
 	private TextBox nodeName = null;
 	private TextBox nodeText = null;
@@ -121,13 +121,14 @@ public class MainWindow extends JFrame {
 	private JButton getOpenFile() {
 		if (openFile == null) {
 			openFile = new JButton();
-			openFile.setText(LocalizedMessages.getString("MainWindow.ButtonOpenFile")); //$NON-NLS-1$
+			openFile.setText("Open..."); //$NON-NLS-1$
 			openFile.setIcon(new ImageIcon(getClass().getResource("/icons/iconOpenFile.gif"))); //$NON-NLS-1$
-			openFile.setToolTipText(LocalizedMessages.getString("MainWindow.TipButtonOpenFile")); //$NON-NLS-1$
+			openFile.setToolTipText("Open a File"); //$NON-NLS-1$
 			openFile.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12)); //$NON-NLS-1$
 			openFile.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
 			openFile.setVerticalTextPosition(javax.swing.SwingConstants.CENTER);
 			openFile.setPreferredSize(new java.awt.Dimension(125,44));
+			openFile.setName("OpenFile");
 			openFile.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
 					JFileChooser dlgApri = new JFileChooser();
@@ -156,13 +157,14 @@ public class MainWindow extends JFrame {
 		if (saveFile == null) {
 			saveFile = new JButton();
 			saveFile.setIcon(new ImageIcon(getClass().getResource("/icons/iconSaveFile.gif"))); //$NON-NLS-1$
-			saveFile.setText(LocalizedMessages.getString("MainWindow.ButtonSaveFile")); //$NON-NLS-1$
-			saveFile.setToolTipText(LocalizedMessages.getString("MainWindow.TipButtonSaveFile")); //$NON-NLS-1$
+			saveFile.setText("Save"); //$NON-NLS-1$
+			saveFile.setToolTipText("Save current file"); //$NON-NLS-1$
 			saveFile.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12)); //$NON-NLS-1$
 			saveFile.setPreferredSize(new java.awt.Dimension(125,44));
+			saveFile.setName("SaveFile");
 			saveFile.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
-					//albero.salvaXML(albero.getNomeFile());
+					albero.salvaXML(albero.getNomeFile());
 				}
 			});
 		}
@@ -177,10 +179,11 @@ public class MainWindow extends JFrame {
 		if (saveFileAs == null) {
 			saveFileAs = new JButton();
 			saveFileAs.setIcon(new ImageIcon(getClass().getResource("/icons/iconSaveFileAs.gif"))); //$NON-NLS-1$
-			saveFileAs.setText(LocalizedMessages.getString("MainWindow.ButtonSaveFileAs")); //$NON-NLS-1$
-			saveFileAs.setToolTipText(LocalizedMessages.getString("MainWindow.TipButtonSaveFileAs")); //$NON-NLS-1$
+			saveFileAs.setText("Save..."); //$NON-NLS-1$
+			saveFileAs.setToolTipText("Save current file as..."); //$NON-NLS-1$
 			saveFileAs.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12)); //$NON-NLS-1$
 			saveFileAs.setPreferredSize(new java.awt.Dimension(125,44));
+			saveFileAs.setName("SaveFileAs");
 			saveFileAs.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
 					JFileChooser dlgSalva = new JFileChooser();
@@ -207,7 +210,7 @@ public class MainWindow extends JFrame {
 						
 						if (ok)
 						{
-							//albero.salvaXML(dlgSalva.getSelectedFile().toString());
+							albero.salvaXML(dlgSalva.getSelectedFile().toString());
 						}
 					}
 				}
@@ -224,10 +227,11 @@ public class MainWindow extends JFrame {
 		if (exit == null) {
 			exit = new JButton();
 			exit.setIcon(new ImageIcon(getClass().getResource("/icons/iconExit.gif"))); //$NON-NLS-1$
-			exit.setText(LocalizedMessages.getString("MainWindow.ButtonExit")); //$NON-NLS-1$
-			exit.setToolTipText(LocalizedMessages.getString("MainWindow.TipButtonExit")); //$NON-NLS-1$
+			exit.setText("Exit"); //$NON-NLS-1$
+			exit.setToolTipText("Exit application"); //$NON-NLS-1$
 			exit.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12)); //$NON-NLS-1$
 			exit.setPreferredSize(new java.awt.Dimension(125,44));
+			exit.setName("Exit");
 			exit.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
 					if (JOptionPane.showConfirmDialog(null,LocalizedMessages.getString("MainWindow.MessageConfirmationExit"),LocalizedMessages.getString("MainWindow.TitleConfirmationExit"),JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.YES_OPTION) //$NON-NLS-1$ //$NON-NLS-2$
@@ -296,10 +300,10 @@ public class MainWindow extends JFrame {
 	private JButton getAddNode() {
 		if (addNode == null) {
 			addNode = new JButton();
-			addNode.setText(LocalizedMessages.getString("MainWindow.ButtonAddNode")); //$NON-NLS-1$
+			addNode.setText("Add"); //$NON-NLS-1$
 			addNode.setIcon(new ImageIcon(getClass().getResource("/icons/iconAddNode.gif"))); //$NON-NLS-1$
-			addNode.setToolTipText(LocalizedMessages.getString("MainWindow.TipButtonAddNode")); //$NON-NLS-1$
-			addNode.setName("addNode"); //$NON-NLS-1$
+			addNode.setToolTipText("Add child node to current node"); //$NON-NLS-1$
+			addNode.setName("AddNode"); //$NON-NLS-1$
 			addNode.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12)); //$NON-NLS-1$
 			addNode.setSize(130, 44);
 			addNode.setLocation(14, 140);
@@ -339,11 +343,12 @@ public class MainWindow extends JFrame {
 		if (modifyNode == null) {
 			modifyNode = new JButton();
 			modifyNode.setIcon(new ImageIcon(getClass().getResource("/icons/iconModifyNode.gif"))); //$NON-NLS-1$
-			modifyNode.setText(LocalizedMessages.getString("MainWindow.ButtonModifyNode")); //$NON-NLS-1$
-			modifyNode.setToolTipText(LocalizedMessages.getString("MainWindow.TipButtonModifyNode")); //$NON-NLS-1$
+			modifyNode.setText("Modify"); //$NON-NLS-1$
+			modifyNode.setToolTipText("Modify current node"); //$NON-NLS-1$
 			modifyNode.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12)); //$NON-NLS-1$
 			modifyNode.setLocation(253, 140);
 			modifyNode.setSize(130, 44);
+			modifyNode.setName("ModifyNode");
 			modifyNode.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
 					boolean ok=false;
@@ -381,12 +386,13 @@ public class MainWindow extends JFrame {
 	private JButton getDeleteNode() {
 		if (deleteNode == null) {
 			deleteNode = new JButton();
-			deleteNode.setText(LocalizedMessages.getString("MainWindow.ButtonDeleteNode")); //$NON-NLS-1$
+			deleteNode.setText("Delete"); //$NON-NLS-1$
 			deleteNode.setIcon(new ImageIcon(getClass().getResource("/icons/iconDeleteNode.gif"))); //$NON-NLS-1$
-			deleteNode.setToolTipText(LocalizedMessages.getString("MainWindow.TipButtonDeleteNode")); //$NON-NLS-1$
+			deleteNode.setToolTipText("Delete current node"); //$NON-NLS-1$
 			deleteNode.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12)); //$NON-NLS-1$
 			deleteNode.setLocation(492, 140);
 			deleteNode.setSize(130, 44);
+			deleteNode.setName("DeleteNode");
 			deleteNode.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
 					if (albero.getSelectionPath()!=null)
@@ -432,8 +438,8 @@ public class MainWindow extends JFrame {
 			pannelloVisualizza.add(getAddAttribute(), null);
 			pannelloVisualizza.add(getModifyAttribute(), null);
 			pannelloVisualizza.add(getDeleteAttribute(), null);
-			pannelloVisualizza.add(getPannelloNodo(), null);
-			pannelloVisualizza.add(getPannelloAttributi(), null);
+			pannelloVisualizza.add(getPanelNode(), null);
+			pannelloVisualizza.add(getPanelAttribute(), null);
 		}
 		return pannelloVisualizza;
 	}
@@ -445,11 +451,13 @@ public class MainWindow extends JFrame {
 	private JButton getAddAttribute() {
 		if (addAttribute == null) {
 			addAttribute = new JButton();
-			addAttribute.setText(LocalizedMessages.getString("MainWindow.ButtonAddAttribute")); //$NON-NLS-1$
+			addAttribute.setText("Add"); //$NON-NLS-1$
 			addAttribute.setIcon(new ImageIcon(getClass().getResource("/icons/iconAddAttribute.gif"))); //$NON-NLS-1$
 			addAttribute.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12)); //$NON-NLS-1$
 			addAttribute.setLocation(15, 447);
 			addAttribute.setSize(130, 44);
+			addAttribute.setName("AddAttribute");
+			addAttribute.setToolTipText("Add attribute to current node");
 			addAttribute.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
 					boolean ok=false;
@@ -489,11 +497,13 @@ public class MainWindow extends JFrame {
 	private JButton getModifyAttribute() {
 		if (modifyAttribute == null) {
 			modifyAttribute = new JButton();
-			modifyAttribute.setText(LocalizedMessages.getString("MainWindow.ButtonModifyAttribute")); //$NON-NLS-1$
+			modifyAttribute.setText("Modify"); //$NON-NLS-1$
 			modifyAttribute.setIcon(new ImageIcon(getClass().getResource("/icons/iconModifyAttribute.gif"))); //$NON-NLS-1$
 			modifyAttribute.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12)); //$NON-NLS-1$
 			modifyAttribute.setLocation(250, 447);
 			modifyAttribute.setSize(130, 44);
+			modifyAttribute.setName("ModifyAttribute");
+			modifyAttribute.setToolTipText("Modify selected attribute");
 			modifyAttribute.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
 					boolean ok=false;
@@ -539,11 +549,13 @@ public class MainWindow extends JFrame {
 	private JButton getDeleteAttribute() {
 		if (deleteAttribute == null) {
 			deleteAttribute = new JButton();
-			deleteAttribute.setText(LocalizedMessages.getString("MainWindow.ButtonDeleteAttribute")); //$NON-NLS-1$
+			deleteAttribute.setText("Delete"); //$NON-NLS-1$
 			deleteAttribute.setIcon(new ImageIcon(getClass().getResource("/icons/iconDeleteAttribute.gif"))); //$NON-NLS-1$
 			deleteAttribute.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12)); //$NON-NLS-1$
 			deleteAttribute.setLocation(485, 447);
 			deleteAttribute.setSize(130, 44);
+			deleteAttribute.setName("DeleteAttribute");
+			deleteAttribute.setToolTipText("Delete selected attribute");
 			deleteAttribute.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
 					if (albero.getSelectionPath()!=null)
@@ -572,31 +584,33 @@ public class MainWindow extends JFrame {
 	 * 	
 	 * @return javax.swing.JPanel	
 	 */    
-	private JPanel getPannelloNodo() {
-		if (pannelloNodo == null) {
-			pannelloNodo = new JPanel();
-			pannelloNodo.setLayout(null);
-			pannelloNodo.setBounds(15, 27, 602, 104);
-			pannelloNodo.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), LocalizedMessages.getString("MainWindow.TitleSectionNode"), javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", java.awt.Font.PLAIN, 24), java.awt.Color.black)); //$NON-NLS-1$ //$NON-NLS-2$
-			pannelloNodo.add(getNodeName(), null);
-			pannelloNodo.add(getNodeText(), null);
+	private JPanel getPanelNode() {
+		if (panelNode == null) {
+			panelNode = new JPanel();
+			panelNode.setLayout(null);
+			panelNode.setBounds(15, 27, 602, 104);
+			panelNode.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Node", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 36), java.awt.Color.black)); //$NON-NLS-1$ //$NON-NLS-2$
+			panelNode.setName("PanelNode");
+			panelNode.add(getNodeName(), null);
+			panelNode.add(getNodeText(), null);
 		}
-		return pannelloNodo;
+		return panelNode;
 	}
 	/**
 	 * This method initializes jPanel1	
 	 * 	
 	 * @return javax.swing.JPanel	
 	 */    
-	private JPanel getPannelloAttributi() {
-		if (pannelloAttributi == null) {
-			pannelloAttributi = new JPanel();
-			pannelloAttributi.setLayout(null);
-			pannelloAttributi.setBounds(14, 205, 602, 227);
-			pannelloAttributi.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), LocalizedMessages.getString("MainWindow.TitleSectionAttribute"), javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", java.awt.Font.PLAIN, 24), java.awt.Color.black)); //$NON-NLS-1$ //$NON-NLS-2$
-			pannelloAttributi.add(getAttributes(), null);
+	private JPanel getPanelAttribute() {
+		if (panelAttribute == null) {
+			panelAttribute = new JPanel();
+			panelAttribute.setLayout(null);
+			panelAttribute.setBounds(14, 205, 602, 227);
+			panelAttribute.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Attribute", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 36), java.awt.Color.black)); //$NON-NLS-1$ //$NON-NLS-2$
+			panelAttribute.setName("PanelAttribute");
+			panelAttribute.add(getAttributes(), null);
 		}
-		return pannelloAttributi;
+		return panelAttribute;
 	}
 	/**
 	 * This method initializes casellaTesto	
@@ -608,8 +622,10 @@ public class MainWindow extends JFrame {
 			nodeName = new TextBox();
 			nodeName.setBounds(10, 42, 582, 22);
 			nodeName.setWidthLabel(100);
-			nodeName.setLabel(LocalizedMessages.getString("MainWindow.TextboxNodeName")); //$NON-NLS-1$
+			nodeName.setLabel("Node Name"); //$NON-NLS-1$
 			nodeName.setEditable(false);
+			nodeName.setName("NodeName");
+			nodeName.setText("");
 		}
 		return nodeName;
 	}
@@ -623,8 +639,9 @@ public class MainWindow extends JFrame {
 			nodeText = new TextBox();
 			nodeText.setBounds(10, 73, 582, 22);
 			nodeText.setWidthLabel(100);
-			nodeText.setLabel(LocalizedMessages.getString("MainWindow.TextboxNodeText")); //$NON-NLS-1$
+			nodeText.setLabel("Text Node"); //$NON-NLS-1$
 			nodeText.setEditable(false);
+			nodeText.setName("NodeText");
 		}
 		return nodeText;
 	}
@@ -636,9 +653,11 @@ public class MainWindow extends JFrame {
 	private JButton getAbout() {
 		if (about == null) {
 			about = new JButton();
-			about.setText(LocalizedMessages.getString("MainWindow.ButtonAbout")); //$NON-NLS-1$
+			about.setText("About..."); //$NON-NLS-1$
 			about.setIcon(new ImageIcon(getClass().getResource("/icons/iconAbout.gif"))); //$NON-NLS-1$
 			about.setPreferredSize(new java.awt.Dimension(125,44));
+			about.setName("About");
+			about.setToolTipText("Open windows about");
 			about.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
 					new About().setVisible(true);
@@ -655,15 +674,16 @@ public class MainWindow extends JFrame {
 	private JButton getConfigure() {
 		if (configure == null) {
 			configure = new JButton();
-			configure.setText(LocalizedMessages.getString("MainWindow.ButtonConfigure")); //$NON-NLS-1$
-			configure.setToolTipText(LocalizedMessages.getString("MainWindow.TipButtonConfigure")); //$NON-NLS-1$
+			configure.setText("Configure..."); //$NON-NLS-1$
+			configure.setToolTipText("Open window configuration"); //$NON-NLS-1$
 			configure.setIcon(new ImageIcon(getClass().getResource("/icons/iconConfig.gif"))); //$NON-NLS-1$
 			configure.setHorizontalTextPosition(javax.swing.SwingConstants.TRAILING);
 			configure.setPreferredSize(new java.awt.Dimension(125,44));
+			configure.setName("Configure");
 			configure.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					new Configuration().setVisible(true);
-					initialize();
+					LocalizedMessages.refreshLanguage("MainWindow",getContentPane());
 				}
 			});
 		}
@@ -687,10 +707,12 @@ public class MainWindow extends JFrame {
 		}
 		return comandi;
 	}
-        	public static void main(String[] args) {
-         		new MainWindow().setVisible(true);
-         		
+
+	public static void main(String[] args)
+	{
+		new MainWindow().setVisible(true);
 	}
+	
 	/**
 	 * This method initializes this
 	 * 
@@ -702,8 +724,9 @@ public class MainWindow extends JFrame {
 		this.setSize(800,600);
 		this.setContentPane(getJContentPane());
 		this.setTitle("Editor XML 0.1"); //$NON-NLS-1$
-		this.setBounds(Utility.centraSuSchermo(this.getBounds()));
+		LocalizedMessages.refreshLanguage("MainWindow",this.getContentPane());
 	}
+	
 	/**
 	 * This method initializes jContentPane
 	 * 

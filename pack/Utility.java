@@ -44,9 +44,43 @@ public class Utility {
 		return nomeFile.substring(nomeFile.lastIndexOf(".")+1); //$NON-NLS-1$
 	}
 	
+	/**
+	 * Return current directory
+	 * @return Current directory
+	 */
 	static public String currentPath()
 	{
-		return new File("").getAbsolutePath(); //$NON-NLS-1$
+		String temp=System.getProperty("java.class.path"); //$NON-NLS-1$
+		
+		File f=new File(temp);
+		
+		if (f.isDirectory())
+		{
+			temp=f.getPath();
+		}
+		else
+		{
+			temp=f.getPath().substring(0,f.getPath().lastIndexOf(File.separator));
+		}
+		return temp;
+	}
+	
+	/**
+	 * Create String by repeating a character
+	 * @param car
+	 * @param count
+	 * @return
+	 */
+	static public String repeatString(String text,int count)
+	{
+		String temp=""; //$NON-NLS-1$
+		
+		for (int t=0;t<count;t++)
+		{
+			temp+=text;
+		}
+		
+		return temp;
 	}
 }
 
