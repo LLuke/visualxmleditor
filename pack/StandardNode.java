@@ -12,6 +12,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 package pack;
 
+import java.io.ByteArrayOutputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -28,6 +30,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.w3c.dom.ls.DOMImplementationLS;
+import org.w3c.dom.ls.LSOutput;
 
 /**
  * This class is the base for an object-model for XML. It buids up in memory the
@@ -102,6 +106,7 @@ public class StandardNode {
 					this.childNodes.add(startComment
 							+ children.item(i).getNodeValue() + endComment);
 				} else {
+					//TODO se si vuole conservare la formattazione, bisogna intervenire qui...
 					// rimozione spazi, tab e ritorni carrello iniziali e finali
 					String temp = children.item(i).getNodeValue().trim();
 					if (temp.length() > 0) {
@@ -294,5 +299,31 @@ public class StandardNode {
 	/** this method is a shorthand for getText() */
 	public String getText() {
 		return (String) this.getChildNodes().get(0);
+	}
+	/**Serializes this object to a XML string; not very efficient, if the object is very big can require lots of memory
+	 * @return a string containing the serialized document. Delegates the real work to toXMLStream(OutputStream o)
+	 * @throws Exception */
+	public String toXMLString() throws Exception {
+		ByteArrayOutputStream output=new ByteArrayOutputStream();
+		toXMLStream(output);
+		return output.toString();
+	}
+	/**Serializes this object to a text stream
+	 * @param o the OutputStream to write to
+	 * @throws Exception if anything goes wrong
+	 * TODO the exception type is too generic, needs specialization*/
+	public void toXMLStream(OutputStream o) throws Exception {
+		Document doc=this.getDocument();
+		
+		DOMImplementationLS impl;
+		try {
+			impl = (DOMImplementationLS) doc.getImplementation().getFeature("LS", "3.0");
+		LSOutput output=impl.createLSOutput();
+		output.setByteStream(o);
+		impl.createLSSerializer().write(doc,output);
+		} catch (Exception e) {
+			throw new Exception ("Cannot serialize the document!!!",e);
+		}
+
 	}
 }
