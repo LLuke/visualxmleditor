@@ -81,8 +81,8 @@ public class Configuration extends JDialog {
 		try {
 			properties.load(new FileInputStream(Utility.currentPath() + File.separator + "Config.properties")); //$NON-NLS-1$
 		} catch (IOException e) {
-			e.printStackTrace();
 			JOptionPane.showMessageDialog(null,e.getMessage());
+			e.printStackTrace();
 		}
 	}
 	

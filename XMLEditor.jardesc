@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jardesc>
+    <jar path="C:/Documents and Settings/Megasoft/Desktop/Progetti/XMLEditorPack/XMLEditor.jar"/>
+    <options overwrite="true" compress="true" exportErrors="true" exportWarnings="true" saveDescription="true" descriptionLocation="/XMLEditor/XMLEditor.jardesc" useSourceFolders="false" buildIfNeeded="true"/>
+    <manifest manifestVersion="1.0" usesManifest="true" reuseManifest="false" saveManifest="false" generateManifest="true" manifestLocation="" mainClassHandleIdentifier="=XMLEditor/&lt;pack{MainWindow.java[MainWindow">
+        <sealing sealJar="false">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="true" exportOutputFolder="false" exportJavaFiles="true">
+        <javaElement handleIdentifier="=XMLEditor"/>
+    </selectedElements>
+</jardesc>

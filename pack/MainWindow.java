@@ -739,7 +739,7 @@ public class MainWindow extends JFrame {
 	 * @return void
 	 */
 	private void initialize() {
-		LocalizedMessages.reInit(Configuration.getCurrentLanguage()); //$NON-NLS-1$
+		LocalizedMessages.reInit("Italiano"); //$NON-NLS-1$
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icons/iconProgram.gif"))); //$NON-NLS-1$
 		this.setSize(800,600);
 		this.setContentPane(getJContentPane());

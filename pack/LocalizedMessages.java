@@ -21,7 +21,6 @@ import java.util.Properties;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.JToolBar;
@@ -65,21 +64,24 @@ public class LocalizedMessages {
 		if (files == null) {
 			getLanguageList();
 		}
-		Object o = files.get("languages\\" + entryName + ".properties");
+		//JOptionPane.showMessageDialog(null,entryName);
+		//JOptionPane.showMessageDialog(null,files.toString());
+		
+		Object o = files.get("pack\\languages\\" + entryName + ".properties");
+		
 		if (o instanceof File) {
 			try {
 				toReturn = new FileInputStream((File) o);
 			} catch (FileNotFoundException e) {
-				JOptionPane.showMessageDialog(null,e.getMessage());
 				toReturn = null;
 			}
 		}
 		if (o instanceof JarEntry) {
+
 			if (j != null) {
 				try {
 					toReturn = j.getInputStream((JarEntry) o);
 				} catch (IOException e) {
-					JOptionPane.showMessageDialog(null,e.getMessage());
 					toReturn = null;
 				}
 			}
@@ -120,7 +122,6 @@ public class LocalizedMessages {
 					}
 				}
 			} catch (Exception e) {
-				JOptionPane.showMessageDialog(null,e.getMessage());
 				e.printStackTrace();
 			}
 		} else {
@@ -130,7 +131,7 @@ public class LocalizedMessages {
 			try {
 				//
 				jarname = URLDecoder.decode(url.substring("jar:file:/".length(), url.indexOf("!")), "UTF-8");
-				// System.out.println(jarname);
+				//System.out.println(jarname);
 				j = new JarFile(jarname);
 				Enumeration e = j.entries();
 				toReturn = new ArrayList();
@@ -150,10 +151,8 @@ public class LocalizedMessages {
 				// (il maiuscolo vale solo per questo file)
 
 			} catch (UnsupportedEncodingException e1) {
-				JOptionPane.showMessageDialog(null,e1.getMessage());
 				e1.printStackTrace();
 			} catch (IOException e) {
-				JOptionPane.showMessageDialog(null,e.getMessage());
 				e.printStackTrace();
 			}
 		}
@@ -172,10 +171,9 @@ public class LocalizedMessages {
 	 */
 	public static void reInit(String languageName) {
 		try {
-
+			
 			properties.load(getInputStream(languageName));
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null,e.getMessage());
 			e.printStackTrace();
 			throw new Error("Undefined language!!!", e); //$NON-NLS-1$
 		}
@@ -192,24 +190,10 @@ public class LocalizedMessages {
 		try {
 			temp = properties.getProperty(key);
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null,e.getMessage());
+
 		}
 
 		return temp;
-	}
-
-	/**
-	 * 
-	 */
-	public boolean accept(File dir, String name) {
-		boolean ok;
-		if (!name.equals("Config.properties")) //$NON-NLS-1$
-		{
-			ok = name.endsWith(".properties"); //$NON-NLS-1$
-		} else {
-			ok = false;
-		}
-		return ok;
 	}
 
 	/**
