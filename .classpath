@@ -2,7 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path=""/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="pacchetto/xerces.jar"/>
-	<classpathentry kind="lib" path="pacchetto/jdom.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Megasoft/Desktop/Progetti/XMLEditor/xerces.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Megasoft/Desktop/Progetti/XMLEditor/jdom.jar"/>
 	<classpathentry kind="output" path=""/>
 </classpath>
