@@ -63,7 +63,9 @@ public class Configuration extends JDialog {
 		
 		for (int t=0;t<files.size();t++)
 		{
-			language.addItem(files.get(t));			
+			String temp = files.get(t).toString();
+			temp=temp.substring(temp.lastIndexOf('\\')+1,temp.lastIndexOf('.'));
+			language.addItem(temp);			
 		}
 		
 		language.setSelectedItem(getCurrentLanguage());

@@ -60,7 +60,7 @@ public class MainWindow extends JFrame {
 	private JButton about = null;
 	private JButton configure = null;
 	private JToolBar comandi = null;
-	private JButton nuovoFile = null;
+	private JButton newFile = null;
 	/**
 	 * @throws java.awt.HeadlessException
 	 */
@@ -123,7 +123,7 @@ public class MainWindow extends JFrame {
 	private JButton getOpenFile() {
 		if (openFile == null) {
 			openFile = new JButton();
-			openFile.setText(""); //$NON-NLS-1$
+			openFile.setText("Open..."); //$NON-NLS-1$
 			openFile.setIcon(new ImageIcon(getClass().getResource("/icons/iconOpenFile.gif"))); //$NON-NLS-1$
 			openFile.setToolTipText("Open a File"); //$NON-NLS-1$
 			openFile.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12)); //$NON-NLS-1$
@@ -159,7 +159,7 @@ public class MainWindow extends JFrame {
 		if (saveFile == null) {
 			saveFile = new JButton();
 			saveFile.setIcon(new ImageIcon(getClass().getResource("/icons/iconSaveFile.gif"))); //$NON-NLS-1$
-			saveFile.setText(""); //$NON-NLS-1$
+			saveFile.setText("Save"); //$NON-NLS-1$
 			saveFile.setToolTipText("Save current file"); //$NON-NLS-1$
 			saveFile.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12)); //$NON-NLS-1$
 			saveFile.setPreferredSize(new java.awt.Dimension(125,44));
@@ -181,7 +181,7 @@ public class MainWindow extends JFrame {
 		if (saveFileAs == null) {
 			saveFileAs = new JButton();
 			saveFileAs.setIcon(new ImageIcon(getClass().getResource("/icons/iconSaveFileAs.gif"))); //$NON-NLS-1$
-			saveFileAs.setText(""); //$NON-NLS-1$
+			saveFileAs.setText("Save..."); //$NON-NLS-1$
 			saveFileAs.setToolTipText("Save current file as..."); //$NON-NLS-1$
 			saveFileAs.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12)); //$NON-NLS-1$
 			saveFileAs.setPreferredSize(new java.awt.Dimension(125,44));
@@ -229,7 +229,7 @@ public class MainWindow extends JFrame {
 		if (exit == null) {
 			exit = new JButton();
 			exit.setIcon(new ImageIcon(getClass().getResource("/icons/iconExit.gif"))); //$NON-NLS-1$
-			exit.setText(""); //$NON-NLS-1$
+			exit.setText("Exit"); //$NON-NLS-1$
 			exit.setToolTipText("Exit application"); //$NON-NLS-1$
 			exit.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12)); //$NON-NLS-1$
 			exit.setPreferredSize(new java.awt.Dimension(125,44));
@@ -655,7 +655,7 @@ public class MainWindow extends JFrame {
 	private JButton getAbout() {
 		if (about == null) {
 			about = new JButton();
-			about.setText(""); //$NON-NLS-1$
+			about.setText("About..."); //$NON-NLS-1$
 			about.setIcon(new ImageIcon(getClass().getResource("/icons/iconAbout.gif"))); //$NON-NLS-1$
 			about.setPreferredSize(new java.awt.Dimension(125,44));
 			about.setName("About");
@@ -676,7 +676,7 @@ public class MainWindow extends JFrame {
 	private JButton getConfigure() {
 		if (configure == null) {
 			configure = new JButton();
-			configure.setText(""); //$NON-NLS-1$
+			configure.setText("Configure..."); //$NON-NLS-1$
 			configure.setToolTipText("Open window configuration"); //$NON-NLS-1$
 			configure.setIcon(new ImageIcon(getClass().getResource("/icons/iconConfig.gif"))); //$NON-NLS-1$
 			configure.setHorizontalTextPosition(javax.swing.SwingConstants.TRAILING);
@@ -701,7 +701,7 @@ public class MainWindow extends JFrame {
 		if (comandi == null) {
 			comandi = new JToolBar();
 			comandi.setFloatable(false);
-			comandi.add(getNuovoFile());
+			comandi.add(getNewFile());
 			comandi.add(getOpenFile());
 			comandi.add(getSaveFile());
 			comandi.add(getSaveFileAs());
@@ -717,14 +717,16 @@ public class MainWindow extends JFrame {
 	 * 	
 	 * @return javax.swing.JButton	
 	 */    
-	private JButton getNuovoFile() {
-		if (nuovoFile == null) {
-			nuovoFile = new JButton();
-			nuovoFile.setName("NuovoFile");
-			nuovoFile.setText("");
-			nuovoFile.setIcon(new ImageIcon(getClass().getResource("/icons/iconNodeWithoutAttribute.gif")));
+	private JButton getNewFile() {
+		if (newFile == null) {
+			newFile = new JButton();
+			newFile.setName("NewFile");
+			newFile.setText("New");
+			newFile.setIcon(new ImageIcon(getClass().getResource("/icons/iconNodeWithoutAttribute.gif")));
+			newFile.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12));
+			newFile.setActionCommand("New");
 		}
-		return nuovoFile;
+		return newFile;
 	}
  	public static void main(String[] args)
 	{

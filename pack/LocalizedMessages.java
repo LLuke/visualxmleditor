@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import java.util.Properties;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.JToolBar;
@@ -49,7 +51,6 @@ public class LocalizedMessages {
 	 * through the getInputStream method
 	 */
 	private static Map files = null;
-
 	private static JarFile j = null;
 
 	/**
@@ -64,11 +65,12 @@ public class LocalizedMessages {
 		if (files == null) {
 			getLanguageList();
 		}
-		Object o = files.get(entryName);
+		Object o = files.get("languages\\" + entryName + ".properties");
 		if (o instanceof File) {
 			try {
 				toReturn = new FileInputStream((File) o);
 			} catch (FileNotFoundException e) {
+				JOptionPane.showMessageDialog(null,e.getMessage());
 				toReturn = null;
 			}
 		}
@@ -77,6 +79,7 @@ public class LocalizedMessages {
 				try {
 					toReturn = j.getInputStream((JarEntry) o);
 				} catch (IOException e) {
+					JOptionPane.showMessageDialog(null,e.getMessage());
 					toReturn = null;
 				}
 			}
@@ -98,7 +101,7 @@ public class LocalizedMessages {
 		if (u != null) {
 
 			try {
-				File f = new File(LocalizedMessages.class.getResource("/languages/").toURI());
+				File f = new File(new URI(LocalizedMessages.class.getResource(".").toString()));
 				// qui si può usare f per navigare l'albero, ex:
 				// supponendo che ci sia la directory languages/*.properties
 				File[] languageDirectoryFiles = f.listFiles(new LanguagesFilter());
@@ -117,6 +120,7 @@ public class LocalizedMessages {
 					}
 				}
 			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null,e.getMessage());
 				e.printStackTrace();
 			}
 		} else {
@@ -146,8 +150,10 @@ public class LocalizedMessages {
 				// (il maiuscolo vale solo per questo file)
 
 			} catch (UnsupportedEncodingException e1) {
+				JOptionPane.showMessageDialog(null,e1.getMessage());
 				e1.printStackTrace();
 			} catch (IOException e) {
+				JOptionPane.showMessageDialog(null,e.getMessage());
 				e.printStackTrace();
 			}
 		}
@@ -169,6 +175,7 @@ public class LocalizedMessages {
 
 			properties.load(getInputStream(languageName));
 		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null,e.getMessage());
 			e.printStackTrace();
 			throw new Error("Undefined language!!!", e); //$NON-NLS-1$
 		}
@@ -185,7 +192,7 @@ public class LocalizedMessages {
 		try {
 			temp = properties.getProperty(key);
 		} catch (Exception e) {
-
+			JOptionPane.showMessageDialog(null,e.getMessage());
 		}
 
 		return temp;
