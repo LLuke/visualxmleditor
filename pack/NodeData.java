@@ -109,7 +109,7 @@ public class NodeData extends JDialog {
 	 * @return void
 	 */
 	private void initialize() {
-		this.setSize(565, 164);
+		this.setSize(565, 182);
 		this.setContentPane(getJContentPane());
 		this.addWindowListener(new java.awt.event.WindowAdapter() {
 		});
@@ -138,10 +138,11 @@ public class NodeData extends JDialog {
 	private JButton getOk() {
 		if (ok == null) {
 			ok = new JButton();
-			ok.setBounds(152, 92, 89, 40);
 			ok.setText(LocalizedMessages.getString("NodeData.ButtonOk")); //$NON-NLS-1$
 			ok.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 14)); //$NON-NLS-1$
 			ok.setIcon(new ImageIcon(getClass().getResource("/icons/iconOk.gif"))); //$NON-NLS-1$
+			ok.setLocation(147, 102);
+			ok.setSize(130, 44);
 			ok.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
 					if (getNome().getText().length()>0)
@@ -166,10 +167,11 @@ public class NodeData extends JDialog {
 	private JButton getAnnulla() {
 		if (annulla == null) {
 			annulla = new JButton();
-			annulla.setBounds(314, 92, 89, 38);
 			annulla.setText(LocalizedMessages.getString("NodeData.ButtonCancel")); //$NON-NLS-1$
 			annulla.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 14)); //$NON-NLS-1$
 			annulla.setIcon(new ImageIcon(getClass().getResource("/icons/iconCancel.gif"))); //$NON-NLS-1$
+			annulla.setLocation(309, 102);
+			annulla.setSize(130, 44);
 			annulla.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
 					scelto=false;
@@ -189,7 +191,7 @@ public class NodeData extends JDialog {
 			nome = new TextBox();
 			nome.setBounds(14, 25, 526, 22);
 			nome.setLabel(""); //$NON-NLS-1$
-			nome.setWidthLabel(100);
+			nome.setWidthLabel(110);
 		}
 		return nome;
 	}
@@ -202,7 +204,7 @@ public class NodeData extends JDialog {
 		if (testo == null) {
 			testo = new TextBox();
 			testo.setBounds(14, 58, 526, 22);
-			testo.setWidthLabel(100);
+			testo.setWidthLabel(110);
 		}
 		return testo;
 	}

@@ -12,7 +12,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 package pack;
 
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -55,8 +54,8 @@ public class Configuration extends JDialog {
 		this.setContentPane(getJContentPane());
 		this.setTitle(LocalizedMessages.getString("Configuration.TitleConfiguration")); //$NON-NLS-1$
 		this.setBounds(Utility.centraSuSchermo(this.getBounds()));
-		
-		String[] files = LocalizedMessages.languagesAvailable();
+
+		String[] files = Configuration.languagesAvailable();
 		
 		for (int t=0;t<files.length;t++)
 		{
@@ -64,6 +63,7 @@ public class Configuration extends JDialog {
 		}
 		
 		language.setSelectedItem(getCurrentLanguage());
+
 	}
 	
 	/**
@@ -73,7 +73,7 @@ public class Configuration extends JDialog {
 	private static void loadConfig()
 	{
 		try {
-			properties.load(new FileInputStream(Utility.currentPath()+"/pack/Config.properties")); //$NON-NLS-1$ //$NON-NLS-2$
+			properties.load(Configuration.class.getResourceAsStream("Config.properties")); //$NON-NLS-1$
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -105,6 +105,15 @@ public class Configuration extends JDialog {
 	public static void setCurrentLanguage(String value)
 	{
 		properties.setProperty("Language",value); //$NON-NLS-1$
+	}
+	
+	/**
+	 * This method return a list of languages available
+	 * @return
+	 */
+	public static String[] languagesAvailable()
+	{
+		return properties.getProperty("Languages").split(","); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 	
 	/**

@@ -301,9 +301,8 @@ public class MainWindow extends JFrame {
 			addNode.setToolTipText(LocalizedMessages.getString("MainWindow.TipButtonAddNode")); //$NON-NLS-1$
 			addNode.setName("addNode"); //$NON-NLS-1$
 			addNode.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12)); //$NON-NLS-1$
-			addNode.setSize(125, 44);
+			addNode.setSize(130, 44);
 			addNode.setLocation(14, 140);
-			addNode.setPreferredSize(new java.awt.Dimension(130,44));
 			addNode.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
 					boolean ok=false;
@@ -343,9 +342,8 @@ public class MainWindow extends JFrame {
 			modifyNode.setText(LocalizedMessages.getString("MainWindow.ButtonModifyNode")); //$NON-NLS-1$
 			modifyNode.setToolTipText(LocalizedMessages.getString("MainWindow.TipButtonModifyNode")); //$NON-NLS-1$
 			modifyNode.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12)); //$NON-NLS-1$
-			modifyNode.setLocation(250, 140);
-			modifyNode.setSize(125, 44);
-			modifyNode.setPreferredSize(new java.awt.Dimension(130,44));
+			modifyNode.setLocation(253, 140);
+			modifyNode.setSize(130, 44);
 			modifyNode.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
 					boolean ok=false;
@@ -387,9 +385,8 @@ public class MainWindow extends JFrame {
 			deleteNode.setIcon(new ImageIcon(getClass().getResource("/icons/iconDeleteNode.gif"))); //$NON-NLS-1$
 			deleteNode.setToolTipText(LocalizedMessages.getString("MainWindow.TipButtonDeleteNode")); //$NON-NLS-1$
 			deleteNode.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12)); //$NON-NLS-1$
-			deleteNode.setLocation(486, 140);
-			deleteNode.setSize(125, 44);
-			deleteNode.setPreferredSize(new java.awt.Dimension(130,44));
+			deleteNode.setLocation(492, 140);
+			deleteNode.setSize(130, 44);
 			deleteNode.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
 					if (albero.getSelectionPath()!=null)
@@ -452,7 +449,7 @@ public class MainWindow extends JFrame {
 			addAttribute.setIcon(new ImageIcon(getClass().getResource("/icons/iconAddAttribute.gif"))); //$NON-NLS-1$
 			addAttribute.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12)); //$NON-NLS-1$
 			addAttribute.setLocation(15, 447);
-			addAttribute.setSize(125, 44);
+			addAttribute.setSize(130, 44);
 			addAttribute.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
 					boolean ok=false;
@@ -496,7 +493,7 @@ public class MainWindow extends JFrame {
 			modifyAttribute.setIcon(new ImageIcon(getClass().getResource("/icons/iconModifyAttribute.gif"))); //$NON-NLS-1$
 			modifyAttribute.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12)); //$NON-NLS-1$
 			modifyAttribute.setLocation(250, 447);
-			modifyAttribute.setSize(125, 44);
+			modifyAttribute.setSize(130, 44);
 			modifyAttribute.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
 					boolean ok=false;
@@ -546,7 +543,7 @@ public class MainWindow extends JFrame {
 			deleteAttribute.setIcon(new ImageIcon(getClass().getResource("/icons/iconDeleteAttribute.gif"))); //$NON-NLS-1$
 			deleteAttribute.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12)); //$NON-NLS-1$
 			deleteAttribute.setLocation(485, 447);
-			deleteAttribute.setSize(125, 44);
+			deleteAttribute.setSize(130, 44);
 			deleteAttribute.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
 					if (albero.getSelectionPath()!=null)
@@ -666,8 +663,7 @@ public class MainWindow extends JFrame {
 			configure.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					new Configuration().setVisible(true);
-					setVisible(false);
-					setVisible(true);
+					initialize();
 				}
 			});
 		}
