@@ -28,16 +28,16 @@ public class About extends JDialog {
 	private javax.swing.JPanel jContentPane = null;
 
 	private JButton ok = null;
-	private JLabel jLabel = null;
+	private JLabel title = null;
 	private JLabel createdBy = null;
-	private JLabel jLabel2 = null;
+	private JLabel Authors = null;
 	/**
 	 * 
 	 */
 	public About() {
 		super();
 		initialize();
-		this.setBounds(Utility.centraSuSchermo(this.getBounds()));
+		this.setBounds(Utility.centerToScreen(this.getBounds()));
 		LocalizedMessages.refreshLanguage("About",this);
 	}
 
@@ -60,31 +60,33 @@ public class About extends JDialog {
 	 */
 	private javax.swing.JPanel getJContentPane() {
 		if(jContentPane == null) {
-			jLabel2 = new JLabel();
+			Authors = new JLabel();
 			createdBy = new JLabel();
-			jLabel = new JLabel();
+			title = new JLabel();
 			jContentPane = new javax.swing.JPanel();
 			jContentPane.setLayout(null);
-			jLabel.setBounds(5, 16, 436, 62);
-			jLabel.setText("Visual XML Editor 0.1"); //$NON-NLS-1$
-			jLabel.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 40)); //$NON-NLS-1$
-			jLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-			jLabel.setForeground(java.awt.Color.red);
-			jLabel.setBackground(java.awt.Color.yellow);
+			title.setBounds(5, 16, 436, 62);
+			title.setText("Visual XML Editor 0.1"); //$NON-NLS-1$
+			title.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 40)); //$NON-NLS-1$
+			title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+			title.setForeground(java.awt.Color.red);
+			title.setBackground(java.awt.Color.yellow);
+			title.setName("Title");
+			Authors.setName("Authors");
 			jContentPane.setBackground(java.awt.Color.yellow);
 			createdBy.setBounds(5, 98, 436, 36);
 			createdBy.setText("Created by"); //$NON-NLS-1$
 			createdBy.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 24)); //$NON-NLS-1$
 			createdBy.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 			createdBy.setName("CreatedBy");
-			jLabel2.setBounds(5, 137, 436, 42);
-			jLabel2.setText("Gabriele Ferreri & Ignazio Palmisano"); //$NON-NLS-1$
-			jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-			jLabel2.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD | java.awt.Font.ITALIC, 26)); //$NON-NLS-1$
+			Authors.setBounds(5, 137, 436, 42);
+			Authors.setText("Gabriele Ferreri & Ignazio Palmisano"); //$NON-NLS-1$
+			Authors.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+			Authors.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD | java.awt.Font.ITALIC, 26)); //$NON-NLS-1$
 			jContentPane.add(getOk(), null);
-			jContentPane.add(jLabel, null);
+			jContentPane.add(title, null);
 			jContentPane.add(createdBy, null);
-			jContentPane.add(jLabel2, null);
+			jContentPane.add(Authors, null);
 		}
 		return jContentPane;
 	}

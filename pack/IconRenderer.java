@@ -26,34 +26,34 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 public class IconRenderer extends DefaultTreeCellRenderer {
 
 	private static final long serialVersionUID = 1L;
-	private ImageIcon iconaF;
-	private ImageIcon iconaNCA;
-	private ImageIcon iconaNSA;
+	private ImageIcon iconF;
+	private ImageIcon iconNWA;
+	private ImageIcon iconNNA;
 	
 	/**
-	 * Costruttore della classe
-	 * @param iconaFile	Icona che rappresenta il nodo File
-	 * @param iconaNodoConAttributi	Icona che rappresenta il nodo Nodo con attributi
-	 * @param iconaNodoSenzaAttributi Icona che rappresenta il nodo Nodo senza attributi
+	 * Constructor
+	 * @param iconFile	Icon of File node
+	 * @param iconNodeWithAttribute	Icon of Node with attributes  
+	 * @param iconNodeWithoutAttribute Icon of Node without attributes
 	 */
-	public IconRenderer(ImageIcon iconaFile,ImageIcon iconaNodoConAttributi,ImageIcon iconaNodoSenzaAttributi) {
+	public IconRenderer(ImageIcon iconFile,ImageIcon iconNodeWithAttribute,ImageIcon iconNodeWithoutAttribute) {
 		super();
-		iconaF=iconaFile;
-		iconaNCA=iconaNodoConAttributi;
-		iconaNSA=iconaNodoSenzaAttributi;
+		iconF=iconFile;
+		iconNWA=iconNodeWithAttribute;
+		iconNNA=iconNodeWithoutAttribute;
 	}
 	
 	/**
-	 * Funzione che effettua l'overrides del metodo getTreeCellRendererComponent
-	 * per personalizzare le icone in base al tipo di nodo
-	 * @param tree Oggetto JTree
-	 * @param value Oggetto contenente il nodo del JTree corrente
+	 * This method overrides method getTreeCellRendererComponent
+	 * to personalize icons
+	 * @param tree JTree object
+	 * @param value 
 	 * @param sel			
 	 * @param expanded
 	 * @param leaf
 	 * @param row
 	 * @param hasFocus
-	 * @return Ritorna l'oggetto Render personalizzato
+	 * @return Return personalized object
 	 */
 	public Component getTreeCellRendererComponent(JTree tree,Object value,boolean sel,boolean expanded,boolean leaf,int row,boolean hasFocus)
 	{
@@ -61,21 +61,21 @@ public class IconRenderer extends DefaultTreeCellRenderer {
 		
 		if (value instanceof DefaultMutableTreeNode)
 		{
-			if (((DefaultMutableTreeNode)value).getUserObject() instanceof Nodo)
+			if (((DefaultMutableTreeNode)value).getUserObject() instanceof NodeElement)
 			{
-				Nodo ele = (Nodo)((DefaultMutableTreeNode)value).getUserObject();
+				NodeElement ele = (NodeElement)((DefaultMutableTreeNode)value).getUserObject();
 	
-				if (ele.getTipo()==Nodo.TIPONODO_FILE)
+				if (ele.getType()==NodeElement.TYPENODE_FILE)
 				{
-					this.setIcon(iconaF);
+					this.setIcon(iconF);
 				}
-				else if (ele.getTipo()==Nodo.TIPONODO_NODOCONATTRIBUTI)
+				else if (ele.getType()==NodeElement.TYPENODE_NODEWITHATTRIBUTES)
 				{
-					this.setIcon(iconaNCA);
+					this.setIcon(iconNWA);
 				}
-				else if (ele.getTipo()==Nodo.TIPONODO_NODOSENZAATTRIBUTI)
+				else if (ele.getType()==NodeElement.TYPENODE_WITHOUTATTRIBUTES)
 				{
-					this.setIcon(iconaNSA);
+					this.setIcon(iconNNA);
 				}
 			}
 		}

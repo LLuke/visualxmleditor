@@ -12,75 +12,117 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 package pack;
 
-import java.awt.Rectangle;
-import java.io.File;
+import java.util.*;
 
 /**
  * @author Ferreri Gabriele
  *
- * Utility class
+ * Node XML into JTree
  * 
  */
-public class Utility {
+public class NodeElement {
+	public static int TYPENODE_FILE=0;
+	public static int TYPENODE_NODEWITHATTRIBUTES=1;
+	public static int TYPENODE_WITHOUTATTRIBUTES=2;
+
+	private int typeNode;
+	private String nodeName;
+	private String nodeText;
+	private HashMap nodeAttributes;
+	
+	/**
+	 * Constructor
+	 * @param name Name XML node
+	 * @param text Text XML node
+	 * @param attributes Attributes XML node
+	 * @param type Type XML node 
+	 */
+	public NodeElement(String name,String text,HashMap attributes,int type)
+	{
+		nodeName=name;
+		nodeText=text;
+		nodeAttributes=attributes;
+		typeNode=type;
+	}
+	
+	/**
+	 * Return node type
+	 * @return node type
+	 */
+	public int getType()
+	{
+		return typeNode;
+	}
+	
+	/**
+	 * Set node type
+	 * @param val node type
+	 */
+	public void setType(int val)
+	{
+		typeNode=val;
+	}
+	
+	/**
+	 * Return node name
+	 * @return node name
+	 */
+	public String getName()
+	{
+		return nodeName;
+	}
+	
+	/**
+	 * Set node name
+	 * @param val node name
+	 */
+	public void setName(String val)
+	{
+		nodeName=val;
+	}
+	
+	/**
+	 * Return node text 
+	 * @return node text
+	 */
+	public String getText()
+	{
+		return nodeText;
+	}
+	
+	/**
+	 * Set node text
+	 * @param val node text
+	 */
+	public void setText(String val)
+	{
+		nodeText=val;
+	}
+	
+	/**
+	 * Return node attributes 
+	 * @return node attributes
+	 */
+	public HashMap getAttributes()
+	{
+		return nodeAttributes;
+	}
+	
+	/**
+	 * set node attributes
+	 * @param val node attributes
+	 */
+	public void setAttributes(HashMap val)
+	{
+		nodeAttributes=val;
+	}
 
 	/**
-	 * Center the JFrame
-	 * 
-	 * @param window JFrame to center
+	 * Override toString method to personalize show into JTree
+	 * @return String to return
 	 */
-	static public Rectangle centerToScreen(Rectangle dim)
+	public String toString()
 	{
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        return new Rectangle((screenSize.width-dim.width)/2, (screenSize.height-dim.height)/2, dim.width, dim.height);
-	}
-	
-	/**
-	 * Extract extension file (ex. "file1.avi" -> "avi")
-	 * @param filename Filename to extract
-	 * @return Extension filename
-	 */
-	static public String extractExtensionFile(String filename)
-	{
-		return filename.substring(filename.lastIndexOf(".")+1); //$NON-NLS-1$
-	}
-	
-	/**
-	 * Return current directory
-	 * @return Current directory
-	 */
-	static public String currentPath()
-	{
-		String temp=System.getProperty("java.class.path"); //$NON-NLS-1$
-		
-		File f=new File(temp);
-		
-		if (f.isDirectory())
-		{
-			temp=f.getPath();
-		}
-		else
-		{
-			temp=f.getPath().substring(0,f.getPath().lastIndexOf(File.separator));
-		}
-		return temp;
-	}
-	
-	/**
-	 * Create String by repeating a character
-	 * @param car
-	 * @param count
-	 * @return
-	 */
-	static public String repeatString(String text,int count)
-	{
-		String temp=""; //$NON-NLS-1$
-		
-		for (int t=0;t<count;t++)
-		{
-			temp+=text;
-		}
-		
-		return temp;
+		return nodeName;
 	}
 }
-

@@ -24,7 +24,7 @@ import javax.swing.filechooser.FileFilter;
 public class XMLFilter extends FileFilter {
 
 	/**
-	 * Costruttore di classe
+	 * Constructor
 	 * 
 	 */
 	public XMLFilter() {
@@ -32,15 +32,15 @@ public class XMLFilter extends FileFilter {
 	}
 
 	/**
-	 * Funzione che effettua l'overrides del metodo accept per filtrare i file
-	 * @param f File corrente 
+	 * Overrides accept method to filter files
+	 * @param f Current file
 	 */
 	public boolean accept(File f) {
 		if (f.isDirectory())
 		{
 			return true;
 		}
-		else if (Utility.estraiEstensioneFile(f.getName()).equalsIgnoreCase("xml")) //$NON-NLS-1$
+		else if (Utility.extractExtensionFile(f.getName()).equalsIgnoreCase("xml")) //$NON-NLS-1$
 		{
 			return true;
 		}
@@ -48,11 +48,11 @@ public class XMLFilter extends FileFilter {
 	}
 
 	/**
-	 * Funzione che ritorna la descrizione del file filtrato
-	 * @return Descrizione del file filtrato
+	 * Return file description
+	 * @return File description
 	 */
 	public String getDescription() {
-		return "File XML"; //$NON-NLS-1$
+		return "XML File"; //$NON-NLS-1$
 	}
 
 }

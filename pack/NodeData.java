@@ -6,7 +6,7 @@ Redistribution and use in source and binary forms, with or without modification,
 
 Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer. 
 Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution. 
-Neither the name of Gabriele Ferreri or Ignazio Palmisano nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission. 
+Neither the nameNode of Gabriele Ferreri or Ignazio Palmisano nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission. 
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
@@ -27,80 +27,79 @@ public class NodeData extends JDialog {
 	private javax.swing.JPanel jContentPane = null;
 
 	private JButton ok = null;
-	private JButton annulla = null;
-	private int modo;
-	private boolean scelto;
-	private String valoreNomeVecchio=""; //$NON-NLS-1$
-	private String valoreTestoVecchio=""; //$NON-NLS-1$
+	private JButton cancel = null;
+	private int mode;
+	private boolean choice;
+	private String oldNameNode=""; //$NON-NLS-1$
+	private String oldTextNode=""; //$NON-NLS-1$
 	
-	final static int MODO_NODO=0;
-	final static int MODO_ATTRIBUTO=1;
+	final static int MODE_NODE=0;
+	final static int MODE_ATTRIBUTE=1;
 	
-	private TextBox nome = null;
-	private TextBox testo = null;
+	private TextBox nameNode = null;
+	private TextBox textNode = null;
 	/**
-	 * Costruttore di classe
-	 * 
-	 * 
+	 * Constructor
 	 */
 	public NodeData() {
 		super();
 		initialize();
-		this.setBounds(Utility.centraSuSchermo(this.getBounds()));
+		this.setBounds(Utility.centerToScreen(this.getBounds()));
+		LocalizedMessages.refreshLanguage("NodeData",this);
 	}
 	/**
-	 * Visualizza la finestra di dialogo per recuperare i dati
+	 * Show window dialog
 
-	 * @param modo Modalità di recupero dati (Recupero dati Nodo o Attributo)
-	 * @param nomeElemento Nome del nodo o dell'attributo
-	 * @param testoElemento Testo del nodo o dell'attributo
-	 * @return Vero se è stato premuto Ok, Falso altrimenti
+	 * @param mode Mode window dialog (Node or Attribute)
+	 * @param nameElement Name node or attribute
+	 * @param textElement Text node or attribute
+	 * @return True if ok else false
 	 */
-	public boolean visualizza(int modo,String nomeElemento,String testoElemento)
+	public boolean visualizza(int mode,String nameElement,String textElement)
 	{
-		valoreNomeVecchio=nomeElemento;
-		valoreTestoVecchio=testoElemento;
+		oldNameNode=nameElement;
+		oldTextNode=textElement;
 		
-		this.modo=modo;
-		this.nome.setText(nomeElemento);
-		this.testo.setText(testoElemento);
+		this.mode=mode;
+		this.nameNode.setText(nameElement);
+		this.textNode.setText(textElement);
 		
-		if (modo==MODO_NODO)
+		if (mode==MODE_NODE)
 		{
 			this.setTitle(LocalizedMessages.getString("NodeData.TitleWindowNode")); //$NON-NLS-1$
-			nome.setLabel(LocalizedMessages.getString("NodeData.TextboxNodeName")); //$NON-NLS-1$
-			testo.setLabel(LocalizedMessages.getString("NodeData.TextBoxNodeText")); //$NON-NLS-1$
+			nameNode.setLabel(LocalizedMessages.getString("NodeData.TextBoxNodeName")); //$NON-NLS-1$
+			textNode.setLabel(LocalizedMessages.getString("NodeData.TextBoxNodeText")); //$NON-NLS-1$
 		}
 		else
 		{
 			this.setTitle(LocalizedMessages.getString("NodeData.TitleWindowAttribute")); //$NON-NLS-1$
-			nome.setLabel(LocalizedMessages.getString("NodeData.TextboxAttributeName")); //$NON-NLS-1$
-			testo.setLabel(LocalizedMessages.getString("NodeData.TextboxAttributeText")); //$NON-NLS-1$
+			nameNode.setLabel(LocalizedMessages.getString("NodeData.TextBoxAttributeName")); //$NON-NLS-1$
+			textNode.setLabel(LocalizedMessages.getString("NodeData.TextBoxAttributeText")); //$NON-NLS-1$
 		}
 
 		this.setModal(true);
 		this.setVisible(true);
-		nome.grabFocus();
+		nameNode.grabFocus();
 		
-		return scelto;
+		return choice;
 	}
 	
 	/**
-	 * Metodo che restituisce il parametro nome recuperato dall'utente
-	 * @return nome recuperato
+	 * Return Name Node
+	 * @return nameNode
 	 */	
 	public String getParametroNome()
 	{
-		return getNome().getText();
+		return getNameNode().getText();
 	}
 	
 	/**
-	 * Metodo che restituisce il parametro testo recuperato dall'utente
-	 * @return testo recuperato
+	 * Return Text Node
+	 * @return textNode
 	 */
 	public String getParametroTesto()
 	{
-		return getTesto().getText();
+		return getTextNode().getText();
 	}
 	
 	/**
@@ -122,9 +121,9 @@ public class NodeData extends JDialog {
 			jContentPane = new javax.swing.JPanel();
 			jContentPane.setLayout(null);
 			jContentPane.add(getOk(), null);
-			jContentPane.add(getAnnulla(), null);
-			jContentPane.add(getNome(), null);
-			jContentPane.add(getTesto(), null);
+			jContentPane.add(getCancel(), null);
+			jContentPane.add(getNameNode(), null);
+			jContentPane.add(getTextNode(), null);
 		}
 		return jContentPane;
 	}
@@ -141,11 +140,12 @@ public class NodeData extends JDialog {
 			ok.setIcon(new ImageIcon(getClass().getResource("/icons/iconOk.gif"))); //$NON-NLS-1$
 			ok.setLocation(147, 102);
 			ok.setSize(130, 44);
+			ok.setName("Ok");
 			ok.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
-					if (getNome().getText().length()>0)
+					if (getNameNode().getText().length()>0)
 					{
-						scelto=true;
+						choice=true;
 						setVisible(false);
 					}
 					else
@@ -162,60 +162,61 @@ public class NodeData extends JDialog {
 	 * 	
 	 * @return javax.swing.JButton	
 	 */    
-	private JButton getAnnulla() {
-		if (annulla == null) {
-			annulla = new JButton();
-			annulla.setText("Cancel"); //$NON-NLS-1$
-			annulla.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 14)); //$NON-NLS-1$
-			annulla.setIcon(new ImageIcon(getClass().getResource("/icons/iconCancel.gif"))); //$NON-NLS-1$
-			annulla.setLocation(309, 102);
-			annulla.setSize(130, 44);
-			annulla.addActionListener(new java.awt.event.ActionListener() { 
+	private JButton getCancel() {
+		if (cancel == null) {
+			cancel = new JButton();
+			cancel.setText("Cancel"); //$NON-NLS-1$
+			cancel.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 14)); //$NON-NLS-1$
+			cancel.setIcon(new ImageIcon(getClass().getResource("/icons/iconCancel.gif"))); //$NON-NLS-1$
+			cancel.setLocation(309, 102);
+			cancel.setSize(130, 44);
+			cancel.setName("Cancel");
+			cancel.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
-					scelto=false;
+					choice=false;
 					setVisible(false);
 				}
 			});
 		}
-		return annulla;
+		return cancel;
 	}
 	/**
-	 * This method initializes casellaTesto	
+	 * This method initializes nameNode	
 	 * 	
-	 * @return pacchetto.CasellaTesto	
+	 * @return TextBox	
 	 */    
-	private TextBox getNome() {
-		if (nome == null) {
-			nome = new TextBox();
-			nome.setBounds(14, 25, 526, 22);
-			nome.setLabel(""); //$NON-NLS-1$
-			nome.setWidthLabel(110);
+	private TextBox getNameNode() {
+		if (nameNode == null) {
+			nameNode = new TextBox();
+			nameNode.setBounds(14, 25, 526, 22);
+			nameNode.setLabel(""); //$NON-NLS-1$
+			nameNode.setWidthLabel(110);
 		}
-		return nome;
+		return nameNode;
 	}
 	/**
-	 * This method initializes casellaTesto1	
+	 * This method initializes textNode	
 	 * 	
-	 * @return pacchetto.CasellaTesto	
+	 * @return TextBox	
 	 */    
-	private TextBox getTesto() {
-		if (testo == null) {
-			testo = new TextBox();
-			testo.setBounds(14, 58, 526, 22);
-			testo.setWidthLabel(110);
+	private TextBox getTextNode() {
+		if (textNode == null) {
+			textNode = new TextBox();
+			textNode.setBounds(14, 58, 526, 22);
+			textNode.setWidthLabel(110);
 		}
-		return testo;
+		return textNode;
 	}
 	/**
-	 * @return Returns the valoreNomeVecchio.
+	 * @return Returns the oldNameNode.
 	 */
-	public String getValoreNomeVecchio() {
-		return valoreNomeVecchio;
+	public String getOldNameNode() {
+		return oldNameNode;
 	}
 	/**
-	 * @return Returns the valoreTestoVecchio.
+	 * @return Returns the oldTextNode.
 	 */
-	public String getValoreTestoVecchio() {
-		return valoreTestoVecchio;
+	public String getoldTextNode() {
+		return oldTextNode;
 	}
   }  //  @jve:decl-index=0:visual-constraint="10,10"

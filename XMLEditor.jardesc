@@ -9,6 +9,12 @@
         </sealing>
     </manifest>
     <selectedElements exportClassFiles="true" exportOutputFolder="false" exportJavaFiles="true">
-        <javaElement handleIdentifier="=XMLEditor"/>
+        <file path="/XMLEditor/.#.classpath.1.3"/>
+        <javaElement handleIdentifier="=XMLEditor/&lt;languages"/>
+        <file path="/XMLEditor/.project"/>
+        <file path="/XMLEditor/.classpath"/>
+        <javaElement handleIdentifier="=XMLEditor/&lt;pack.languages"/>
+        <javaElement handleIdentifier="=XMLEditor/&lt;icons"/>
+        <javaElement handleIdentifier="=XMLEditor/&lt;pack"/>
     </selectedElements>
 </jardesc>

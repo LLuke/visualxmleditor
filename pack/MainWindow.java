@@ -36,19 +36,19 @@ public class MainWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private javax.swing.JPanel jContentPane = null;
 
-	private JPanel pannelloComandi = null;
+	private JPanel panelCommands = null;
 	private JButton openFile = null;
 	private JButton saveFile = null;
 	private JButton saveFileAs = null;
 	private JButton exit = null;
-	private JSplitPane splitAlbero = null;
+	private JSplitPane splitTree = null;
 	private JScrollPane scrollAlbero = null;
-	private JTreeXML albero = null;
+	private JTreeXML tree = null;
 	private JButton addNode = null;  //  @jve:decl-index=0:visual-constraint="461,442"
 	private JButton modifyNode = null;
 	private JButton deleteNode = null;
 	private JList attributes = null;  //  @jve:decl-index=0:visual-constraint="271,213"
-	private JPanel pannelloVisualizza = null;
+	private JPanel panelView = null;
 	private JButton addAttribute = null;
 	private JButton modifyAttribute = null;
 	private JButton deleteAttribute = null;
@@ -59,24 +59,26 @@ public class MainWindow extends JFrame {
 	private TextBox nodeText = null;
 	private JButton about = null;
 	private JButton configure = null;
-	private JToolBar comandi = null;
+	private JToolBar commands = null;
 	private JButton newFile = null;
+	
+	private boolean openedFile=false;
+	
 	/**
 	 * @throws java.awt.HeadlessException
 	 */
 	public MainWindow() {
 		super();
 		initialize();
-		this.setBounds(Utility.centraSuSchermo(this.getBounds()));
+		this.setBounds(Utility.centerToScreen(this.getBounds()));
 		LocalizedMessages.reInit(Configuration.getCurrentLanguage());
-		LocalizedMessages.refreshLanguage("MainWindow",getContentPane());
+		LocalizedMessages.refreshLanguage("MainWindow",this);
 	}
 
 	/**
-	 * Metodo che svuota tutti i dati del nodo e degli attributes
-	 * dalla visualizzazione della maschera
+	 * Reset Node and Attributes values
 	 */
-	public void azzeraDati()
+	public void resetData()
 	{
 		nodeName.setText(""); //$NON-NLS-1$
 		nodeText.setText(""); //$NON-NLS-1$
@@ -84,21 +86,20 @@ public class MainWindow extends JFrame {
 	}
 	
 	/**
-	 * Metodo che aggiorna i dati del nodo e degli attributes
-	 * nella visualizzazione delle maschera
-	 * @param dmtn Nodo selezionato di cui visualizzare i dati 
+	 * Refresh Node Data and Attributes Data
+	 * @param dmtn Node Data to show 
 	 */
-	public void aggiornaDati(DefaultMutableTreeNode dmtn)
+	public void refreshData(DefaultMutableTreeNode dmtn)
 	{
-		Nodo nodo=(Nodo)dmtn.getUserObject();
-		nodeName.setText(nodo.getNome());
-		nodeText.setText(nodo.getTesto());
+		NodeElement node=(NodeElement)dmtn.getUserObject();
+		nodeName.setText(node.getName());
+		nodeText.setText(node.getText());
 		
-		if (nodo.getAttributi()!=null)
+		if (node.getAttributes()!=null)
 		{
-			attributes.setListData(nodo.getAttributi().values().toArray());
+			attributes.setListData(node.getAttributes().values().toArray());
 		}
-		((DefaultTreeModel)getAlbero().getModel()).nodeStructureChanged(dmtn);
+		((DefaultTreeModel)getTree().getModel()).nodeStructureChanged(dmtn);
 	}
 	
 	/**
@@ -106,15 +107,15 @@ public class MainWindow extends JFrame {
 	 * 	
 	 * @return javax.swing.JPanel	
 	 */    
-	private JPanel getPannelloComandi() {
-		if (pannelloComandi == null) {
+	private JPanel getPanelCommands() {
+		if (panelCommands == null) {
 			FlowLayout flowLayout1 = new FlowLayout();
-			pannelloComandi = new JPanel();
-			pannelloComandi.setLayout(flowLayout1);
+			panelCommands = new JPanel();
+			panelCommands.setLayout(flowLayout1);
 			flowLayout1.setAlignment(java.awt.FlowLayout.LEFT);
-			pannelloComandi.add(getComandi(), null);
+			panelCommands.add(getCommands(), null);
 		}
-		return pannelloComandi;
+		return panelCommands;
 	}
 	/**
 	 * This method initializes configure	
@@ -143,8 +144,8 @@ public class MainWindow extends JFrame {
 						
 					if (res==JFileChooser.APPROVE_OPTION)
 					{
-						azzeraDati();
-						albero.caricaXML(dlgApri.getSelectedFile().toString());
+						resetData();
+						tree.loadXML(dlgApri.getSelectedFile().toString());
 					}
 				}
 			});
@@ -167,7 +168,7 @@ public class MainWindow extends JFrame {
 			saveFile.setName("SaveFile");
 			saveFile.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
-					albero.salvaXML(albero.getNomeFile());
+					tree.saveXML(tree.getFileName());
 				}
 			});
 		}
@@ -199,7 +200,13 @@ public class MainWindow extends JFrame {
 					
 					if (res==JFileChooser.APPROVE_OPTION)
 					{
-						if (dlgSalva.getSelectedFile().exists())
+						String filename=dlgSalva.getSelectedFile().toString();
+						if (!filename.endsWith(".xml"))
+						{
+							filename=filename + ".xml";
+						}
+						
+						if (new File(filename).exists())
 						{
 							if (JOptionPane.showConfirmDialog(null,LocalizedMessages.getString("MainWindow.MessageFileExistOverwrite"),LocalizedMessages.getString("MainWindow.TitleFileExistOverwrite"),JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) //$NON-NLS-1$ //$NON-NLS-2$
 							{
@@ -213,7 +220,7 @@ public class MainWindow extends JFrame {
 						
 						if (ok)
 						{
-							albero.salvaXML(dlgSalva.getSelectedFile().toString());
+							tree.saveXML(filename);
 						}
 					}
 				}
@@ -251,15 +258,15 @@ public class MainWindow extends JFrame {
 	 * 	
 	 * @return javax.swing.JSplitPane	
 	 */    
-	private JSplitPane getSplitAlbero() {
-		if (splitAlbero == null) {
-			splitAlbero = new JSplitPane();
-			splitAlbero.setLeftComponent(getScrollAlbero());
-			splitAlbero.setDividerSize(10);
-			splitAlbero.setDividerLocation(150);
-			splitAlbero.setRightComponent(getPannelloVisualizza());
+	private JSplitPane getSplitTree() {
+		if (splitTree == null) {
+			splitTree = new JSplitPane();
+			splitTree.setLeftComponent(getScrollAlbero());
+			splitTree.setDividerSize(10);
+			splitTree.setDividerLocation(150);
+			splitTree.setRightComponent(getPanelView());
 		}
-		return splitAlbero;
+		return splitTree;
 	}
 	/**
 	 * This method initializes jScrollPane	
@@ -269,7 +276,7 @@ public class MainWindow extends JFrame {
 	private JScrollPane getScrollAlbero() {
 		if (scrollAlbero == null) {
 			scrollAlbero = new JScrollPane();
-			scrollAlbero.setViewportView(getAlbero());
+			scrollAlbero.setViewportView(getTree());
 		}
 		return scrollAlbero;
 	}
@@ -278,22 +285,22 @@ public class MainWindow extends JFrame {
 	 * 	
 	 * @return javax.swing.JTree	
 	 */    
-	private JTreeXML getAlbero() {
-		if (albero == null) {
-			albero = new JTreeXML();
-			albero.setFont(new java.awt.Font("Times New Roman", java.awt.Font.PLAIN, 12)); //$NON-NLS-1$
-			albero.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() { 
+	private JTreeXML getTree() {
+		if (tree == null) {
+			tree = new JTreeXML();
+			tree.setFont(new java.awt.Font("Times New Roman", java.awt.Font.PLAIN, 12)); //$NON-NLS-1$
+			tree.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() { 
 				public void valueChanged(javax.swing.event.TreeSelectionEvent e) {    
-					DefaultMutableTreeNode dmtn=(DefaultMutableTreeNode)albero.getLastSelectedPathComponent();
+					DefaultMutableTreeNode dmtn=(DefaultMutableTreeNode)tree.getLastSelectedPathComponent();
 					
 					if (dmtn!=null)
 					{
-						aggiornaDati(dmtn);
+						refreshData(dmtn);
 					}
 				}
 			});
 		}
-		return albero;
+		return tree;
 	}
 	/**
 	 * This method initializes configure	
@@ -315,22 +322,22 @@ public class MainWindow extends JFrame {
 					boolean ok=false;
 					NodeData dati = new NodeData();
 					
-					if (albero.getSelectionPath()!=null)
+					if (tree.getSelectionPath()!=null)
 					{
-						DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode)albero.getLastSelectedPathComponent();
+						DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode)tree.getLastSelectedPathComponent();
 						while (!ok)
 						{
-							ok=dati.visualizza(NodeData.MODO_ATTRIBUTO,"",""); //$NON-NLS-1$ //$NON-NLS-2$
+							ok=dati.visualizza(NodeData.MODE_ATTRIBUTE,"",""); //$NON-NLS-1$ //$NON-NLS-2$
 							if (ok)
 							{
-								albero.aggiungiNodo(dmtn,dati.getParametroNome(),dati.getParametroTesto());
+								tree.addNode(dmtn,dati.getParametroNome(),dati.getParametroTesto());
 							}
 							else
 							{
 								break;
 							}
 						}
-						aggiornaDati(dmtn);
+						refreshData(dmtn);
 					}
 				}
 			});
@@ -357,24 +364,24 @@ public class MainWindow extends JFrame {
 					boolean ok=false;
 					NodeData dati = new NodeData();
 					
-					if (albero.getSelectionPath()!=null)
+					if (tree.getSelectionPath()!=null)
 					{
-						DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode)albero.getLastSelectedPathComponent();
-						Nodo nodo = (Nodo)dmtn.getUserObject();
+						DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode)tree.getLastSelectedPathComponent();
+						NodeElement nodo = (NodeElement)dmtn.getUserObject();
 						
 						while (!ok)
 						{
-							ok=dati.visualizza(NodeData.MODO_ATTRIBUTO ,nodo.getNome(),nodo.getTesto());
+							ok=dati.visualizza(NodeData.MODE_ATTRIBUTE ,nodo.getName(),nodo.getText());
 							if (ok)
 							{
-								albero.modificaNodo(dmtn,dati.getParametroNome(),dati.getParametroTesto());
+								tree.modifyNode(dmtn,dati.getParametroNome(),dati.getParametroTesto());
 							}
 							else
 							{
 								break;
 							}
 						}
-						aggiornaDati(dmtn);
+						refreshData(dmtn);
 					}
 				}
 			});
@@ -398,11 +405,11 @@ public class MainWindow extends JFrame {
 			deleteNode.setName("DeleteNode");
 			deleteNode.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
-					if (albero.getSelectionPath()!=null)
+					if (tree.getSelectionPath()!=null)
 					{
 						if (JOptionPane.showConfirmDialog(null,LocalizedMessages.getString("MainWindow.MessageConfirmationDeleteNode"),LocalizedMessages.getString("MainWindow.TitleConfirmationDeleteNode"),JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.YES_OPTION) //$NON-NLS-1$ //$NON-NLS-2$
 						{
-							albero.eliminaNodo((DefaultMutableTreeNode)albero.getLastSelectedPathComponent());
+							tree.deleteNode((DefaultMutableTreeNode)tree.getLastSelectedPathComponent());
 						}
 					}
 				}
@@ -431,20 +438,20 @@ public class MainWindow extends JFrame {
 	 * 	
 	 * @return javax.swing.JPanel	
 	 */    
-	private JPanel getPannelloVisualizza() {
-		if (pannelloVisualizza == null) {
-			pannelloVisualizza = new JPanel();
-			pannelloVisualizza.setLayout(null);
-			pannelloVisualizza.add(getAddNode(), null);
-			pannelloVisualizza.add(getDeleteNode(), null);
-			pannelloVisualizza.add(getModifyNode(), null);
-			pannelloVisualizza.add(getAddAttribute(), null);
-			pannelloVisualizza.add(getModifyAttribute(), null);
-			pannelloVisualizza.add(getDeleteAttribute(), null);
-			pannelloVisualizza.add(getPanelNode(), null);
-			pannelloVisualizza.add(getPanelAttribute(), null);
+	private JPanel getPanelView() {
+		if (panelView == null) {
+			panelView = new JPanel();
+			panelView.setLayout(null);
+			panelView.add(getAddNode(), null);
+			panelView.add(getDeleteNode(), null);
+			panelView.add(getModifyNode(), null);
+			panelView.add(getAddAttribute(), null);
+			panelView.add(getModifyAttribute(), null);
+			panelView.add(getDeleteAttribute(), null);
+			panelView.add(getPanelNode(), null);
+			panelView.add(getPanelAttribute(), null);
 		}
-		return pannelloVisualizza;
+		return panelView;
 	}
 	/**
 	 * This method initializes configure	
@@ -466,15 +473,15 @@ public class MainWindow extends JFrame {
 					boolean ok=false;
 					NodeData dati = new NodeData();
 					
-					if (albero.getSelectionPath()!=null)
+					if (tree.getSelectionPath()!=null)
 					{
-						DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode)albero.getLastSelectedPathComponent();
+						DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode)tree.getLastSelectedPathComponent();
 						while (!ok)
 						{
-							ok=dati.visualizza(NodeData.MODO_ATTRIBUTO,"",""); //$NON-NLS-1$ //$NON-NLS-2$
+							ok=dati.visualizza(NodeData.MODE_ATTRIBUTE,"",""); //$NON-NLS-1$ //$NON-NLS-2$
 							if (ok)
 							{
-								ok=albero.aggiungiAttributo(dmtn,dati.getParametroNome(),dati.getParametroTesto());
+								ok=tree.addAttribute(dmtn,dati.getParametroNome(),dati.getParametroTesto());
 								if (!ok)
 								{
 									JOptionPane.showMessageDialog(null,LocalizedMessages.getString("MainWindow.MessageAttributeExist"),LocalizedMessages.getString("MainWindow.TitleAttributeExist"),JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
@@ -485,7 +492,7 @@ public class MainWindow extends JFrame {
 								break;
 							}
 						}
-						aggiornaDati(dmtn);
+						refreshData(dmtn);
 					}
 				}
 			});
@@ -512,20 +519,20 @@ public class MainWindow extends JFrame {
 					boolean ok=false;
 					NodeData dati = new NodeData();
 					
-					if (albero.getSelectionPath()!=null)
+					if (tree.getSelectionPath()!=null)
 					{
-						DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode)albero.getLastSelectedPathComponent();
-						Nodo nodo = (Nodo)dmtn.getUserObject();
+						DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode)tree.getLastSelectedPathComponent();
+						NodeElement nodo = (NodeElement)dmtn.getUserObject();
 						if (attributes.getSelectedValue()!=null)
 						{
 							String[] valori=((String)attributes.getSelectedValue()).split("="); //$NON-NLS-1$
 							
 							while (!ok)
 							{
-								ok=dati.visualizza(NodeData.MODO_ATTRIBUTO ,valori[0],valori[1]);
+								ok=dati.visualizza(NodeData.MODE_ATTRIBUTE ,valori[0],valori[1]);
 								if (ok)
 								{
-									ok=albero.modificaAttributo(dmtn,dati.getParametroNome(),dati.getParametroTesto(),dati.getValoreNomeVecchio());
+									ok=tree.modifyAttribute(dmtn,dati.getParametroNome(),dati.getParametroTesto(),dati.getOldNameNode());
 									if (!ok)
 									{
 										JOptionPane.showMessageDialog(null,LocalizedMessages.getString("MainWindow.MessageAttributeExist"),LocalizedMessages.getString("MainWindow.TitleAttributeExist"),JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
@@ -536,7 +543,7 @@ public class MainWindow extends JFrame {
 									break;
 								}
 							}
-							aggiornaDati(dmtn);
+							refreshData(dmtn);
 						}
 					}
 				}
@@ -561,7 +568,7 @@ public class MainWindow extends JFrame {
 			deleteAttribute.setToolTipText("Delete selected attribute");
 			deleteAttribute.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
-					if (albero.getSelectionPath()!=null)
+					if (tree.getSelectionPath()!=null)
 					{
 						if (attributes.getSelectedValue()!=null)
 						{
@@ -570,9 +577,9 @@ public class MainWindow extends JFrame {
 							
 								String nomeAttributo=((String)attributes.getSelectedValue());
 								nomeAttributo=nomeAttributo.substring(0,nomeAttributo.indexOf('='));
-								DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode)albero.getLastSelectedPathComponent();
-								albero.eliminaAttributo(dmtn,nomeAttributo);
-								aggiornaDati(dmtn);
+								DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode)tree.getLastSelectedPathComponent();
+								tree.deleteAttribute(dmtn,nomeAttributo);
+								refreshData(dmtn);
 							}
 						}
 					}
@@ -698,19 +705,19 @@ public class MainWindow extends JFrame {
 	 * 	
 	 * @return javax.swing.JToolBar	
 	 */    
-	private JToolBar getComandi() {
-		if (comandi == null) {
-			comandi = new JToolBar();
-			comandi.setFloatable(false);
-			comandi.add(getNewFile());
-			comandi.add(getOpenFile());
-			comandi.add(getSaveFile());
-			comandi.add(getSaveFileAs());
-			comandi.add(getConfigure());
-			comandi.add(getAbout());
-			comandi.add(getExit());
+	private JToolBar getCommands() {
+		if (commands == null) {
+			commands = new JToolBar();
+			commands.setFloatable(false);
+			commands.add(getNewFile());
+			commands.add(getOpenFile());
+			commands.add(getSaveFile());
+			commands.add(getSaveFileAs());
+			commands.add(getConfigure());
+			commands.add(getAbout());
+			commands.add(getExit());
 		}
-		return comandi;
+		return commands;
 	}
 
 	/**
@@ -726,6 +733,28 @@ public class MainWindow extends JFrame {
 			newFile.setIcon(new ImageIcon(getClass().getResource("/icons/iconNodeWithoutAttribute.gif")));
 			newFile.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12));
 			newFile.setActionCommand("New");
+			newFile.addActionListener(new java.awt.event.ActionListener() { 
+				public void actionPerformed(java.awt.event.ActionEvent e) {    
+					boolean ok=false;
+					
+					if (openedFile)
+					{
+						if (JOptionPane.showConfirmDialog(null,LocalizedMessages.getString("MainWindow.MessageFileNotSaved"),LocalizedMessages.getString("MainWindow.TitleFileNotSaved"),JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION)
+						{
+							ok=true;
+						}
+					}
+					else
+					{
+						ok=true;
+					}
+					
+					if (ok)
+					{
+						//albero.newFile();
+					}
+				}
+			});
 		}
 		return newFile;
 	}
@@ -755,8 +784,8 @@ public class MainWindow extends JFrame {
 		if(jContentPane == null) {
 			jContentPane = new javax.swing.JPanel();
 			jContentPane.setLayout(new java.awt.BorderLayout());
-			jContentPane.add(getPannelloComandi(), java.awt.BorderLayout.NORTH);
-			jContentPane.add(getSplitAlbero(), java.awt.BorderLayout.CENTER);
+			jContentPane.add(getPanelCommands(), java.awt.BorderLayout.NORTH);
+			jContentPane.add(getSplitTree(), java.awt.BorderLayout.CENTER);
 		}
 		return jContentPane;
 	}

@@ -58,7 +58,7 @@ public class Configuration extends JDialog {
 		this.setSize(400,230);
 		this.setContentPane(getJContentPane());
 		this.setTitle("Configuration"); //$NON-NLS-1$
-		this.setBounds(Utility.centraSuSchermo(this.getBounds()));
+		this.setBounds(Utility.centerToScreen(this.getBounds()));
 
 		List files = LocalizedMessages.getLanguageList();
 		
@@ -138,10 +138,11 @@ public class Configuration extends JDialog {
 	private ComboBox getLanguage() {
 		if (language == null) {
 			language = new ComboBox();
-			language.setBounds(10, 24, 376, 28);
+			language.setBounds(10, 24, 376, 32);
 			language.setLabel("Language"); //$NON-NLS-1$
-			language.setWidthLabel(120);
+			language.setWidthLabel(100);
 			language.setText("");
+			language.setName("Language");
 		}
 		return language;
 	}
@@ -157,6 +158,7 @@ public class Configuration extends JDialog {
 			ok.setText("Ok"); //$NON-NLS-1$
 			ok.setLocation(64, 138);
 			ok.setSize(121, 51);
+			ok.setName("Ok");
 			ok.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
 					setCurrentLanguage(language.getSelectedItem().toString());
@@ -178,6 +180,7 @@ public class Configuration extends JDialog {
 			cancel.setBounds(210, 138, 121, 51);
 			cancel.setIcon(new ImageIcon(getClass().getResource("/icons/iconCancel.gif"))); //$NON-NLS-1$
 			cancel.setText("Cancel"); //$NON-NLS-1$
+			cancel.setName("Cancel");
 			cancel.addActionListener(new java.awt.event.ActionListener() { 
 				public void actionPerformed(java.awt.event.ActionEvent e) {    
 					setVisible(false);

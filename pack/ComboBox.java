@@ -95,7 +95,7 @@ public class ComboBox extends JPanel {
 		label.setText(""); //$NON-NLS-1$
 		label.setLocation(5, 4);
 		label.setSize(94, 20);
-		label.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 12)); //$NON-NLS-1$
+		label.setFont(new java.awt.Font("Times New Roman", java.awt.Font.BOLD, 14)); //$NON-NLS-1$
 		this.add(label, null);
 		this.add(getField(), null);
 		refreshDimension();

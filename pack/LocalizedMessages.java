@@ -24,7 +24,9 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+import javax.swing.JRootPane;
 import javax.swing.JSplitPane;
 import javax.swing.JToolBar;
 import javax.swing.border.TitledBorder;
@@ -104,7 +106,7 @@ public class LocalizedMessages {
 		if (u != null) {
 
 			try {
-				File f = new File(new URI(LocalizedMessages.class.getResource(".").toString()));
+				File f = new File(new URI(LocalizedMessages.class.getResource("..").toString()));
 				// qui si può usare f per navigare l'albero, ex:
 				// supponendo che ci sia la directory languages/*.properties
 				File[] languageDirectoryFiles = f.listFiles(new LanguagesFilter());
@@ -305,6 +307,26 @@ public class LocalizedMessages {
 			for (int t=0;t<dlg.getComponentCount();t++)
 			{
 				refreshLanguage(formName,dlg.getComponent(t));
+			}
+			
+		}
+		else if (comp instanceof JRootPane)
+		{
+			JRootPane pan = (JRootPane)comp;
+
+			for (int t=0;t<pan.getComponentCount();t++)
+			{
+				refreshLanguage(formName,pan.getComponent(t));
+			}
+			
+		} 
+		else if (comp instanceof JLayeredPane)
+		{
+			JLayeredPane pan = (JLayeredPane)comp;
+
+			for (int t=0;t<pan.getComponentCount();t++)
+			{
+				refreshLanguage(formName,pan.getComponent(t));
 			}
 			
 		}
